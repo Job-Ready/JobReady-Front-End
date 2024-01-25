@@ -1,8 +1,14 @@
 import {React, useState} from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import axios from 'axios';
 
 
 const LandingPage = () => {
+
+    axios.post('http://localhost:3001/saveResume').then((response) => {
+        console.log(response.data)
+    })
+
 
   return (
         <div>
