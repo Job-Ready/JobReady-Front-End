@@ -1,6 +1,9 @@
 import {React, useState} from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon
+import { faTwitter, faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import axios from 'axios';
+import Header from './header';  
 
 
 const LandingPage = () => {
@@ -11,22 +14,7 @@ const LandingPage = () => {
 
   return (
         <div>
-            <header className="h-16 flex justify-center items-center mt-8 mb-14">
-                <nav className='w-[80%] sticky top-0 mt-4 flex justify-between'>
-                    <div className='flex items-center '>
-                        <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/'><button><h1 className='text-xl font-semibold italic'>
-                            Job-Ready
-                        </h1></button></Link> 
-                    </div>
-                    <div className=''>
-                        <ul className='flex items-center'>
-                        <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/aboutus'><button><li>About us</li></button></Link> 
-                            <li className=' text-white mr-2 cursor-pointer bg-sky-400 rounded-md px-4 py-2 shadow-md'>Login</li>
-                            <li className='text-white cursor-pointer bg-sky-400 rounded-md px-4 py-2 shadow-md'>Sign Up</li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
+            <Header />
 
             <main className='mx-auto text-center flex flex-col gap-10'>
                 <div className='flex flex-col gap-8'>
@@ -76,13 +64,13 @@ const LandingPage = () => {
                         <p className="text-lg font-semibold mb-2">Connect With Us</p>
                         <div className="flex items-center justify-center space-x-4">
                             <a href="#your-social-link" className="hover:text-gray-400">
-                            <i className="fab fa-twitter"></i>
+                            <FontAwesomeIcon icon={faTwitter} /> 
                             </a>
                             <a href="#your-social-link" className="hover:text-gray-400">
-                            <i className="fab fa-linkedin-in"></i>
+                            <FontAwesomeIcon icon={faFacebook} />
                             </a>
                             <a href="#your-social-link" className="hover:text-gray-400">
-                            <i className="fab fa-facebook-f"></i>
+                            <FontAwesomeIcon icon={faTwitter} />
                             </a>
                         </div>
                     </div>
