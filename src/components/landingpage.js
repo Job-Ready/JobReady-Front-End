@@ -5,11 +5,6 @@ import axios from 'axios';
 
 const LandingPage = () => {
 
-    // axios.post('http://localhost:3001/saveResume').then((response) => {
-    //     console.log(response.data)
-    // })
-
-
   return (
         <div>
             <header className="h-16 flex justify-center items-center mt-8 mb-14">
