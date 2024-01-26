@@ -5,9 +5,9 @@ import axios from 'axios';
 
 const LandingPage = () => {
 
-    axios.post('http://localhost:3001/saveResume').then((response) => {
-        console.log(response.data)
-    })
+    // axios.post('http://localhost:3001/saveResume').then((response) => {
+    //     console.log(response.data)
+    // })
 
 
   return (
