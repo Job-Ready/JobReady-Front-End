@@ -7,6 +7,7 @@ import Languages from './languages';
 import Skills from './skills';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import * as html2pdf from 'html2pdf.js';
 
 function Forms({ details, setDetails, workExperiences, setWorkExperiences, projects, setProjects, education, 
   setEducation, languages, setLanguages, skills, setSkills }) {
@@ -24,13 +25,14 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
 
   const downloadAsPDF = () => {
     const input = document.getElementById('resume'); // Replace 'entire-page' with the ID of the element you want to capture
-
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF();
-      pdf.addImage(imgData, 'JPEG', 0, 0);
-      pdf.save('Resume.pdf');
-    });
+    const options = {
+      
+      filename: 'resume.pdf',
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: { scale: 3 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    };
+    html2pdf(input, options);
   };
 
 

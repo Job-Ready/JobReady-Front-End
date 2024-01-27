@@ -4,7 +4,7 @@ function plain({ details, workExperiences, projects, education, languages, skill
     
     return (
         <div className=" p-8">
-          <div id="resume"  className="w-[210mm] h-[297mm] mx-auto bg-white p-6 rounded-md shadow-xl">
+          <div id="resume"  className="w-[210mm] h-[297mm]  bg-white p-6 rounded-md shadow-xl">
             <header className="text-left mb-6">
               <h1 className="text-3xl font-bold">{details.fullname ? details.fullname : "Your Name"}</h1>
               <p className="text-gray-600">Web Developer</p>
