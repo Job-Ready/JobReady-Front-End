@@ -8,6 +8,7 @@ import Home from './components/home';
 import LandingPage from './components/landingpage';
 import AboutUs from './components/aboutus';
 import Settings from './components/settings';
+import Login from './components/login';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
         <Route path="/design" element={<Design />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );
