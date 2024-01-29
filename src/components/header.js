@@ -5,8 +5,8 @@ import logo from '../assets/JobReady2-nobg.png'
 function header() {
   return (
     <div>
-        <header className="h-16 flex justify-center items-center mt-8 mb-14">
-                <nav className='w-[80%] sticky top-0 mt-4 flex justify-between'>
+        <header className="h-12 flex justify-center items-center mt-4 mb-14">
+                <nav className='w-[80%] h-full sticky top-0 mt-4 flex justify-between'>
                     <div className='flex items-center '>
                         <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/'><button>
                             <img src={logo} alt="" className='w-[250px]' />
