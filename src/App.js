@@ -9,6 +9,7 @@ import LandingPage from './components/landingpage';
 import AboutUs from './components/aboutus';
 import Settings from './components/settings';
 import Login from './components/login';
+import Signup from './components/signup';
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>
   );

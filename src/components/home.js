@@ -1,11 +1,20 @@
 import {React, useState} from 'react'
-import { Link } from 'react-router-dom';
+import axios from 'axios'
 import Header from './header';
 
 import SavedResumes from './savedResumes';
 
 function Home() {
     
+//  axios.post('http://localhost:3001/create-resume') 
+//   .then(response => {
+//       console.log(response);
+//   })
+//   .catch(error => {
+//       console.log(error);
+//   })
+
+
   return (
     <div>
         <Header />
