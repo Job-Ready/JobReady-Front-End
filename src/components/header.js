@@ -16,7 +16,14 @@ function header() {
                     </div>
                     <div className='flex items-center'>
                         <ul className='flex items-center'>
-                        <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/aboutus'><button><li>About us</li></button></Link>
+                            <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/aboutus'><button><li>About us</li></button></Link>
+                            <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/'>
+                                <button>
+                                    <li>
+                                        Logout
+                                    </li>
+                                </button>
+                            </Link>
                         </ul>
                     </div>
                 </nav>
