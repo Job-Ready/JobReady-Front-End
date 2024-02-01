@@ -8,7 +8,7 @@ function header() {
         <header className="h-12 flex justify-center items-center mt-4 mb-14">
                 <nav className='w-[80%] h-full sticky top-0 mt-4 flex justify-between'>
                     <div className='flex items-center '>
-                        <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/'>
+                        <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/home'>
                             <button>
                                 <img src={logo} alt="" className='w-[250px]' />
                             </button>
@@ -16,9 +16,7 @@ function header() {
                     </div>
                     <div className='flex items-center'>
                         <ul className='flex items-center'>
-                        <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/aboutus'><button><li>About us</li></button></Link> 
-                        <Link to='/login'><li className=' text-white mr-2 cursor-pointer bg-sky-400 rounded-md px-4 py-2 shadow-md'>Login</li></Link>
-                        <Link to='/signup'><li className='text-white cursor-pointer bg-sky-400 rounded-md px-4 py-2 shadow-md'>Sign Up</li></Link>
+                        <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/aboutus'><button><li>About us</li></button></Link>
                         </ul>
                     </div>
                 </nav>

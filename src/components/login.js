@@ -56,12 +56,14 @@ function login() {
 
             <div>
               {/* Add your login button here */}
-              <button
-                type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-400 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Sign in
-              </button>
+              <Link to='/home'>
+                <button
+                  type="submit"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-400 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Sign in
+                </button>
+              </Link>
               <AuthForm isSignup={false} />
             </div>
           </form>
@@ -75,11 +77,13 @@ function login() {
 
       </div>
       <div className='flex items-center justify-center w-[70%] h-full bg-sky-400 bg-opacity-25'>
-          <p>
-            Create a resume that stands out from the crowd. <br/>
-            Free templates, easy, fast and professional. <br/>
-            With our free resume builder, create the perfect resume and get hired.
-          </p>
+      <div className='p-10'>
+                        <h1 className='text-5xl font-semibold mb-4'>Create your resume in minutes</h1>
+                        <p className='text-2xl font-semibold'>Get started with our easy-to-use resume builder now.</p>
+                        <Link to='/home'> 
+                            <button className='text-white bg-sky-400 rounded-md px-4 py-2 shadow-md mt-4'>Get Started</button>
+                        </Link>
+                    </div>
       </div>
   </div>
   )
