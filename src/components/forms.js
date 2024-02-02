@@ -24,14 +24,13 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
   };
 
   const downloadAsPDF = () => {
-    const input = document.getElementById('resume'); // Replace 'entire-page' with the ID of the element you want to capture
     const options = {
-      
-      filename: 'resume.pdf',
+      filename: details.fullname ? `${details.fullname}.pdf` : 'resume.pdf',
       image: { type: 'jpeg', quality: 1 },
       html2canvas: { scale: 3 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
     };
+    const input = document.getElementById('resume'); // Replace 'entire-page' with the ID of the element you want to capture
     html2pdf(input, options);
   };
 

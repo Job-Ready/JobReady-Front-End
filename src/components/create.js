@@ -5,10 +5,11 @@ import Header from './header';
 
 function create( { details, setDetails, workExperiences, setWorkExperiences, projects, setProjects, education, 
     setEducation, languages, setLanguages, skills, setSkills }) {
+
+    
   return (
     <div>
         <Header />
-
             <div className='flex h-screen'>
                 <div className='w-[30%] overflow-auto'>
                     <Forms 

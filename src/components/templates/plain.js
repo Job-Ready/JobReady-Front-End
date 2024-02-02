@@ -29,7 +29,8 @@ function plain({ details, workExperiences, projects, education, languages, skill
                   
                   {/* Work Experience */}
                   <section className="mb-6">
-                    <h2 className="text-xl font-semibold mb-2 border-b-2">Work Experience</h2>
+                    <h2 className="text-xl font-semibold mb-2">Work Experience</h2>
+                    <hr className="border-gray-400 flex-grow mt-2" />
                     <div>
                       {workExperiences.length !== 0  ? workExperiences.map((index) => (
                         <div>
@@ -54,7 +55,8 @@ function plain({ details, workExperiences, projects, education, languages, skill
                   </section>
 
                   <section className="mb-6">
-                    <h2 className="text-xl font-semibold mb-2 border-b-2">Education</h2>
+                    <h2 className="text-xl font-semibold mb-2">Education</h2>
+                    <hr className="border-gray-400 flex-grow mt-2" />
                     {education.length !== 0 ? education.map((index) => (
                       <div>
                         <p className="text-lg font-semibold">{index.uniName}</p>
@@ -69,7 +71,8 @@ function plain({ details, workExperiences, projects, education, languages, skill
                   </section>
 
                   <section className="mb-6">
-                    <h2 className="text-xl font-semibold mb-2 border-b-2">Languages</h2>
+                    <h2 className="text-xl font-semibold mb-2">Languages</h2>
+                    <hr className="border-gray-400 flex-grow mt-2" />
                     {languages.length !== 0 ? languages.map((index) => (
                       <div>
                         <p className="text-lg font-semibold">{index.languageName}</p>
@@ -88,7 +91,8 @@ function plain({ details, workExperiences, projects, education, languages, skill
                 <div>
                   <section>
                     <div>
-                      <h2 className="text-xl font-semibold mb-2 border-b-2">Projects</h2>
+                      <h2 className="text-xl font-semibold mb-2">Projects</h2>
+                      <hr className="border-gray-400 flex-grow mt-2" />
                       {projects.length !==0 ? projects.map((project) => (
                           <div>
                             <p className="text-lg font-semibold">{project.projectName}</p>
@@ -105,7 +109,8 @@ function plain({ details, workExperiences, projects, education, languages, skill
                   {/* Skills */}
 
                   <section>
-                    <h2 className="text-xl font-semibold mb-2 border-b-2">Skills</h2>
+                    <h2 className="text-xl font-semibold mb-2">Skills</h2>
+                    <hr className="border-gray-400 flex-grow mt-2" />
                     <div className='flex'>
                       {skills.length !== 0 ? skills.map((index) => (
                         <ul className="flex flex-wrap">
