@@ -1,9 +1,33 @@
-import React from 'react'
+import React,{ useState } from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import AuthForm from './google-auth';
 import logo from '../assets/JobReady2-nobg-crp.png'
 
-function login() {
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [fullname, setFullname] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:5000/login', {
+        fullname,
+        email,
+        password,
+      });
+
+      // Handle success, for example, redirect to the home page
+      console.log(response.data);
+    } catch (error) {
+      // Handle error, display error message, etc.
+      console.error('Login failed:', error.response.data.error);
+    }
+  };
+
+
   return (
     <div className="min-h-screen h-[600px] flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-[30%] h-full mx-6">
@@ -21,7 +45,7 @@ function login() {
         </div>
 
         <div className='mt-[30%]'>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleLogin}>
             <div className="rounded-md shadow-sm -space-y-px">
               {/* Add your login form fields here */}
               <div>
@@ -89,4 +113,4 @@ function login() {
   )
 }
 
-export default login
+export default Login

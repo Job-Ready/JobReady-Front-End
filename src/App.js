@@ -48,6 +48,7 @@ function App() {
         <Route path="/design" element={<Design />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>
   );
