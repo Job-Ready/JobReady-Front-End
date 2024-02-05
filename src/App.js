@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import Create from './components/create';
 import Design from './components/design';
@@ -8,8 +8,6 @@ import Home from './components/home';
 import LandingPage from './components/landingpage';
 import AboutUs from './components/aboutus';
 import Settings from './components/settings';
-import Login from './components/login';
-import Signup from './components/signup';
 
 
 function App() {
@@ -25,7 +23,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/create" 
           element={
@@ -48,7 +46,6 @@ function App() {
         <Route path="/design" element={<Design />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/settings" element={<Settings />} />
-        <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>
   );

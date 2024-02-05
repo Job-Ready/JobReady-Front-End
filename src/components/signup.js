@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import logo from '../assets/JobReady2-nobg-crp.png';
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -31,21 +30,9 @@ function Signup() {
       console.error('Signup failed:', error.response.data.error);
     }
   };
+  
   return (
-    <div className="min-h-screen h-[600px] flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-[30%] mx-4 bg-login-pattern">
-        <div>
-            <div className='flex items-center justify-center'>
-                <Link className='hover:scale-110 transition-transform duration-200' to='/'>
-                    <button>
-                        <img src={logo} alt="" className='w-[250px]' />
-                    </button>
-                </Link> 
-            </div>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Join us! Create an account to get started.
-          </p>
-        </div>
+      <div>
         <form className="mt-8 space-y-6" onSubmit={handleSignup}>
           <div className="rounded-md shadow-sm -space-y-px">
             {/* Add your sign-up form fields here */}
@@ -124,22 +111,7 @@ function Signup() {
             </button>
           </div>
         </form>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <Link to='/'><a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-            Sign in
-          </a></Link>
-        </p>
-      </div>
-      <div className='flex items-center justify-center w-[70%] h-full bg-sky-400 bg-opacity-25'>
-          <p>
-            Create a resume that stands out from the crowd. <br/>
-            Free templates, easy, fast and professional. <br/>
-            With our free resume builder, create the perfect resume and get hired.
-          </p>
-      </div>
-    </div>
-    
+      </div> 
   );
 }
 
