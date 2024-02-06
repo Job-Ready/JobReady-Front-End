@@ -1,9 +1,13 @@
 import React,{ useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import AuthForm from './google-auth';
+import Home from './home';
 
 function Login() {
+  const [user, setUser] = useState(false);
+  
+  const [errorMessages, setErrorMessages] = useState(''); 
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -21,17 +25,22 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/login', formData);
-      const { token } = response.data;
-
-      // Store the token securely (e.g., in a cookie or local storage)
-      console.log('Token:', token);
-
-      // Redirect or perform other actions after successful login
+      console.log(response);
+      if (response.status === 200) {
+        setErrorMessages('');
+        setUser(true);
+      } 
     } catch (error) {
-      console.error('Login failed:', error.message);
+      console.log('Login failed:', error.message);
+      if (error.response.status === 401) {
+        setErrorMessages('Invalid email or password');
+      }
     }
   };
 
+  if (user) {
+    return <Navigate replace to="/home" />;
+  }
 
   return (
     <div>
@@ -71,6 +80,10 @@ function Login() {
               />
             </div>
           </div>
+
+          {errorMessages && (
+            <div className="text-red-600 text-center">{errorMessages}</div>
+          )}
 
           <div>
             {/* Add your login button here */}
