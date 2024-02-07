@@ -21,7 +21,7 @@ function RoutesDeclared() {
   return (
     <div>
         <Routes>
-            <Route path="/" element={<LandingPage user={user} setUser={setUser} />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/home" element={<Home />} />
             <Route path="/create" 
               element={

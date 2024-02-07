@@ -1,11 +1,12 @@
-import {React, useState} from 'react'
+import {React, useEffect, useState} from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Header from './header';
 
 import SavedResumes from './savedResumes';
 
 function Home() {
+  const [token, setToken] = useState(localStorage.getItem('token'));
     
 //  axios.post('http://localhost:3001/create-resume') 
 //   .then(response => {
@@ -22,7 +23,12 @@ function Home() {
 //on pressing the existing resumes, the user should be able to see 
 // the resume on the right side of the screen
 // on clicking the resume, the user should be redirected to the create page 
-
+console.log('token:', token);
+if (!token || token === null) {
+  console.log('token:', token);
+  // token exists but it is null in local storage
+  return <Navigate replace to="/" />;
+} 
 
   return (
     <div>

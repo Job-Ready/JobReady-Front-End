@@ -1,12 +1,11 @@
-import React,{ useState } from 'react'
+import React,{ useState, useEffect } from 'react'
 import axios from 'axios'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate, Route } from 'react-router-dom'
 import AuthForm from './google-auth';
 import Home from './home';
 
 function Login() {
-  const [user, setUser] = useState(false);
-  
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [errorMessages, setErrorMessages] = useState(''); 
   const [formData, setFormData] = useState({
     email: '',
@@ -28,7 +27,10 @@ function Login() {
       console.log(response);
       if (response.status === 200) {
         setErrorMessages('');
-        setUser(true);
+        setToken(response.data.token);
+        // Store token in local storage
+        console.log(token);
+        localStorage.setItem('token', token);
       } 
     } catch (error) {
       console.log('Login failed:', error.message);
@@ -38,9 +40,13 @@ function Login() {
     }
   };
 
-  if (user) {
-    return <Navigate replace to="/home" />;
-  }
+
+    if (token && token !== null) {
+      console.log('token:', token);
+      // token exists but it is null in local storage
+      return <Navigate replace to="/home" />;
+    } 
+
 
   return (
     <div>
