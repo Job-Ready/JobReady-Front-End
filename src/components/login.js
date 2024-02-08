@@ -27,9 +27,10 @@ function Login() {
       console.log(response);
       if (response.status === 200) {
         setErrorMessages('');
-        setToken(response.data.token);
+        const token = response.data.token;
+        console.log('Token:', token);
+        setToken(token);
         // Store token in local storage
-        console.log(token);
         localStorage.setItem('token', token);
       } 
     } catch (error) {
@@ -41,11 +42,9 @@ function Login() {
   };
 
 
-    if (token && token !== null) {
-      console.log('token:', token);
-      // token exists but it is null in local storage
-      return <Navigate replace to="/home" />;
-    } 
+  if (token && token !== null) {
+    return <Navigate replace to="/home" />;
+  } 
 
 
   return (
@@ -101,7 +100,7 @@ function Login() {
               </button>
             <AuthForm isSignup={false} />
           </div>
-        </form>
+      </form>
     </div>
   )
 }
