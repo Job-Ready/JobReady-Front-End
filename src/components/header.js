@@ -1,12 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/JobReady2-nobg-crp.png'
 
-function header() {
+function Header() {
+    const navigate = useNavigate()
 
     const logout = () => {
         localStorage.clear()
-        window.location.href = '/'
+        //window.location.href = '/'
+        navigate('/')
     }
 
   return (
@@ -38,4 +40,4 @@ function header() {
   )
 }
 
-export default header
+export default Header

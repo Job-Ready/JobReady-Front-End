@@ -24,7 +24,7 @@ function Home() {
 // the resume on the right side of the screen
 // on clicking the resume, the user should be redirected to the create page 
 console.log('token:', token);
-if (!token || token === null) {
+if (!token || token === undefined || token === null) {
   console.log('token:', token);
   // token exists but it is null in local storage
   return <Navigate replace to="/" />;
