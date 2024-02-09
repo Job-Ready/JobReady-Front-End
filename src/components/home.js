@@ -23,6 +23,11 @@ function Home() {
 //on pressing the existing resumes, the user should be able to see 
 // the resume on the right side of the screen
 // on clicking the resume, the user should be redirected to the create page 
+const handleStorageChange = () => {
+  const updatedToken = localStorage.getItem('token');
+  setToken(updatedToken);
+};
+window.addEventListener('storage', handleStorageChange);
 if (!token || token === undefined || token === null) {
   return <Navigate replace to="/" />;
 } 

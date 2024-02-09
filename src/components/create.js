@@ -8,9 +8,14 @@ function Create( { details, setDetails, workExperiences, setWorkExperiences, pro
     setEducation, languages, setLanguages, skills, setSkills }) {
 
     const [token, setToken] = useState(localStorage.getItem('token'));
-    if (!token || token === undefined || token === null) {
+    const handleStorageChange = () => {
+        const updatedToken = localStorage.getItem('token');
+        setToken(updatedToken);
+      };
+      window.addEventListener('storage', handleStorageChange);
+      if (!token || token === undefined || token === null) {
         return <Navigate replace to="/" />;
-        } 
+      } 
 
     
   return (

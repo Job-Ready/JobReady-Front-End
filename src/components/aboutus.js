@@ -4,9 +4,14 @@ import Header from './header';
 
 function Aboutus() {
   const [token, setToken] = useState(localStorage.getItem('token'));
-    if (!token || token === undefined || token === null) {
-        return <Navigate replace to="/" />;
-    } 
+  const handleStorageChange = () => {
+    const updatedToken = localStorage.getItem('token');
+    setToken(updatedToken);
+  };
+  window.addEventListener('storage', handleStorageChange);
+  if (!token || token === undefined || token === null) {
+    return <Navigate replace to="/" />;
+  } 
       
   return (
     <div>
