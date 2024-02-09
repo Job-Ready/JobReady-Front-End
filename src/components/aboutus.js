@@ -1,8 +1,13 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react'
+import { Link, Navigate } from 'react-router-dom';
 import Header from './header';
 
-function aboutus() {
+function Aboutus() {
+  const [token, setToken] = useState(localStorage.getItem('token'));
+    if (!token || token === undefined || token === null) {
+        return <Navigate replace to="/" />;
+    } 
+      
   return (
     <div>
     
@@ -40,4 +45,4 @@ function aboutus() {
   )
 }
 
-export default aboutus
+export default Aboutus

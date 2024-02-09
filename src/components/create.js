@@ -1,10 +1,16 @@
-import React from 'react'
+import React, {useState}  from 'react'
+import { Link, Navigate } from 'react-router-dom';
 import Forms from './forms';
 import Plain from './templates/plain';
 import Header from './header';
 
-function create( { details, setDetails, workExperiences, setWorkExperiences, projects, setProjects, education, 
+function Create( { details, setDetails, workExperiences, setWorkExperiences, projects, setProjects, education, 
     setEducation, languages, setLanguages, skills, setSkills }) {
+
+    const [token, setToken] = useState(localStorage.getItem('token'));
+    if (!token || token === undefined || token === null) {
+        return <Navigate replace to="/" />;
+        } 
 
     
   return (
@@ -64,4 +70,4 @@ function create( { details, setDetails, workExperiences, setWorkExperiences, pro
   )
 }
 
-export default create
+export default Create
