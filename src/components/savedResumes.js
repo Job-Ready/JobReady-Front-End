@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import dummyResumes from './dummyResumes'
 import axios from 'axios'
 
 function SavedResumes() {
   const [userId, setUserId] = useState(localStorage.getItem('User'))
   const [resumes, setResumes] = React.useState([]) // [{}, {}, {}]
 
-  const getResumes = async () => {
-    try {
-      const response = await axios.get(`http://localhost:5000/get-resume/${userId}`);
-      // console.log(response);
-      resumes.append(response.data.resume);
-      setResumes(resumes);
-      console.log(resumes);
-    } catch (error) {
-      console.log('Login failed:', error.message); 
-    }
-  }
-  getResumes();
+  useEffect(() => {
+    const getResumes = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/get-resume/${userId}`);
+        console.log(response)
+        const flattenedResumes = response.data.resume.flat();
+        setResumes(prevResumes => [...prevResumes, ...flattenedResumes]);
+      } catch (error) {
+        console.log('Get Resumes:', error.message);
+      }
+    };
 
+    getResumes();
+  }, []); 
+  console.log(resumes)
   return (
     <div>
   <div>

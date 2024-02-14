@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import PersonalDetails from './personalDetails';
 import WorkExperience from './workExperience';
 import Projects from './projects';
@@ -10,8 +10,10 @@ import axios from 'axios';
 
 function Forms({ details, setDetails, workExperiences, setWorkExperiences, projects, setProjects, education, 
   setEducation, languages, setLanguages, skills, setSkills }) {
+  const userId = localStorage.getItem('User');
 
   const formData = {
+    userId,
     details,
     workExperiences,
     projects,

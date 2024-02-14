@@ -1,9 +1,5 @@
 import {React, useState} from 'react';
-import { BrowserRouter as Router, Route, Link, Navigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon
-import { faTwitter, faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import logo from '../assets/JobReady2-nobg-crp.png';
-import axios from 'axios'; 
+import { Navigate } from 'react-router-dom';
 import Login from './login';
 import SignUp from './signup';
 import Header from './header.js'
@@ -30,7 +26,7 @@ const LandingPage = () => {
             
                 <div className=''>
                     {component.type === SignUp ? (
-                        <div className='w-[20rem]'>
+                        <div className='w-[25rem]'>
                             <SignUp />
                             <p className="mt-2 text-center text-sm text-gray-600">
                                 Already have an account?{' '}
@@ -40,7 +36,7 @@ const LandingPage = () => {
                             </p>
                         </div>
                     ) : (
-                        <div>
+                        <div  className='w-[25rem]'>
                             <Login />
                             <p className="mt-2 text-center text-sm text-gray-600">
                                 Don't have an account?{' '}

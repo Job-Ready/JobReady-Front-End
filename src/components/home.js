@@ -1,5 +1,4 @@
-import {React, useEffect, useState} from 'react'
-import axios from 'axios'
+import {React, useState} from 'react'
 import { Link, Navigate } from 'react-router-dom';
 import Header from './header';
 
@@ -7,7 +6,6 @@ import SavedResumes from './savedResumes';
 
 function Home() {
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [resumes, setResumes] = useState([])
     
   const handleStorageChange = () => {
     const updatedToken = localStorage.getItem('token');

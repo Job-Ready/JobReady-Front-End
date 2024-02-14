@@ -1,5 +1,5 @@
 import React, {useState}  from 'react'
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Forms from './forms';
 import Plain from './templates/plain';
 import Header from './header';
@@ -23,7 +23,7 @@ function Create( { details, setDetails, workExperiences, setWorkExperiences, pro
             <Header />
             <div className='flex h-screen '>
                 <div className='w-[30%] overflow-auto mt-16'>
-                    <Forms 
+                    <Forms
                         details={details} 
                         setDetails={setDetails} 
                         workExperiences={workExperiences} 
