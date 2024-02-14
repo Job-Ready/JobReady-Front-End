@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 
+axios.defaults.baseURL = process.env.REACT_APP_URL
+
 function SavedResumes() {
   const [userId, setUserId] = useState(localStorage.getItem('User'))
   const [resumes, setResumes] = React.useState([]) // [{}, {}, {}]
@@ -9,7 +11,7 @@ function SavedResumes() {
   useEffect(() => {
     const getResumes = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/get-resume/${userId}`);
+        const response = await axios.get(`/get-resume/${userId}`);
         console.log(response)
         const flattenedResumes = response.data.resume.flat();
         setResumes(prevResumes => [...prevResumes, ...flattenedResumes]);

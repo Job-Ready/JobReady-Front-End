@@ -8,6 +8,8 @@ import Skills from './skills';
 import * as html2pdf from 'html2pdf.js';
 import axios from 'axios';
 
+const URL = process.env.REACT_APP_URL
+
 function Forms({ details, setDetails, workExperiences, setWorkExperiences, projects, setProjects, education, 
   setEducation, languages, setLanguages, skills, setSkills }) {
   const userId = localStorage.getItem('User');
@@ -31,7 +33,7 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
 
   const saveResume = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/create-resume', formData);
+      const response = await axios.post('/create-resume', formData);
       console.log(response);
       console.log(formData);
       

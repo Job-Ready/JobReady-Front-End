@@ -4,6 +4,9 @@ import { Link, Navigate, Route } from 'react-router-dom'
 import AuthForm from './google-auth';
 import Home from './home';
 
+
+axios.defaults.URL = process.env.REACT_APP_URL
+
 function Login() {
   const [userId, setUserId] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -24,7 +27,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/login', formData);
+      const response = await axios.post('/login', formData);
       console.log(response);
       if (response.status === 200) {
         setErrorMessages('');
