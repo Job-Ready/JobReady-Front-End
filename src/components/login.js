@@ -5,6 +5,7 @@ import AuthForm from './google-auth';
 import Home from './home';
 
 function Login() {
+  const [userId, setUserId] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [errorMessages, setErrorMessages] = useState(''); 
   const [formData, setFormData] = useState({
@@ -28,9 +29,9 @@ function Login() {
       if (response.status === 200) {
         setErrorMessages('');
         const token = response.data.token;
-        console.log('Token:', token);
+        const userId = response.data.Id
         setToken(token);
-        // Store token in local storage
+        localStorage.setItem('User',userId)
         localStorage.setItem('token', token);
       } 
     } catch (error) {
@@ -43,7 +44,7 @@ function Login() {
 
 
   if (token && token !== null) {
-    return <Navigate replace to="/home" />;
+    return <Navigate replace to="/home" userId={userId} setUserId={setUserId} />;
   } 
 
 

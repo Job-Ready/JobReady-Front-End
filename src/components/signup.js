@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-function Signup() {
+function Signup({userId, setUserId}) {
   const [formData, setFormData] = useState({
     fullname: '',
     email: '',
@@ -22,7 +22,8 @@ function Signup() {
 
     try {
       const response = await axios.post('http://localhost:5000/signup', formData);
-
+      setUserId(response.user.id)
+      console.log(response.user.id)
       // Handle success, for example, redirect to the home page or show a success message
       console.log(response.data);
     } catch (error) {

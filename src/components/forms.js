@@ -5,12 +5,20 @@ import Projects from './projects';
 import Education from './education';
 import Languages from './languages';
 import Skills from './skills';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import * as html2pdf from 'html2pdf.js';
+import axios from 'axios';
 
 function Forms({ details, setDetails, workExperiences, setWorkExperiences, projects, setProjects, education, 
   setEducation, languages, setLanguages, skills, setSkills }) {
+
+  const formData = {
+    details,
+    workExperiences,
+    projects,
+    education,
+    languages,
+    skills
+  }
 
   const handleChange = (e, label) => {
     setDetails({
@@ -18,6 +26,18 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
       [label]: e.target.value
     });
   };
+
+  const saveResume = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/create-resume', formData);
+      console.log(response);
+      console.log(formData);
+      
+    } catch (error) {
+      console.log('Login failed:', error.message);
+      
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,6 +74,12 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
             onClick={downloadAsPDF}
           >
             Download Resume
+          </button>
+          <button
+            className="ml-4 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+            onClick={saveResume}
+          >
+            Save
           </button>
         </div>     
       </form>

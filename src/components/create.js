@@ -20,9 +20,9 @@ function Create( { details, setDetails, workExperiences, setWorkExperiences, pro
     
   return (
     <div>
-        <Header />
-            <div className='flex h-screen'>
-                <div className='w-[30%] overflow-auto'>
+            <Header />
+            <div className='flex h-screen '>
+                <div className='w-[30%] overflow-auto mt-16'>
                     <Forms 
                         details={details} 
                         setDetails={setDetails} 
@@ -38,7 +38,7 @@ function Create( { details, setDetails, workExperiences, setWorkExperiences, pro
                         setSkills={setSkills}
                     />
                 </div>
-                <div className='w-[50%] float-left overflow-y-auto'>
+                <div className='w-[50%] float-left overflow-y-auto mt-16'>
                     <Plain 
                         details={details} 
                         workExperiences={workExperiences} 
@@ -48,7 +48,7 @@ function Create( { details, setDetails, workExperiences, setWorkExperiences, pro
                         skills={skills}
                     />
                 </div>
-                <div className='w-[20%] float-left overflow-y-auto'>
+                <div className='w-[20%] float-left overflow-y-auto mt-16'>
                     <div className='bg-white rounded-lg shadow-md p-4'>
                         <h1 className='text-xl font-bold'>Templates</h1>
                         <div className='flex flex-col mt-10'>
