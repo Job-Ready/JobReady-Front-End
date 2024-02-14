@@ -30,7 +30,7 @@ const LandingPage = () => {
                             <SignUp />
                             <p className="mt-2 text-center text-sm text-gray-600">
                                 Already have an account?{' '}
-                                <button onClick={() => changeComponent(<Login userId={userId} setUserId={setUserId} />)} className="font-medium text-indigo-600 hover:text-indigo-500">
+                                <button onClick={() => changeComponent(<Login />)} className="font-medium text-indigo-600 hover:text-indigo-500">
                                     Sign in
                                 </button>
                             </p>
@@ -40,14 +40,13 @@ const LandingPage = () => {
                             <Login />
                             <p className="mt-2 text-center text-sm text-gray-600">
                                 Don't have an account?{' '}
-                                <button onClick={() => changeComponent(<SignUp userId={userId} setUserId={setUserId} />)} className="font-medium text-indigo-600 hover:text-indigo-500">
+                                <button onClick={() => changeComponent(<SignUp />)} className="font-medium text-indigo-600 hover:text-indigo-500">
                                     Sign up
                                 </button>
                             </p>
                         </div>    
                     )}
                 </div>
-
             </div>
             <div className='flex items-center justify-center w-[70%] h-full bg-sky-400 bg-opacity-25'>
                 <div className='p-10'>

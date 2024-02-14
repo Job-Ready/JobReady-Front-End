@@ -2,11 +2,12 @@ import React,{ useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link, Navigate, Route } from 'react-router-dom'
 import AuthForm from './google-auth';
-import Home from './home';
+import ClipLoader from './spinner';
 
 axios.defaults.URL = process.env.REACT_APP_URL
 
 function Login() {
+  const [isLoading, setIsLoading] = useState(false);
   const [userId, setUserId] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [errorMessages, setErrorMessages] = useState(''); 
@@ -24,6 +25,7 @@ function Login() {
   };
 
   const handleLogin = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       const response = await axios.post('/login', formData);
@@ -99,7 +101,7 @@ function Login() {
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-400 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Sign in
+                {isLoading ? <ClipLoader /> : 'Sign in'}
               </button>
             <AuthForm isSignup={false} />
           </div>
