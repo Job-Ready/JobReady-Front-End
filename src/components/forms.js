@@ -8,7 +8,7 @@ import Skills from './skills';
 import * as html2pdf from 'html2pdf.js';
 import axios from 'axios';
 
-const URL = process.env.REACT_APP_URL
+axios.defaults.URL = process.env.REACT_APP_URL
 
 function Forms({ details, setDetails, workExperiences, setWorkExperiences, projects, setProjects, education, 
   setEducation, languages, setLanguages, skills, setSkills }) {

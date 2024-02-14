@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const URL = process.env.REACT_APP_URL
+axios.defaults.URL = process.env.REACT_APP_URL
 
 function Signup({userId, setUserId}) {
   const [formData, setFormData] = useState({

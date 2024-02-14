@@ -4,7 +4,6 @@ import { Link, Navigate, Route } from 'react-router-dom'
 import AuthForm from './google-auth';
 import Home from './home';
 
-
 axios.defaults.URL = process.env.REACT_APP_URL
 
 function Login() {
