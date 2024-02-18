@@ -8,7 +8,6 @@ function Header() {
     const [isLogin, setIsLogin] = useState(localStorage.getItem('token') ? true : false);
     const logout = () => {
         localStorage.clear()
-        //window.location.href = '/'
         navigate('/')
     }
 
@@ -49,7 +48,7 @@ function Header() {
                                     {isOpen && (
                                         <div className="origin-top-right absolute right-0 mt-2 mr-4 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
                                             <div className="" role="none">
-                                                <button
+                                                <Link to='/account'><button
                                                 onClick={() => console.log("Account clicked")}
                                                 className="block px-4 py-2 text-sm text-gray-700 w-full text-left border-b-2 hover:bg-gray-100"
                                                 role="menuitem"
@@ -57,7 +56,8 @@ function Header() {
                                                 >
                                                 Account
                                                 </button>
-                                                <button
+                                                </Link>
+                                                <Link to='/settings'><button
                                                 onClick={() => console.log("Settings clicked")}
                                                 className="block px-4 py-2 text-sm text-gray-700 w-full text-left border-b-2 hover:bg-gray-100"
                                                 role="menuitem"
@@ -66,6 +66,7 @@ function Header() {
                                                 Settings
                                                 
                                                 </button>
+                                                </Link>
                                                 <button
                                                 onClick={logout}
                                                 className="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100"
@@ -83,7 +84,7 @@ function Header() {
                         </ul>
                     </div>
                 </nav>
-            </header>
+        </header>
     </div>
   )
 }

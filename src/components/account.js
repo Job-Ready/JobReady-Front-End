@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Link, Navigate } from 'react-router-dom';
 import Header from './header';
 
-function Settings() {
+function Account() {
     const [token, setToken] = useState(localStorage.getItem('token'));
     
     const handleStorageChange = () => {
@@ -20,4 +20,4 @@ function Settings() {
   )
 }
 
-export default Settings
+export default Account
