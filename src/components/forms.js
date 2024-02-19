@@ -32,10 +32,9 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
   };
 
   const saveResume = async () => {
+    const token = localStorage.getItem('token');
     try {
-      const response = await axios.post('/create-resume', formData);
-      console.log(response);
-      console.log(formData);
+      const response = await axios.post('/create-resume', formData, { headers: { Authorization: token }});
       
     } catch (error) {
       console.log('Login failed:', error.message);

@@ -42,6 +42,7 @@ function Login() {
       console.log('Login failed:', error.message);
       if (error.response.status === 401) {
         setErrorMessages('Invalid email or password');
+        setIsLoading(false);
       }
     }
   };
