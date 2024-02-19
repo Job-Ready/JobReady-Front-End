@@ -1,18 +1,25 @@
 import React, {useState} from 'react'
 
-function PersonalDetails({handleChange, details}) {
-    const [selectedPersonalDetails, setSelectedPersonalDetails] = useState([]);
+function PersonalDetails({details, setDetails}) {
 
     const personalDetails = [
-        "Full-Name",
-        "Title",
-        "Email",
-        "Phone",
-        "Linked-In",
-        "Code-Repository",
-        "Portfolio",
-        "Country/City",
+        "fullname",
+        "title",
+        "email",
+        "phone",
+        "linkedin",
+        "codeRepository",
+        "portfolio",
+        "countryCity",
     ];
+
+    const handleChange = (e, label) => {
+        setDetails({
+          ...details,
+          [label]: e.target.value
+        });
+      };
+    
 
   return (
     <div>

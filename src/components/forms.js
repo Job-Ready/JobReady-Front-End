@@ -5,7 +5,8 @@ import Projects from './projects';
 import Education from './education';
 import Languages from './languages';
 import Skills from './skills';
-import * as html2pdf from 'html2pdf.js';
+import html2canvas from 'html2canvas';
+import jsPdf from 'jspdf';
 import axios from 'axios';
 
 axios.defaults.URL = process.env.REACT_APP_URL
@@ -24,13 +25,6 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
     skills
   }
 
-  const handleChange = (e, label) => {
-    setDetails({
-      ...details,
-      [label]: e.target.value
-    });
-  };
-
   const saveResume = async () => {
     const token = localStorage.getItem('token');
     try {
@@ -47,15 +41,24 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
   };
 
   const downloadAsPDF = () => {
-    const options = {
-      filename: details.fullname ? `${details.fullname}.pdf` : 'resume.pdf',
-      image: { type: 'jpeg', quality: 1 },
-      html2canvas: { scale: 3 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    };
+    // const options = {
+    //   filename: details.fullname ? `${details.fullname}.pdf` : 'resume.pdf',
+    //   image: { type: 'jpeg', quality: 1 },
+    //   html2canvas: { scale: 3 },
+    //   jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    // };
     const input = document.getElementById('resume'); // Replace 'entire-page' with the ID of the element you want to capture
-    html2pdf(input, options);
-  };
+    // html2pdf(input, options);
+
+    html2canvas(input, { onclone: (document) => {
+      //document.getElementById('print-button').style.visibility = 'hidden'
+    }})
+    .then((canvas) => {
+        const img = canvas.toDataURL('image/png')
+        const pdf = new jsPdf()
+        pdf.addImage(img, 'JPEG', 0, 0, 210, 297)
+        pdf.save('your-filename.pdf')
+  })};
 
 
   return (
@@ -63,7 +66,7 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
       <form onSubmit={handleSubmit}>
         <h2 className="text-2xl font-semibold mb-4">Resume Builder</h2>
         
-        <PersonalDetails handleChange={handleChange} details={details} />                                   
+        <PersonalDetails details={details} setDetails={setDetails} />                                   
         <WorkExperience workExperiences={workExperiences} setWorkExperiences={setWorkExperiences} />
         <Education education={education} setEducation={setEducation} />
         <Languages languages={languages} setLanguages={setLanguages} />

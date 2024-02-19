@@ -1,14 +1,16 @@
 import React from 'react'
 
 function plain({ details, workExperiences, projects, education, languages, skills }) {
-    
+
     return (
         <div className=" p-8">
           <div id="resume"  className="w-[210mm] h-[297mm]  bg-white p-6 rounded-md shadow-xl">
             <header className="text-left mb-6">
               <h1 className="text-3xl font-bold">{details.fullname ? details.fullname : "Your Name"}</h1>
-              <p className="text-gray-600">Web Developer</p>
+              <p className="text-gray-600">{details.title ? details.title : "Web Developer"}</p>
+              <p className="text-gray-400 text-sm">{details.countryCity ? details.countryCity : "Country, City"}</p>
               <hr className="border-gray-400 flex-grow mt-2" />
+              {details.portfolio ? "Portfolio : " + details.portfolio : ""}
             </header>
     
             {/* Contact Information */}
@@ -17,7 +19,7 @@ function plain({ details, workExperiences, projects, education, languages, skill
                 <li>{details.email ? details.email : "your.email@example.com"}</li>
                 <li>{details.phone ? details.phone : "(123) 456-7890"}</li>
                 <li>{details.linkedin ? details.linkedin : "linkedin.com/in/yourname"}</li>
-                <li>{details.github ? details.github : "github.com/yourusername"}</li>
+                <li>{details.codeRepository ? details.codeRepository : "github.com/yourusername"}</li>
               </ul>
               <hr className="border-gray-400 flex-grow mt-2" />
             </section>

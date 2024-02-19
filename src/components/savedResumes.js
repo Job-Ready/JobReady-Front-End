@@ -12,7 +12,6 @@ function SavedResumes() {
     const getResumes = async () => {
       try {
         const response = await axios.get(`/get-resume/${userId}`);
-        console.log(response)
         const flattenedResumes = response.data.resume.flat();
         setResumes(prevResumes => [...prevResumes, ...flattenedResumes]);
       } catch (error) {
@@ -22,7 +21,7 @@ function SavedResumes() {
 
     getResumes();
   }, []); 
-  console.log(resumes)
+
   return (
     <div>
   <div>

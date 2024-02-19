@@ -41,10 +41,12 @@ function Header() {
                     </div>
                     <div className='flex items-center'>
                         <ul className='flex items-center'>
+                            <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/home'><button><li>Home</li></button></Link>
+                            <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/create'><button><li>Create</li></button></Link>
                             <Link className='mr-10 hover:scale-110 transition-transform duration-200' to='/aboutus'><button><li>About us</li></button></Link>
                             {isLogin ? 
                                 <div>
-                                    <button className='w-[40px]' onClick={toggleMenu}><img alt='' src={userImage} /></button>
+                                    <button className='w-[32px]' onClick={toggleMenu}><img alt='' src={userImage} /></button>
                                     {isOpen && (
                                         <div className="origin-top-right absolute right-0 mt-2 mr-4 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
                                             <div className="" role="none">
