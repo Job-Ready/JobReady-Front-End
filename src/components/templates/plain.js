@@ -1,20 +1,30 @@
 import React from 'react'
 
 function plain({ details, workExperiences, projects, education, languages, skills }) {
-
+  console.log(details)
     return (
         <div className=" p-8">
           <div id="resume"  className="w-[210mm] h-[297mm]  bg-white p-6 rounded-md shadow-xl">
-            <header className="text-left mb-6">
-              <h1 className="text-3xl font-bold">{details.fullname ? details.fullname : "Your Name"}</h1>
-              <p className="text-gray-600">{details.title ? details.title : "Web Developer"}</p>
-              <p className="text-gray-400 text-sm">{details.countryCity ? details.countryCity : "Country, City"}</p>
-              <hr className="border-gray-400 flex-grow mt-2" />
-              {details.portfolio ? "Portfolio : " + details.portfolio : ""}
-            </header>
+            <div className='flex justify-between items-center'>
+              <div>
+                <header className="text-left mb-6">
+                <h1 className="text-3xl font-bold">{details.fullname ? details.fullname : "Your Name"}</h1>
+                <p className="text-gray-600">{details.title ? details.title : "Web Developer"}</p>
+                <p className="text-gray-400 text-sm">{details.countryCity ? details.countryCity : "Country, City"}</p>
+                </header>
+              </div>
+              <div className='items center'>
+                <div className=" bg-black rounded-full w-[80px] h-[80px]">
+                  Photo
+                </div>
+              </div>
+            </div>
+           
     
             {/* Contact Information */}
             <section className="mb-6">
+              <hr className="border-gray-400 flex-grow mt-2" />
+              {details.portfolio ? "Portfolio : " + details.portfolio : ""}
               <ul className="text-sm flex justify-between">
                 <li>{details.email ? details.email : "your.email@example.com"}</li>
                 <li>{details.phone ? details.phone : "(123) 456-7890"}</li>
@@ -34,7 +44,7 @@ function plain({ details, workExperiences, projects, education, languages, skill
                     <h2 className="text-xl font-semibold mb-2">Work Experience</h2>
                     <hr className="border-gray-400 flex-grow mt-2" />
                     <div>
-                      {workExperiences.length !== 0  ? workExperiences.map((index) => (
+                      {workExperiences !== undefined && workExperiences.length !== 0 ? workExperiences.map((index) => (
                         <div>
                           <p className="text-lg font-semibold">{index.companyName}</p>
                           <p className="text-gray-600">{index.position}</p>
