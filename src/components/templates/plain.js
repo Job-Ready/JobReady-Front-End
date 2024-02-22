@@ -1,7 +1,7 @@
 import React from 'react'
 
 function plain({ details, workExperiences, projects, education, languages, skills }) {
-  console.log(details)
+ 
     return (
         <div className=" p-8">
           <div id="resume"  className="w-[210mm] h-[297mm]  bg-white p-6 rounded-md shadow-xl">

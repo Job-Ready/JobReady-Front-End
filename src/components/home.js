@@ -10,6 +10,7 @@ function Home() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [userId, setUserId] = useState(localStorage.getItem('User'))
   const [resumes, setResumes] = useState([]) 
+  const [selectedResume, setSelectedResume] = useState(null); // State to hold the selected resume
 
   useEffect(() => {
     const getResumes = async () => {
@@ -33,27 +34,48 @@ function Home() {
   if (!token || token === undefined || token === null) {
     return <Navigate replace to="/" />;
   } 
-  console.log(resumes)
+  
+  // Find the index of the resume with the latest last_change timestamp
+  const latestResumeIndex = resumes.reduce((acc, curr, index) => {
+    if (index === 0) return index;
+    return curr.last_change > resumes[acc].last_change ? index : acc;
+  }, 0);
+
+  const handleResumeClick = (index) => {
+    setSelectedResume(resumes[index]);
+  };
+
   return (
     <div>
         <Header />
         <div className='flex h-screen p-8'>
             <div className='w-[40%] overflow-auto mt-12'>
-                <SavedResumes resumes={resumes} />
+                <SavedResumes resumes={resumes} onResumeClick={handleResumeClick} />
             </div>
             <div className='flex-1 float-left overflow-y-auto bg-slate-100 hover:opacity-50 transition-transform duration-200 cursor-pointer mt-12'>
               <Link to='/create'>
-                  <div className=''>
-                    {resumes !== undefined && resumes.length !== 0 ?
-                      <Plain 
-                          details={resumes[0].details} 
-                          workExperiences={resumes[0].workExperiences} 
-                          projects={resumes[0].projects}
-                          education={resumes[0].education}
-                          languages={resumes[0].languages}
-                          skills={resumes[0].skills}
-                      />
-                    : <h1 className='text-4xl opacity-30'>No resumes found</h1>}
+                  <div>
+                    {selectedResume !== null ? 
+                        (<Plain
+                            details={selectedResume.details}
+                            workExperiences={selectedResume.workExperiences}
+                            projects={selectedResume.projects}
+                            education={selectedResume.education}
+                            languages={selectedResume.languages}
+                            skills={selectedResume.skills}
+                        />)
+                      :
+                      (resumes !== undefined && resumes.length !== 0 ?
+                        <Plain 
+                            details={resumes[latestResumeIndex].details} 
+                            workExperiences={resumes[latestResumeIndex].workExperiences} 
+                            projects={resumes[latestResumeIndex].projects}
+                            education={resumes[latestResumeIndex].education}
+                            languages={resumes[latestResumeIndex].languages}
+                            skills={resumes[latestResumeIndex].skills}
+                        />
+                      : <h1 className='text-4xl opacity-30'>No resumes found</h1>)
+                    }
                   </div>
               </Link>
             </div>

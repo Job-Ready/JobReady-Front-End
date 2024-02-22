@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PersonalDetails from './personalDetails';
 import WorkExperience from './workExperience';
 import Projects from './projects';
@@ -14,6 +14,7 @@ axios.defaults.URL = process.env.REACT_APP_URL
 function Forms({ details, setDetails, workExperiences, setWorkExperiences, projects, setProjects, education, 
   setEducation, languages, setLanguages, skills, setSkills }) {
   const userId = localStorage.getItem('User');
+  const resumeId = localStorage.getItem('Resume_Id');
 
   const formData = {
     userId,
@@ -25,16 +26,28 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
     skills
   }
 
-  const saveResume = async () => {
+  const updateResume = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.put(`/update-resume/${resumeId}`, formData, { headers: { Authorization: token }});
+    } catch (error) {
+      console.log('Login failed:', error.message);
+    }
+  }
+
+  const createResume = async () => {
     const token = localStorage.getItem('token');
     try {
       const response = await axios.post('/create-resume', formData, { headers: { Authorization: token }});
-      
+      localStorage.setItem('Resume_Id', response.data.resume.id);
     } catch (error) {
       console.log('Login failed:', error.message);
-      
     }
   }
+
+  useEffect(() => {
+    createResume();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,7 +68,12 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
   return (
     <div className="container p-8">
       <form onSubmit={handleSubmit}>
-        <h2 className="text-2xl font-semibold mb-4">Resume Builder</h2>
+        <div className="flex justify-between ">
+          <h1 className="text-xl font-bold">Create Resume</h1>
+          <button onClick={() => updateResume()} className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+            Save
+          </button>
+        </div>
         
         <PersonalDetails details={details} setDetails={setDetails} />                                   
         <WorkExperience workExperiences={workExperiences} setWorkExperiences={setWorkExperiences} />
@@ -71,12 +89,6 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
             onClick={downloadAsPDF}
           >
             Download Resume
-          </button>
-          <button
-            className="ml-4 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-            onClick={saveResume}
-          >
-            Save
           </button>
         </div>     
       </form>
