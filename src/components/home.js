@@ -11,6 +11,8 @@ function Home() {
   const [userId, setUserId] = useState(localStorage.getItem('User'))
   const [resumes, setResumes] = useState([]) 
   const [selectedResume, setSelectedResume] = useState(null); // State to hold the selected resume
+  const [resumeId, setResumeId] = useState(null);
+  localStorage.removeItem('Resume_Id');
 
   useEffect(() => {
     const getResumes = async () => {
@@ -41,6 +43,13 @@ function Home() {
     return curr.last_change > resumes[acc].last_change ? index : acc;
   }, 0);
 
+  const setResumeIdfun = () => {
+    if (selectedResume !== null) {
+      localStorage.setItem('Resume_Id', selectedResume.id);
+    }
+    console.log('Resume Id:', resumeId);
+  }
+
   const handleResumeClick = (index) => {
     setSelectedResume(resumes[index]);
   };
@@ -54,7 +63,7 @@ function Home() {
             </div>
             <div className='flex-1 float-left overflow-y-auto bg-slate-100 hover:opacity-50 transition-transform duration-200 cursor-pointer mt-12'>
               <Link to='/create'>
-                  <div>
+                  <div onClick={() => setResumeIdfun()}>
                     {selectedResume !== null ? 
                         (<Plain
                             details={selectedResume.details}

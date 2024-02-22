@@ -35,20 +35,6 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
     }
   }
 
-  const createResume = async () => {
-    const token = localStorage.getItem('token');
-    try {
-      const response = await axios.post('/create-resume', formData, { headers: { Authorization: token }});
-      localStorage.setItem('Resume_Id', response.data.resume.id);
-    } catch (error) {
-      console.log('Login failed:', error.message);
-    }
-  }
-
-  useEffect(() => {
-    createResume();
-  }, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
   };

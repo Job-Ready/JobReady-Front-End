@@ -7,6 +7,25 @@ axios.defaults.baseURL = process.env.REACT_APP_URL
 
 function SavedResumes({resumes, onResumeClick}) {
 
+  const [formData, setFormData] = useState({
+    userId: localStorage.getItem('User'),
+    details: {},
+    workExperiences: [],
+    projects: [],
+    education: [],
+    languages: [],
+    skills: []
+  });
+
+  const createResume = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.post('/create-resume', formData, { headers: { Authorization: token }});
+      localStorage.setItem('Resume_Id', response.data.resume.id);
+    } catch (error) {
+      console.log('Login failed:', error.message);
+    }
+  }
 
   return (
     <div>
@@ -20,7 +39,7 @@ function SavedResumes({resumes, onResumeClick}) {
       ))}
       <div className='w-28 h-28 mb-4 mr-4 bg-white shadow-md rounded-md hover:scale-110 transition-transform duration-200 cursor-pointer'>
         <Link to='/create'>
-          <div className='flex justify-center items-center h-full'>
+          <div onClick={() => createResume()} className='flex justify-center items-center h-full'>
             <h1 className='text-4xl'>+</h1> 
           </div>
         </Link>
