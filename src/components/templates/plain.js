@@ -1,7 +1,8 @@
 import React from 'react'
 
-function plain({ details, workExperiences, projects, education, languages, skills }) {
- 
+function plain({ details, workexperiences, projects, education, languages, skills }) {
+ console.log(workexperiences)
+ console.log(projects)
     return (
         <div className=" p-8">
           <div id="resume"  className="w-[210mm] h-[297mm]  bg-white p-6 rounded-md shadow-xl">
@@ -44,7 +45,7 @@ function plain({ details, workExperiences, projects, education, languages, skill
                     <h2 className="text-xl font-semibold mb-2">Work Experience</h2>
                     <hr className="border-gray-400 flex-grow mt-2" />
                     <div>
-                      {workExperiences !== undefined && workExperiences.length !== 0 ? workExperiences.map((index) => (
+                      {workexperiences !== undefined && workexperiences.length !== 0 ? workexperiences.map((index) => (
                         <div>
                           <p className="text-lg font-semibold">{index.companyName}</p>
                           <p className="text-gray-600">{index.position}</p>

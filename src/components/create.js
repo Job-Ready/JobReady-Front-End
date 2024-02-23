@@ -5,10 +5,16 @@ import Forms from './forms';
 import Plain from './templates/plain';
 import Header from './header';
 
-function Create( { details, setDetails, workExperiences, setWorkExperiences, projects, setProjects, education, 
-    setEducation, languages, setLanguages, skills, setSkills }) {
+function Create() {
     const [resumes, setResumes] = useState([]);
     const [userId, setUserId] = useState(localStorage.getItem('User'))
+    const [details, setDetails] = useState([]);
+    const [workexperiences, setWorkExperiences] = useState([]);
+    const [projects, setProjects] = useState([]);
+    const [education, setEducation] = useState([]);
+    const [languages, setLanguages] = useState([]);
+    const [skills, setSkills] = useState([]);
+    const [detailsToDisplay, setDetailsToDisplay] = useState([]);
 
     useEffect(() => {
         const getResumes = async () => {
@@ -43,7 +49,6 @@ function Create( { details, setDetails, workExperiences, setWorkExperiences, pro
         if (index === 0) return index;
         return curr.last_change > resumes[acc].last_change ? index : acc;
     }, 0);
-    
 
   return (
     <div>
@@ -53,7 +58,7 @@ function Create( { details, setDetails, workExperiences, setWorkExperiences, pro
                     <Forms
                         details={details} 
                         setDetails={setDetails} 
-                        workExperiences={workExperiences} 
+                        workExperiences={workexperiences} 
                         setWorkExperiences={setWorkExperiences} 
                         projects={projects}
                         setProjects={setProjects}
@@ -68,12 +73,12 @@ function Create( { details, setDetails, workExperiences, setWorkExperiences, pro
                 <div className='w-[50%] float-left overflow-y-auto mt-16'>
                     {resumes !== undefined && resumes.length !== 0 ?
                         <Plain 
-                            details={resumes[getResumeIndex].details} 
-                            workExperiences={resumes[getResumeIndex].workExperiences} 
-                            projects={resumes[getResumeIndex].projects}
-                            education={resumes[getResumeIndex].education}
-                            languages={resumes[getResumeIndex].languages}
-                            skills={resumes[getResumeIndex].skills}
+                            details={details !== undefined && details.length !== 0 ? details : resumes[getResumeIndex].details} 
+                            workexperiences={workexperiences !== undefined && workexperiences.length !== 0 ? workexperiences : resumes[getResumeIndex].workexperiences}
+                            projects={projects !== undefined && projects.length !== 0 ? projects : resumes[getResumeIndex].projects}
+                            education={education !== undefined && education.length !== 0 ? education : resumes[getResumeIndex].education}
+                            languages={languages !== undefined && languages.length !== 0 ? languages : resumes[getResumeIndex].languages}
+                            skills={skills !== undefined && skills.length !== 0 ? skills : resumes[getResumeIndex].skills}
                         />
                       : <h1 className='text-4xl opacity-30'>No resumes found</h1>}
                 </div>

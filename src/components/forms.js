@@ -28,11 +28,17 @@ function Forms({ details, setDetails, workExperiences, setWorkExperiences, proje
 
   const updateResume = async () => {
     const token = localStorage.getItem('token');
+    for (let key in formData) {
+      if (formData[key] === null || formData[key] === undefined || formData[key] === '') {
+        delete formData[key];
+      }
+    }
     try {
       const response = await axios.put(`/update-resume/${resumeId}`, formData, { headers: { Authorization: token }});
     } catch (error) {
       console.log('Login failed:', error.message);
     }
+    console.log(formData);
   }
 
   const handleSubmit = (e) => {
