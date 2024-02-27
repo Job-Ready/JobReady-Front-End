@@ -1,17 +1,16 @@
 import React from 'react'
 
-function plain({ details, workexperiences, projects, education, languages, skills }) {
- console.log(workexperiences)
- console.log(projects)
+function plain({ fullname, workexperiences, projects, education, languages, skills }) {
+ 
     return (
         <div className=" p-8">
           <div id="resume"  className="w-[210mm] h-[297mm]  bg-white p-6 rounded-md shadow-xl">
             <div className='flex justify-between items-center'>
               <div>
                 <header className="text-left mb-6">
-                <h1 className="text-3xl font-bold">{details.fullname ? details.fullname : "Your Name"}</h1>
-                <p className="text-gray-600">{details.title ? details.title : "Web Developer"}</p>
-                <p className="text-gray-400 text-sm">{details.countryCity ? details.countryCity : "Country, City"}</p>
+                <h1 className="text-3xl font-bold">{fullname ? fullname : "Your Name"}</h1>
+                <p className="text-gray-600">{"Web Developer"}</p>
+                <p className="text-gray-400 text-sm">{"Country, City"}</p>
                 </header>
               </div>
               <div className='items center'>
@@ -25,12 +24,12 @@ function plain({ details, workexperiences, projects, education, languages, skill
             {/* Contact Information */}
             <section className="mb-6">
               <hr className="border-gray-400 flex-grow mt-2" />
-              {details.portfolio ? "Portfolio : " + details.portfolio : ""}
+              {"Portfolio : "}
               <ul className="text-sm flex justify-between">
-                <li>{details.email ? details.email : "your.email@example.com"}</li>
-                <li>{details.phone ? details.phone : "(123) 456-7890"}</li>
-                <li>{details.linkedin ? details.linkedin : "linkedin.com/in/yourname"}</li>
-                <li>{details.codeRepository ? details.codeRepository : "github.com/yourusername"}</li>
+                <li>{"your.email@example.com"}</li>
+                <li>{"(123) 456-7890"}</li>
+                <li>{"linkedin.com/in/yourname"}</li>
+                <li>{"github.com/yourusername"}</li>
               </ul>
               <hr className="border-gray-400 flex-grow mt-2" />
             </section>

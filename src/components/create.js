@@ -8,13 +8,12 @@ import Header from './header';
 function Create() {
     const [resumes, setResumes] = useState([]);
     const [userId, setUserId] = useState(localStorage.getItem('User'))
-    const [details, setDetails] = useState([]);
+    const [fullname, setFullname] = useState('');
     const [workexperiences, setWorkExperiences] = useState([]);
     const [projects, setProjects] = useState([]);
     const [education, setEducation] = useState([]);
     const [languages, setLanguages] = useState([]);
     const [skills, setSkills] = useState([]);
-    const [detailsToDisplay, setDetailsToDisplay] = useState([]);
 
     useEffect(() => {
         const getResumes = async () => {
@@ -56,8 +55,8 @@ function Create() {
             <div className='flex h-screen '>
                 <div className='w-[30%] overflow-auto mt-16'>
                     <Forms
-                        details={details} 
-                        setDetails={setDetails} 
+                        fullname={fullname}
+                        setFullname={setFullname}
                         workExperiences={workexperiences} 
                         setWorkExperiences={setWorkExperiences} 
                         projects={projects}
@@ -73,7 +72,7 @@ function Create() {
                 <div className='w-[50%] float-left overflow-y-auto mt-16'>
                     {resumes !== undefined && resumes.length !== 0 ?
                         <Plain 
-                            details={details !== undefined && details.length !== 0 ? details : resumes[getResumeIndex].details} 
+                            fullname={fullname !== undefined && fullname.length !== 0 ? fullname : resumes[getResumeIndex].fullname}
                             workexperiences={workexperiences !== undefined && workexperiences.length !== 0 ? workexperiences : resumes[getResumeIndex].workexperiences}
                             projects={projects !== undefined && projects.length !== 0 ? projects : resumes[getResumeIndex].projects}
                             education={education !== undefined && education.length !== 0 ? education : resumes[getResumeIndex].education}

@@ -66,7 +66,7 @@ function Home() {
                   <div onClick={() => setResumeIdfun()}>
                     {selectedResume !== null ? 
                         (<Plain
-                            details={selectedResume.details}
+                            fullname={selectedResume.fullname}
                             workExperiences={selectedResume.workExperiences}
                             projects={selectedResume.projects}
                             education={selectedResume.education}
@@ -76,7 +76,7 @@ function Home() {
                       :
                       (resumes !== undefined && resumes.length !== 0 ?
                         <Plain 
-                            details={resumes[latestResumeIndex].details} 
+                            fullname={resumes[latestResumeIndex].fullname} 
                             workExperiences={resumes[latestResumeIndex].workExperiences} 
                             projects={resumes[latestResumeIndex].projects}
                             education={resumes[latestResumeIndex].education}
