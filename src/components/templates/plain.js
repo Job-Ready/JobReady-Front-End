@@ -1,6 +1,6 @@
 import React from 'react'
 
-function plain({ fullname, workexperiences, projects, education, languages, skills }) {
+function plain({ fullname, title, country, email, phone, linkedin, portfolio, repos, workexperiences, projects, education, languages, skills}) {
  
     return (
         <div className=" p-8">
@@ -9,8 +9,8 @@ function plain({ fullname, workexperiences, projects, education, languages, skil
               <div>
                 <header className="text-left mb-6">
                 <h1 className="text-3xl font-bold">{fullname ? fullname : "Your Name"}</h1>
-                <p className="text-gray-600">{"Web Developer"}</p>
-                <p className="text-gray-400 text-sm">{"Country, City"}</p>
+                <p className="text-gray-600">{title ? title : "Web Developer"}</p>
+                <p className="text-gray-400 text-sm">{country ? country : "Country, City"}</p>
                 </header>
               </div>
               <div className='items center'>
@@ -24,12 +24,12 @@ function plain({ fullname, workexperiences, projects, education, languages, skil
             {/* Contact Information */}
             <section className="mb-6">
               <hr className="border-gray-400 flex-grow mt-2" />
-              {"Portfolio : "}
+              {portfolio ? portfolio : "Portfolio : "}
               <ul className="text-sm flex justify-between">
-                <li>{"your.email@example.com"}</li>
-                <li>{"(123) 456-7890"}</li>
-                <li>{"linkedin.com/in/yourname"}</li>
-                <li>{"github.com/yourusername"}</li>
+                <li>{email ? email : "youremail@test.com"}</li>
+                <li>{phone ? phone : "(123) 456-7890"}</li>
+                <li>{linkedin ? linkedin : "linkedin.com/in/yourname"}</li>
+                <li>{repos ? repos : "github.com/yourusername"}</li>
               </ul>
               <hr className="border-gray-400 flex-grow mt-2" />
             </section>

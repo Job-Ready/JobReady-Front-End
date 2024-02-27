@@ -67,6 +67,13 @@ function Home() {
                     {selectedResume !== null ? 
                         (<Plain
                             fullname={selectedResume.fullname}
+                            title={selectedResume.title}
+                            email={selectedResume.email}
+                            phone={selectedResume.phone}
+                            linkedin={selectedResume.linkedin}
+                            portfolio={selectedResume.portfolio}
+                            country={selectedResume.country}
+                            repos={selectedResume.repos}
                             workExperiences={selectedResume.workExperiences}
                             projects={selectedResume.projects}
                             education={selectedResume.education}
@@ -77,6 +84,13 @@ function Home() {
                       (resumes !== undefined && resumes.length !== 0 ?
                         <Plain 
                             fullname={resumes[latestResumeIndex].fullname} 
+                            title={resumes[latestResumeIndex].title}
+                            email={resumes[latestResumeIndex].email}
+                            phone={resumes[latestResumeIndex].phone}
+                            linkedin={resumes[latestResumeIndex].linkedin}
+                            portfolio={resumes[latestResumeIndex].portfolio}
+                            country={resumes[latestResumeIndex].country}
+                            repos={resumes[latestResumeIndex].repos}
                             workExperiences={resumes[latestResumeIndex].workExperiences} 
                             projects={resumes[latestResumeIndex].projects}
                             education={resumes[latestResumeIndex].education}

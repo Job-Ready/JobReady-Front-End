@@ -9,6 +9,13 @@ function Create() {
     const [resumes, setResumes] = useState([]);
     const [userId, setUserId] = useState(localStorage.getItem('User'))
     const [fullname, setFullname] = useState('');
+    const [title, setTitle] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [linkedin, setLinkedin] = useState('');
+    const [portfolio, setPortfolio] = useState('');
+    const [country, setCountry] = useState('');
+    const [repos, setRepos] = useState('');
     const [workexperiences, setWorkExperiences] = useState([]);
     const [projects, setProjects] = useState([]);
     const [education, setEducation] = useState([]);
@@ -55,6 +62,20 @@ function Create() {
             <div className='flex h-screen '>
                 <div className='w-[30%] overflow-auto mt-16'>
                     <Forms
+                        email={email}
+                        setEmail={setEmail}
+                        phone={phone}
+                        setPhone={setPhone}
+                        linkedin={linkedin}
+                        setLinkedin={setLinkedin}
+                        portfolio={portfolio}
+                        setPortfolio={setPortfolio}
+                        country={country}
+                        setCountry={setCountry}
+                        repos={repos}
+                        setRepos={setRepos}
+                        title={title}
+                        setTitle={setTitle}
                         fullname={fullname}
                         setFullname={setFullname}
                         workExperiences={workexperiences} 
@@ -72,7 +93,14 @@ function Create() {
                 <div className='w-[50%] float-left overflow-y-auto mt-16'>
                     {resumes !== undefined && resumes.length !== 0 ?
                         <Plain 
+                            email={email !== undefined && email.length !== 0 ? email : resumes[getResumeIndex].email}
+                            phone={phone !== undefined && phone.length !== 0 ? phone : resumes[getResumeIndex].phone}
+                            linkedin={linkedin !== undefined && linkedin.length !== 0 ? linkedin : resumes[getResumeIndex].linkedin}
+                            portfolio={portfolio !== undefined && portfolio.length !== 0 ? portfolio : resumes[getResumeIndex].portfolio}
+                            country={country !== undefined && country.length !== 0 ? country : resumes[getResumeIndex].country}
+                            repos={repos !== undefined && repos.length !== 0 ? repos : resumes[getResumeIndex].repos}
                             fullname={fullname !== undefined && fullname.length !== 0 ? fullname : resumes[getResumeIndex].fullname}
+                            title={title !== undefined && title.length !== 0 ? title : resumes[getResumeIndex].title}
                             workexperiences={workexperiences !== undefined && workexperiences.length !== 0 ? workexperiences : resumes[getResumeIndex].workexperiences}
                             projects={projects !== undefined && projects.length !== 0 ? projects : resumes[getResumeIndex].projects}
                             education={education !== undefined && education.length !== 0 ? education : resumes[getResumeIndex].education}

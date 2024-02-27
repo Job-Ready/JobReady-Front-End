@@ -9,17 +9,33 @@ import html2canvas from 'html2canvas';
 import jsPdf from 'jspdf';
 import axios from 'axios';
 import Fullname from './details/fullname';
+import Title from './details/title';
+import Email from './details/email';
+import Phone from './details/phone';
+import LinkedIn from './details/linkedin';
+import Portfolio from './details/portfolio';
+import Country from './details/country';
+import Repos from './details/repos';
+
 
 axios.defaults.URL = process.env.REACT_APP_URL
 
-function Forms({ fullname, setFullname, workExperiences, setWorkExperiences, projects, setProjects, education, 
-  setEducation, languages, setLanguages, skills, setSkills }) {
+function Forms({ fullname, setFullname, email, setEmail, phone, setPhone, linkedin, setLinkedin, portfolio, setPortfolio, country, setCountry, repos, setRepos, title, setTitle, 
+  workExperiences, setWorkExperiences, projects, setProjects, education, setEducation, languages, setLanguages, skills, setSkills }) { 
+
   const userId = localStorage.getItem('User');
   const resumeId = localStorage.getItem('Resume_Id');
 
   const formData = {
     userId,
     fullname,
+    title,
+    email,
+    phone,
+    linkedin,
+    portfolio,
+    country,
+    repos,
     workExperiences,
     projects,
     education,
@@ -69,7 +85,14 @@ function Forms({ fullname, setFullname, workExperiences, setWorkExperiences, pro
           </button>
         </div>
         
-        <Fullname fullname={fullname} setFullname={setFullname} />                               
+        <Fullname fullname={fullname} setFullname={setFullname} />       
+        <Title title={title} setTitle={setTitle} />    
+        <Email email={email} setEmail={setEmail} />
+        <Phone phone={phone} setPhone={setPhone} />
+        <LinkedIn linkedin={linkedin} setLinkedin={setLinkedin} />
+        <Portfolio portfolio={portfolio} setPortfolio={setPortfolio} />
+        <Country country={country} setCountry={setCountry} />
+        <Repos repos={repos} setRepos={setRepos} />                    
         <WorkExperience workExperiences={workExperiences} setWorkExperiences={setWorkExperiences} />
         <Education education={education} setEducation={setEducation} />
         <Languages languages={languages} setLanguages={setLanguages} />
