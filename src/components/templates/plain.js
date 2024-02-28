@@ -23,9 +23,9 @@ function plain({ fullname, title, country, email, phone, linkedin, portfolio, re
     
             {/* Contact Information */}
             <section className="mb-6">
+            {portfolio ? "Portfolio : " + portfolio : "Portfolio : "}
               <hr className="border-gray-400 flex-grow mt-2" />
-              {portfolio ? portfolio : "Portfolio : "}
-              <ul className="text-sm flex justify-between">
+              <ul className="text-sm my-2 flex justify-between">
                 <li>{email ? email : "youremail@test.com"}</li>
                 <li>{phone ? phone : "(123) 456-7890"}</li>
                 <li>{linkedin ? linkedin : "linkedin.com/in/yourname"}</li>
