@@ -1,9 +1,26 @@
 import React from 'react'
 
-function plain({ fullname, title, country, email, phone, linkedin, portfolio, repos, workexperiences, projects, education, languages, skills}) {
- 
+function plain({ fullname, title, country, email, phone, linkedin, portfolio, repos, workexperiences, projects, 
+  education, languages, skills, fontFamily, fontSize, backgroundColor, spacing}) {
+    
+    const resume = document.getElementById("resume");
+    if (resume) {
+      if (fontFamily) {
+        resume.style.fontFamily = fontFamily;
+      }
+      if (fontSize) {
+        resume.style.fontSize = fontSize;
+      }
+      if (backgroundColor) {
+        resume.style.backgroundColor = backgroundColor;
+      }
+      if (spacing) {
+        resume.style.padding = spacing;}
+    }
+
+
     return (
-        <div className=" p-8">
+        <div className="p-8">
           <div id="resume"  className="w-[210mm] h-[297mm]  bg-white p-6 rounded-md shadow-xl">
             <div className='flex justify-between items-center'>
               <div>
