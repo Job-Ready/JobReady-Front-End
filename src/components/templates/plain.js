@@ -1,7 +1,7 @@
 import React from 'react'
 
 function plain({ fullname, title, country, email, phone, linkedin, portfolio, repos, workexperiences, projects, 
-  education, languages, skills, fontFamily, fontSize, backgroundColor, spacing}) {
+  education, languages, skills, fontFamily, fontSize, backgroundColor, fontColor}) {
     
     const resume = document.getElementById("resume");
     if (resume) {
@@ -14,8 +14,9 @@ function plain({ fullname, title, country, email, phone, linkedin, portfolio, re
       if (backgroundColor) {
         resume.style.backgroundColor = backgroundColor;
       }
-      if (spacing) {
-        resume.style.padding = spacing;}
+      if (fontColor) {
+        resume.style.color = fontColor;
+      }
     }
 
 
@@ -26,8 +27,8 @@ function plain({ fullname, title, country, email, phone, linkedin, portfolio, re
               <div>
                 <header className="text-left mb-6">
                 <h1 className="text-3xl font-bold">{fullname ? fullname : "Your Name"}</h1>
-                <p className="text-gray-600">{title ? title : "Web Developer"}</p>
-                <p className="text-gray-400 text-sm">{country ? country : "Country, City"}</p>
+                <p className="text-base">{title ? title : "Web Developer"}</p>
+                <p className="text-sm">{country ? country : "Country, City"}</p>
                 </header>
               </div>
               <div className='items center'>

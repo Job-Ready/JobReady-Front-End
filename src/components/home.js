@@ -97,7 +97,15 @@ function Home() {
                             languages={resumes[latestResumeIndex].languages}
                             skills={resumes[latestResumeIndex].skills}
                         />
-                      : <h1 className='text-4xl opacity-30'>No resumes found</h1>)
+                      : (
+                        <div  className="flex justify-center pt-20">
+                            <div>
+                              <h1 className='text-3xl text-center opacity-30'>No resumes found</h1>
+                              <p className='text-xl opacity-30' >Please presss the "+" button to create a new one.</p>
+                            </div>
+                        </div>
+                          
+                        ))
                     }
                   </div>
               </Link>

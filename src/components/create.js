@@ -107,7 +107,15 @@ function Create() {
                             languages={languages !== undefined && languages.length !== 0 ? languages : resumes[getResumeIndex].languages}
                             skills={skills !== undefined && skills.length !== 0 ? skills : resumes[getResumeIndex].skills}
                         />
-                      : <h1 className='text-4xl opacity-30'>No resumes found</h1>}
+                      : (
+                        <div  className="flex justify-center pt-20">
+                            <div>
+                              <h1 className='text-3xl text-center opacity-30'>No resumes found</h1>
+                              <p className='text-xl opacity-30' >Please presss the "+" button to create a new one.</p>
+                            </div>
+                        </div>
+                          
+                        )}
                 </div>
                 <div className='w-[20%] float-left overflow-y-auto mt-16'>
                     <div className='bg-white rounded-lg shadow-md p-4'>

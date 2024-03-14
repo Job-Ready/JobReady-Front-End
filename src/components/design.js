@@ -23,6 +23,7 @@ function Design() {
 
     const [fontFamily, setFontFamily] = useState("Arial");
     const [fontSize, setFontSize] = useState("12px");
+    const [fontColor, setFontColor] = useState("#000000");
     const [backgroundColor, setBackgroundColor] = useState("#ffffff");
 
     const [token, setToken] = useState(localStorage.getItem('token'));
@@ -69,24 +70,43 @@ function Design() {
               <div className='w-[40%] overflow-auto mt-12'>
                   <div className="p-4">
                     <h3 className="text-lg font-semibold mb-4">Resume Customizer</h3>
-                    <div className="mb-4">
-                        <label htmlFor="fontFamily" className="block mb-2">Font Family:</label>
-                        <select id="fontFamily" value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full px-3 py-2 border rounded-lg">
-                            <option value="Arial">Arial</option>
-                            <option value="Times New Roman">Times New Roman</option>
-                            <option value="Helvetica">Helvetica</option>
-                            {/* Add more font options here */}
-                        </select>
+                    <div className='flex justify-between'>
+                      <div className="mb-4">
+                          <label htmlFor="fontFamily" className="block mb-2">Font Family:</label>
+                          <select id="fontFamily" value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full px-3 py-2 border rounded-lg">
+                              <option value="Arial">Arial</option>
+                              <option value="Times New Roman">Times New Roman</option>
+                              <option value="Helvetica">Helvetica</option>
+                              {/* Add more font options here */}
+                          </select>
+                      </div>
+                      <div className="mb-4 items-center">
+                        <label htmlFor="fontSize" className="block mb-2 mr-2">Font Size:</label>
+                        <div className="flex border rounded-lg w-max">
+                            <button onClick={() => setFontSize(prevSize => `${parseInt(prevSize) - 1}px`)} className="px-3 py-2 border-r">
+                                -
+                            </button>
+                            <input
+                                type="text"
+                                id="fontSize"
+                                value={fontSize}
+                                onChange={e => setFontSize(e.target.value)}
+                                className="px-3 py-2 text-center outline-none w-20"
+                            />
+                            <button onClick={() => setFontSize(prevSize => `${parseInt(prevSize) + 1}px`)} className="px-3 py-2 border-l">
+                                +
+                            </button>
+                        </div>                      
+                      </div>
+                      <div className="mb-4">
+                            <label htmlFor="backgroundColor" className="block mb-2">Font Color:</label>
+                            <input type="color" id="fontColor" value={fontColor} onChange={e => setFontColor(e.target.value)} className="w-16 h-16 px-3 py-2 border rounded-lg " />
+                        </div>
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="fontSize" className="block mb-2">Font Size:</label>
-                        <select id="fontSize" value={fontSize} onChange={e => setFontSize(e.target.value)} className="w-full px-3 py-2 border rounded-lg">
-                            <option value="12px">12px</option>
-                            <option value="14px">14px</option>
-                            <option value="16px">16px</option>
-                            {/* Add more font size options here */}
-                        </select>
-                    </div>
+                    
+                    
+                    
+
                     <div className="mb-4">
                         <label htmlFor="backgroundColor" className="block mb-2">Background Color:</label>
                         <input type="color" id="backgroundColor" value={backgroundColor} onChange={e => setBackgroundColor(e.target.value)} className="w-16 h-16 px-3 py-2 border rounded-lg " />
@@ -100,6 +120,7 @@ function Design() {
                                 fontFamily={fontFamily}
                                 fontSize={fontSize}
                                 backgroundColor={backgroundColor}
+                                fontColor={fontColor}
 
                                 email={email !== undefined && email.length !== 0 ? email : resumes[getResumeIndex].email}
                                 phone={phone !== undefined && phone.length !== 0 ? phone : resumes[getResumeIndex].phone}
@@ -115,7 +136,15 @@ function Design() {
                                 languages={languages !== undefined && languages.length !== 0 ? languages : resumes[getResumeIndex].languages}
                                 skills={skills !== undefined && skills.length !== 0 ? skills : resumes[getResumeIndex].skills}
                             />
-                          : <h1 className='text-4xl opacity-30'>No resumes found</h1>}
+                          : (
+                            <div  className="flex justify-center pt-20">
+                                <div>
+                                  <h1 className='text-3xl text-center opacity-30'>No resumes found</h1>
+                                  <p className='text-xl opacity-30' >Please presss the "+" button to create a new one.</p>
+                                </div>
+                            </div>
+                              
+                            )}
               </div>
             </div>
     </div>
