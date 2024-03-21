@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
-import Plain from './templates/plain' 
+import icon from '../assets/icons-resume.png' 
 
 axios.defaults.baseURL = process.env.REACT_APP_URL
 
@@ -34,7 +34,9 @@ function SavedResumes({resumes, onResumeClick}) {
     <div className='flex flex-wrap p-4 overflow-auto'>
       {resumes.map((resume, index) => (
         <div key={index} onClick={() => onResumeClick(index)} className='w-28 h-28 mb-4 mr-4 bg-slate-100 shadow-md rounded-md hover:scale-110 transition-transform duration-200 cursor-pointer'>
-          {/* Render resume details here */}
+          <div className='flex justify-center items-center h-full'>
+            <img src={icon} alt='icon' className='w-10 h-10 m-4' />
+          </div>
         </div>
       ))}
       <div className='w-28 h-28 mb-4 mr-4 bg-white shadow-md rounded-md hover:scale-110 transition-transform duration-200 cursor-pointer'>
