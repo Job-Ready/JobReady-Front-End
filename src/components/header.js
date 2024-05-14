@@ -34,7 +34,7 @@ function Header() {
 
   return (
     <div ref={menuRef}>
-      <header className="bg-white fixed w-full h-12 flex justify-center items-center border-b-2 z-10">
+      <header className="bg-white w-full h-12 flex justify-center items-center border-b-2 z-10">
         <nav className="w-[80%] h-full flex justify-between">
           <div className="flex items-center ">
             <button>
