@@ -25,6 +25,11 @@ const LandingPage = () => {
           <div className="">
             {component.type === SignUp ? (
               <div className="w-[25rem]">
+                <div>
+                  <h1 className="text-3xl font-semibold mb-4">
+                    Create your resume in minutes. Sign up now!
+                  </h1>
+                </div>
                 <SignUp />
                 <p className="mt-2 text-center text-sm text-gray-600">
                   Already have an account?{" "}
@@ -38,6 +43,11 @@ const LandingPage = () => {
               </div>
             ) : (
               <div className="w-[25rem]">
+                <div>
+                  <h1 className="text-3xl font-semibold mb-4">
+                    Welcome back! Sign in to your account.
+                  </h1>
+                </div>
                 <Login />
                 <p className="mt-2 text-center text-sm text-gray-600">
                   Don't have an account?{" "}
@@ -52,10 +62,8 @@ const LandingPage = () => {
             )}
           </div>
         </div>
-        <div className="flex items-center justify-center w-[70%] h-full bg-opacity-25">
+        <div className="flex items-center justify-center w-[70%] h-full bg-opacity-25 mb-2">
           <div className="">
-            {/* <h1 className='text-5xl font-semibold mb-4'>Create your resume in minutes</h1>
-                    <p className='text-2xl font-semibold'>Get started with our easy-to-use resume builder now.</p> */}
             <img src={CV} />
           </div>
         </div>
