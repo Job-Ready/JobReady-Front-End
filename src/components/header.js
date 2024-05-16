@@ -42,9 +42,11 @@ function Header() {
             </button>
           </div>
           <div className="flex items-center">
-            <ul className="flex items-center">
+            <ul className="flex">
               {isLogin ? (
-                <div>
+                <div className="flex">
+                  {" "}
+                  {/* Wrap list items with a flex container */}
                   <Link
                     className="mr-10 hover:scale-110 transition-transform duration-200"
                     to="/home"
@@ -69,49 +71,6 @@ function Header() {
                       <li>Design</li>
                     </button>
                   </Link>
-                  <button className="w-[32px]" onClick={toggleMenu}>
-                    <img alt="" src={userImage} />
-                  </button>
-                  {isOpen && (
-                    <div
-                      className="origin-top-right absolute right-0 mt-2 mr-4 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="menu-button"
-                      tabIndex="-1"
-                    >
-                      <div className="" role="none">
-                        <Link to="/account">
-                          <button
-                            onClick={() => console.log("Account clicked")}
-                            className="block px-4 py-2 text-sm text-gray-700 w-full text-left border-b-2 hover:bg-gray-100"
-                            role="menuitem"
-                            tabIndex="-1"
-                          >
-                            Account
-                          </button>
-                        </Link>
-                        <Link to="/settings">
-                          <button
-                            onClick={() => console.log("Settings clicked")}
-                            className="block px-4 py-2 text-sm text-gray-700 w-full text-left border-b-2 hover:bg-gray-100"
-                            role="menuitem"
-                            tabIndex="-1"
-                          >
-                            Settings
-                          </button>
-                        </Link>
-                        <button
-                          onClick={logout}
-                          className="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100"
-                          role="menuitem"
-                          tabIndex="-1"
-                        >
-                          Logout
-                        </button>
-                      </div>
-                    </div>
-                  )}
                 </div>
               ) : (
                 <Link
@@ -124,6 +83,56 @@ function Header() {
                 </Link>
               )}
             </ul>
+            <div className="flex items-center">
+              {" "}
+              {/* Wrap user button with a flex container */}
+              <button
+                className="w-[32px] items-center justify-center rounded-full hover:bg-gray-100 transition-colors duration-200"
+                onClick={toggleMenu}
+              >
+                <img alt="" src={userImage} />
+              </button>
+              {isOpen && (
+                <div
+                  className="origin-top-right absolute right-0 mt-44 mr-4 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="menu-button"
+                  tabIndex="-1"
+                >
+                  <div className="" role="none">
+                    <Link to="/account">
+                      <button
+                        onClick={() => console.log("Account clicked")}
+                        className="block px-4 py-2 text-sm text-gray-700 w-full text-left border-b-2 hover:bg-gray-100"
+                        role="menuitem"
+                        tabIndex="-1"
+                      >
+                        Account
+                      </button>
+                    </Link>
+                    <Link to="/settings">
+                      <button
+                        onClick={() => console.log("Settings clicked")}
+                        className="block px-4 py-2 text-sm text-gray-700 w-full text-left border-b-2 hover:bg-gray-100"
+                        role="menuitem"
+                        tabIndex="-1"
+                      >
+                        Settings
+                      </button>
+                    </Link>
+                    <button
+                      onClick={logout}
+                      className="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100"
+                      role="menuitem"
+                      tabIndex="-1"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </nav>
       </header>
