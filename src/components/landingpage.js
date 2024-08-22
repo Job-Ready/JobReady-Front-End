@@ -20,7 +20,7 @@ const LandingPage = () => {
   return (
     <div>
       <Header />
-      <div className="min-h-screen h-[600px] w-screen mx-0 flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen h-full w-screen mx-0 flex items-center justify-center bg-gray-50">
         <div className="flex items-center justify-center w-[30%] h-full mx-6">
           <div className="">
             {component.type === SignUp ? (
@@ -62,8 +62,8 @@ const LandingPage = () => {
             )}
           </div>
         </div>
-        <div className="flex items-center justify-center w-[70%] h-full bg-opacity-25 mb-2">
-          <div className="">
+        <div className="flex items-center justify-center w-[70%] h-full bg-opacity-25">
+          <div className="h-full">
             <img src={CV} />
           </div>
         </div>
