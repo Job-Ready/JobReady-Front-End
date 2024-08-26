@@ -1,13 +1,13 @@
-import './App.css';
 import React from 'react';
+import './App.css';
 import RoutesDeclared from './components/routesDeclared';
+import { BrowserRouter } from 'react-router-dom';
 
-function App() {
-
+const App: React.FC = () => {
   return (
-    <div>
+    <BrowserRouter>
       <RoutesDeclared />
-    </div>
+    </BrowserRouter>
   );
 }
 
