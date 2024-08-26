@@ -36,7 +36,7 @@ function Login() {
         const userId = response.data.Id;
         setToken(token);
         localStorage.setItem("User", userId);
-        localStorage.setItem("token", token);
+        localStorage.setItem("accessToken", token);
       }
     } catch (error) {
       console.log("Login failed:", error.message);

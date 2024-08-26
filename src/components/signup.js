@@ -32,7 +32,7 @@ function Signup() {
       const userId = response.data.Id;
       setToken(token);
       localStorage.setItem("User", userId);
-      localStorage.setItem("token", token);
+      localStorage.setItem("accessToken", token);
     } catch (error) {
       // Handle error, display error message, etc.
       console.error("Signup failed:", error.response.data.error);
