@@ -6,6 +6,7 @@ import icon from "../assets/icons-resume.png";
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
 function SavedResumes({ resumes, onResumeClick }) {
+  const token = localStorage.getItem("token");
   const [formData, setFormData] = useState({
     userId: localStorage.getItem("User"),
     details: {},
@@ -17,10 +18,9 @@ function SavedResumes({ resumes, onResumeClick }) {
   });
 
   const createResume = async () => {
-    const token = localStorage.getItem("token");
     try {
-      const response = await axios.post("/create-resume", formData, {
-        headers: { Authorization: token },
+      const response = await axios.post("/api/resumes", formData, {
+        headers: { Authorization: `Bearer ${token}` },
       });
       localStorage.setItem("Resume_Id", response.data.resume.id);
     } catch (error) {

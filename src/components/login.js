@@ -28,12 +28,12 @@ function Login() {
     setIsLoading(true);
     e.preventDefault();
     try {
-      const response = await axios.post("/login", formData);
+      const response = await axios.post("/api/auth/login", formData);
       console.log(response);
       if (response.status === 200) {
         setErrorMessages("");
         const token = response.data.token;
-        const userId = response.data.Id;
+        const userId = response.data.user.id;
         setToken(token);
         localStorage.setItem("User", userId);
         localStorage.setItem("token", token);

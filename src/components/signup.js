@@ -27,7 +27,7 @@ function Signup() {
     setIsLoading(true);
     e.preventDefault();
     try {
-      const response = await axios.post("/signup", formData);
+      const response = await axios.post("/api/auth/signup", formData);
       const token = response.data.token;
       const userId = response.data.Id;
       setToken(token);

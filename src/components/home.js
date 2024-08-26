@@ -17,9 +17,12 @@ function Home() {
   useEffect(() => {
     const getResumes = async () => {
       try {
-        const response = await axios.get(`/get-resume/${userId}`);
-        const flattenedResumes = response.data.resume.flat();
-        setResumes((prevResumes) => [...prevResumes, ...flattenedResumes]);
+        const response = await axios.get(`/api/resumes`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const fetchedResumes = response.data.resumes;
+        setResumes((prevResumes) => [...prevResumes, ...fetchedResumes]);
+        console.log("Resumes:", resumes);
       } catch (error) {
         console.log("Get Resumes:", error.message);
       }
