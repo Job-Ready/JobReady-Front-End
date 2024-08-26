@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, Navigate, Route } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import AuthForm from "./google-auth";
 import ClipLoader from "./spinner";
+import { setAccessToken, getAccessToken } from "../utils/auth";
 
-axios.defaults.URL = process.env.REACT_APP_URL;
+// Set up axios defaults correctly
+axios.defaults.baseURL = process.env.REACT_APP_URL;
 
-function Login() {
+const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [userId, setUserId] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  const [errorMessages, setErrorMessages] = useState("");
-  const [formData, setFormData] = useState({
+  const [userId, setUserId] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(getAccessToken());
+  const [errorMessages, setErrorMessages] = useState<string>("");
+  const [formData, setFormData] = useState<{ email: string; password: string }>({
     email: "",
     password: "",
   });
 
-  const handleInputChange = (e) => {
+  useEffect(() => {
+    // Clear any existing error messages when formData changes
+    setErrorMessages("");
+  }, [formData]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -24,44 +31,40 @@ function Login() {
     }));
   };
 
-  const handleLogin = async (e) => {
-    setIsLoading(true);
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post("/login", formData);
-      console.log(response);
       if (response.status === 200) {
-        setErrorMessages("");
-        const token = response.data.token;
-        const userId = response.data.Id;
+        const { token, Id } = response.data;
         setToken(token);
-        localStorage.setItem("User", userId);
-        localStorage.setItem("accessToken", token);
+        setUserId(Id);
+        localStorage.setItem("User", Id);
+        setAccessToken(token);
+        setErrorMessages("");
       }
-    } catch (error) {
-      console.log("Login failed:", error.message);
-      if (error.response.status === 401) {
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
         setErrorMessages("Invalid email or password");
-        setIsLoading(false);
+      } else {
+        setErrorMessages("An unexpected error occurred");
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  if (token && token !== null) {
-    return (
-      <Navigate replace to="/home" userId={userId} setUserId={setUserId} />
-    );
+  if (token) {
+    return <Navigate to="/home" replace />;
   }
 
   return (
     <div>
       <form className="space-y-6" onSubmit={handleLogin}>
         <div className="rounded-md shadow-sm -space-y-px">
-          {/* Add your login form fields here */}
           <div>
-            <label htmlFor="email" className="sr-only">
-              Email address
-            </label>
+            <label htmlFor="email" className="sr-only">Email address</label>
             <input
               id="email"
               name="email"
@@ -75,9 +78,7 @@ function Login() {
             />
           </div>
           <div>
-            <label htmlFor="password" className="sr-only">
-              Password
-            </label>
+            <label htmlFor="password" className="sr-only">Password</label>
             <input
               id="password"
               name="password"
@@ -91,27 +92,23 @@ function Login() {
             />
           </div>
         </div>
-        <div className=" text-sm cursor-pointer font-semibold">
-          Forgot your password?
+        <div className="text-sm cursor-pointer font-semibold">
+          <Link to="/forgot-password">Forgot your password?</Link>
         </div>
-        {errorMessages && (
-          <div className="text-red-600 text-center">{errorMessages}</div>
-        )}
-
+        {errorMessages && <div className="text-red-600 text-center">{errorMessages}</div>}
         <div>
-          {/* Add your login button here */}
           <button
             type="submit"
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-400 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             {isLoading ? <ClipLoader /> : "Sign in"}
           </button>
-          <div class="flex items-center justify-center my-4">
-            <hr class="border-gray-300 w-16" />
-            <span class="text-gray-500 font-medium mx-4">Or</span>
-            <hr class="border-gray-300 w-16" />
+          <div className="flex items-center justify-center my-4">
+            <hr className="border-gray-300 w-16" />
+            <span className="text-gray-500 font-medium mx-4">Or</span>
+            <hr className="border-gray-300 w-16" />
           </div>
-          <AuthForm isSignup={false} />
+          <AuthForm />
         </div>
       </form>
     </div>

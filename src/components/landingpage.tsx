@@ -6,7 +6,7 @@ import Header from "./header.js";
 import CV from "../assets/cv.webp";
 import { checkIsAuthenticated } from "../utils/auth";
 
-const LandingPage = () => {
+const LandingPage: React.FC = () => {
   // const [userId, setUserId] = useState(null);
   const [isSigningUp, setIsSigningUp] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(checkIsAuthenticated());
