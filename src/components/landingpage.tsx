@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import Login from "./login";
 import SignUp from "./signup";
 import Header from "./header.js";
@@ -24,7 +24,7 @@ const LandingPage = () => {
   }, []);
 
   if (isAuthenticated) {
-    return <Redirect to="/home" />;
+    return <Navigate to="/home" replace />;
   }
 
   const renderForm = () => (
@@ -34,7 +34,7 @@ const LandingPage = () => {
       </h1>
 
       {isSigningUp ? <SignUp /> : <Login />}
-      
+
       <p className="mt-2 text-center text-sm text-gray-600">
         {isSigningUp ? (
           <>
