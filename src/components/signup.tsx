@@ -1,21 +1,25 @@
 import React, { useState } from "react";
-import { Link, Navigate, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 import ClipLoader from "./spinner";
+import { getAccessToken, setAccessToken } from "../utils/auth";
 
-axios.defaults.URL = process.env.REACT_APP_URL;
+// Set up axios defaults correctly
+axios.defaults.baseURL = process.env.REACT_APP_URL;
 
-function Signup() {
-  const [userId, setUserId] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  const [formData, setFormData] = useState({
+const Signup: React.FC = () => {
+  const [userId, setUserId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [token, setToken] = useState<string | null>(getAccessToken());
+  const [formData, setFormData] = useState<{ fullname: string; email: string; password: string; confirmpassword: string }>({
     fullname: "",
     email: "",
     password: "",
+    confirmpassword: "",
   });
+  const [errorMessages, setErrorMessages] = useState<string>("");
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -23,42 +27,46 @@ function Signup() {
     }));
   };
 
-  const handleSignup = async (e) => {
-    setIsLoading(true);
+  const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    if (formData.password !== formData.confirmpassword) {
+      setErrorMessages("Passwords do not match.");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await axios.post("/signup", formData);
-      const token = response.data.token;
-      const userId = response.data.Id;
+      const { token, Id } = response.data;
       setToken(token);
-      localStorage.setItem("User", userId);
-      localStorage.setItem("accessToken", token);
-    } catch (error) {
-      // Handle error, display error message, etc.
-      console.error("Signup failed:", error.response.data.error);
+      setUserId(Id);
+      localStorage.setItem("User", Id);
+      setAccessToken(token);
+      setErrorMessages("");
+    } catch (error: any) {
+      console.error("Signup failed:", error.response?.data?.error || error.message);
+      setErrorMessages("Signup failed. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  if (token && token !== null) {
-    return (
-      <Navigate replace to="/home" userId={userId} setUserId={setUserId} />
-    );
+  if (token) {
+    return <Navigate to="/home" replace />;
   }
 
   return (
     <div>
       <form className="mt-8 space-y-6" onSubmit={handleSignup}>
         <div className="rounded-md shadow-sm -space-y-px">
-          {/* Add your sign-up form fields here */}
           <div>
-            <label htmlFor="fullname" className="sr-only">
-              Full Name
-            </label>
+            <label htmlFor="fullname" className="sr-only">Full Name</label>
             <input
               id="fullname"
               name="fullname"
-              type="fullname"
-              autoComplete="full-name"
+              type="text"
+              autoComplete="name"
               value={formData.fullname}
               onChange={handleInputChange}
               required
@@ -67,9 +75,7 @@ function Signup() {
             />
           </div>
           <div>
-            <label htmlFor="email" className="sr-only">
-              Email address
-            </label>
+            <label htmlFor="email" className="sr-only">Email address</label>
             <input
               id="email"
               name="email"
@@ -83,9 +89,7 @@ function Signup() {
             />
           </div>
           <div>
-            <label htmlFor="password" className="sr-only">
-              Password
-            </label>
+            <label htmlFor="password" className="sr-only">Password</label>
             <input
               id="password"
               name="password"
@@ -99,13 +103,13 @@ function Signup() {
             />
           </div>
           <div>
-            <label htmlFor="password" className="sr-only">
-              Confirm Password
-            </label>
+            <label htmlFor="confirmpassword" className="sr-only">Confirm Password</label>
             <input
               id="confirmpassword"
               name="confirmpassword"
               type="password"
+              value={formData.confirmpassword}
+              onChange={handleInputChange}
               autoComplete="new-password"
               required
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -114,8 +118,11 @@ function Signup() {
           </div>
         </div>
 
+        {errorMessages && (
+          <div className="text-red-600 text-center">{errorMessages}</div>
+        )}
+
         <div>
-          {/* Update your sign-up button here */}
           <button
             type="submit"
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-400 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -126,6 +133,6 @@ function Signup() {
       </form>
     </div>
   );
-}
+};
 
 export default Signup;
