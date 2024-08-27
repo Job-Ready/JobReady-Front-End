@@ -1,39 +1,46 @@
-import { React, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Header from "./header";
 import axios from "axios";
 import Plain from "./templates/plain";
-
 import SavedResumes from "./savedResumes";
+import { Resume } from "../types/resume";
 
-function Home() {
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  const [userId, setUserId] = useState(localStorage.getItem("User"));
-  const [resumes, setResumes] = useState([]);
-  const [selectedResume, setSelectedResume] = useState(null); // State to hold the selected resume
-  const [resumeId, setResumeId] = useState(null);
+const Home = () => {
+  const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
+  const [userId, setUserId] = useState<string | null>(localStorage.getItem("User"));
+  const [resumes, setResumes] = useState<Resume[]>([]);
+  const [selectedResume, setSelectedResume] = useState<Resume | null>(null); // State to hold the selected resume
   localStorage.removeItem("Resume_Id");
 
   useEffect(() => {
     const getResumes = async () => {
       try {
         const response = await axios.get(`/get-resume/${userId}`);
-        const flattenedResumes = response.data.resume.flat();
-        setResumes((prevResumes) => [...prevResumes, ...flattenedResumes]);
+        const flattenedResumes: Resume[] = response.data.resume.flat();
+        setResumes(flattenedResumes);
       } catch (error) {
-        console.log("Get Resumes:", error.message);
+        console.error("Get Resumes:", error.message);
       }
     };
 
     getResumes();
+  }, [userId]);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const updatedToken = localStorage.getItem("token");
+      setToken(updatedToken);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
-  const handleStorageChange = () => {
-    const updatedToken = localStorage.getItem("token");
-    setToken(updatedToken);
-  };
-  window.addEventListener("storage", handleStorageChange);
-  if (!token || token === undefined || token === null) {
+  if (!token) {
     return <Navigate replace to="/" />;
   }
 
@@ -44,13 +51,13 @@ function Home() {
   }, 0);
 
   const setResumeIdfun = () => {
-    if (selectedResume !== null) {
+    if (selectedResume) {
       localStorage.setItem("Resume_Id", selectedResume.id);
     }
-    console.log("Resume Id:", resumeId);
+    console.log("Resume Id:", selectedResume ? selectedResume.id : null);
   };
 
-  const handleResumeClick = (index) => {
+  const handleResumeClick = (index: number) => {
     setSelectedResume(resumes[index]);
   };
 
@@ -63,8 +70,8 @@ function Home() {
         </div>
         <div className="flex-1 float-left overflow-y-auto bg-slate-100 hover:opacity-50 transition-transform duration-200 cursor-pointer mt-12">
           <Link to="/create">
-            <div onClick={() => setResumeIdfun()}>
-              {selectedResume !== null ? (
+            <div onClick={setResumeIdfun}>
+              {selectedResume ? (
                 <Plain
                   fullname={selectedResume.fullname}
                   title={selectedResume.title}
@@ -80,7 +87,7 @@ function Home() {
                   languages={selectedResume.languages}
                   skills={selectedResume.skills}
                 />
-              ) : resumes !== undefined && resumes.length !== 0 ? (
+              ) : resumes.length > 0 ? (
                 <Plain
                   fullname={resumes[latestResumeIndex].fullname}
                   title={resumes[latestResumeIndex].title}
@@ -103,7 +110,7 @@ function Home() {
                       No resumes found
                     </h1>
                     <p className="text-xl opacity-30">
-                      Please presss the "+" button to create a new one.
+                      Please press the "+" button to create a new one.
                     </p>
                   </div>
                 </div>

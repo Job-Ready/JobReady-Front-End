@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import Login from "./login";
 import SignUp from "./signup";
-import Header from "./header.js";
+import Header from "./header";
 import CV from "../assets/cv.webp";
 import { checkIsAuthenticated } from "../utils/auth";
 

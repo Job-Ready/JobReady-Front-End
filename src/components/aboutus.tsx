@@ -1,13 +1,10 @@
-import React from 'react'
+import React from 'react';
 import Header from './header';
 
-function Aboutus() {
-      
+const Aboutus: React.FC = () => {
   return (
     <div>
-    
       <Header />
-
       <div className='flex justify-center items-center h-screen p-8'>
         <div className="bg-gray-100 p-8 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">About Me</h2>
@@ -36,8 +33,8 @@ function Aboutus() {
           </p>
         </div>
       </div>
-  </div>
-  )
+    </div>
+  );
 }
 
-export default Aboutus
+export default Aboutus;
