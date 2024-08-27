@@ -39,10 +39,11 @@ const Login: React.FC = () => {
     try {
       const response = await axios.post("/api/auth/login", formData);
       if (response.status === 200) {
-        const { token, Id } = response.data;
+        const { token } = response.data;
+        const id = response.data.user.id;
         setToken(token);
-        setUserId(Id);
-        localStorage.setItem("User", Id);
+        setUserId(id);
+        localStorage.setItem("User", id);
         setAccessToken(token);
         setErrorMessages("");
       }

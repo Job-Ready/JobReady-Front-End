@@ -8,7 +8,7 @@ import { Resume } from "../types/resume";
 
 const Home = () => {
   const [token, setToken] = useState<string | null>(
-    localStorage.getItem("token")
+    localStorage.getItem("accessToken")
   );
   const [userId, setUserId] = useState<string | null>(
     localStorage.getItem("User")
