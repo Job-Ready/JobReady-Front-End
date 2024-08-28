@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/JobReady2-nobg-crp.png";
 import userImage from "../assets/user-image.png";
 
-function Header() {
+const Header: React.FC = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(localStorage.getItem("token") ? true : false);
   const [isOpen, setIsOpen] = useState(false);

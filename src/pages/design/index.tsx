@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
-
-import Plain from './templates/Plain';
-
-// Import types from resume.ts
-import { Resume, WorkExperience, Project, Education, Language, Skill } from '../types/resume';
-import { Header } from './layout';
+import { Resume, WorkExperience, Project, Education, Language, Skill } from 'types/resume';
+import { Header } from '@components/layout';
+import Plain from '@components/templates/Plain';
 
 function Design() {
   const [resumes, setResumes] = useState<Resume[]>([]);

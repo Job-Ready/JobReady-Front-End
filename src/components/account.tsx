@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import Header from "./header";
+import { Header } from "./layout";
+
 
 interface AccountProps {
   fullname: string;

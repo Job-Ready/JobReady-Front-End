@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
     "outDir": "./dist", // Path to output directory
     "sourceMap": true, // Allow sourcemap support
     "strictNullChecks": true, // Enable strict null checks as a best practice
@@ -11,7 +12,21 @@
     "esModuleInterop": true, // Enable ES module interoperability
     "skipLibCheck": true, // Skip type checking of declaration files to avoid issues with third-party types
     "moduleResolution": "node", // Resolve modules using Node.js resolution algorithm
-    "forceConsistentCasingInFileNames": true // Ensure consistent casing in import paths
+    "forceConsistentCasingInFileNames": true, // Ensure consistent casing in import paths
+    "paths": {
+      "@components/*": [
+        "./components/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ],
+      "@pages/*": [
+        "./pages/*"
+      ],
+      "types/*": [
+        "./types/*"
+      ],
+    },
   },
   "include": [
     "./src",

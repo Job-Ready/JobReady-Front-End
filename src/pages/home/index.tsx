@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
-import Header from "./header";
 import axios from "axios";
-import Plain from "./templates/plain";
-import SavedResumes from "./savedResumes";
-import { Resume } from "../types/resume";
+import { Resume } from "types/resume";
+import { getAccessToken } from "@utils/auth";
+import { Header } from "@components/layout";
+import SavedResumes from "@components/SavedResumes";
+import Plain from "@components/templates/Plain";
 
 const Home = () => {
-  const [token, setToken] = useState<string | null>(
-    localStorage.getItem("accessToken")
-  );
+  const [token, setToken] = useState<string | null>(getAccessToken());
   const [userId, setUserId] = useState<string | null>(
     localStorage.getItem("User")
   );
@@ -35,8 +34,7 @@ const Home = () => {
 
   useEffect(() => {
     const handleStorageChange = () => {
-      const updatedToken = localStorage.getItem("token");
-      setToken(updatedToken);
+      setToken(getAccessToken());
     };
 
     window.addEventListener("storage", handleStorageChange);

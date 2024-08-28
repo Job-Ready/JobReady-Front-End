@@ -1,20 +1,21 @@
 import React from "react";
-import WorkExperience from "./workExperience";
-import Projects from "./projects";
-import Education from "./education";
-import Languages from "./languages";
-import Skills from "./skills";
+import WorkExperience from "./WorkExperience";
+import Projects from "./Projects";
+import Education from "./Education";
+import Languages from "./Languages";
+import Skills from "./Skills";
 import html2canvas from "html2canvas";
 import jsPdf from "jspdf";
 import axios from "axios";
-import Fullname from "./details/fullname";
-import Title from "./details/title";
-import Email from "./details/email";
-import Phone from "./details/phone";
-import LinkedIn from "./details/linkedin";
-import Portfolio from "./details/portfolio";
-import Country from "./details/country";
-import Repos from "./details/repos";
+import Fullname from "./details/Fullname";
+import Title from "./details/Title";
+import Email from "./details/Email";
+import Phone from "./details/Phone";
+import LinkedIn from "./details/Linkedin";
+import Portfolio from "./details/Portfolio";
+import Repos from "./details/Repos";
+import Country from "./details/Country";
+
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
@@ -160,4 +161,5 @@ function Forms({
     </div>
   );
 }
+
 export default Forms;

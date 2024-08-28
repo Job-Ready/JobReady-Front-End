@@ -1,7 +1,7 @@
 import React from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
-function AuthForm() {
+const AuthForm: React.FC = () => {
   const responseGoogle = (response) => {
     // Handle Google authentication response here
     console.log(response);

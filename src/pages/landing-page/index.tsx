@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import Login from "./login";
-import SignUp from "./signup";
-import Header from "./header";
 import CV from "../assets/cv.webp";
-import { checkIsAuthenticated } from "../utils/auth";
+import { checkIsAuthenticated } from "@utils/auth";
+import Login from "./Login";
+import Register from "./Register";
+import { Header } from "@components/layout";
 
 const LandingPage: React.FC = () => {
-  // const [userId, setUserId] = useState(null);
   const [isSigningUp, setIsSigningUp] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(checkIsAuthenticated());
 
@@ -33,7 +32,7 @@ const LandingPage: React.FC = () => {
         {isSigningUp ? "Create your resume in minutes. Sign up now!" : "Welcome back! Sign in to your account."}
       </h1>
 
-      {isSigningUp ? <SignUp /> : <Login />}
+      {isSigningUp ? <Register /> : <Login />}
 
       <p className="mt-2 text-center text-sm text-gray-600">
         {isSigningUp ? (

@@ -1,7 +1,7 @@
+import { Header } from "@components/layout";
 import React from "react";
-import Header from "./header";
 
-const Aboutus: React.FC = () => {
+const AboutUs: React.FC = () => {
   return (
     <div>
       <Header />
@@ -37,4 +37,4 @@ const Aboutus: React.FC = () => {
   );
 };
 
-export default Aboutus;
+export default AboutUs;

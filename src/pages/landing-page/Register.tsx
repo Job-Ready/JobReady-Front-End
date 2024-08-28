@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
-import ClipLoader from "./spinner";
-import { getAccessToken, setAccessToken } from "../utils/auth";
+import { getAccessToken, setAccessToken } from "@utils/auth";
+import { ClipLoader } from "react-spinners";
 
 // Set up axios defaults correctly
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
-const Signup: React.FC = () => {
+const Register: React.FC = () => {
   const [userId, setUserId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [token, setToken] = useState<string | null>(getAccessToken());
@@ -151,4 +151,4 @@ const Signup: React.FC = () => {
   );
 };
 
-export default Signup;
+export default Register;

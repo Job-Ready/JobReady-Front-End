@@ -1,17 +1,17 @@
-import { Route, Routes } from "react-router-dom"
-import LandingPage from "./landingpage"
-import Home from "./home"
-import Create from "./create"
-import Design from "./design"
-import AboutUs from "./aboutus"
-import Settings from "./settings"
-import PageNotFound from "./pagenotfound"
-import Account from "./account"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-function RoutesDeclared() {
+import PageNotFound from "./components/PageNotFound";
+import Home from "@pages/home";
+import Settings from "@pages/settings";
+import AboutUs from "@pages/about-us";
+import Create from "@pages/create";
+import LandingPage from "@pages/landing-page";
+import Design from "@components/design";
+
+const AppRouter = () => {
 
   return (
-    <div>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<Home />} />
@@ -22,8 +22,8 @@ function RoutesDeclared() {
         {/* <Route path="/account" element={<Account />} /> */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-    </div>
+    </BrowserRouter>
   )
 }
 
-export default RoutesDeclared;
+export default AppRouter;

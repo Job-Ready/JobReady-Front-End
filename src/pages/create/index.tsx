@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
-import Forms from './forms';
-import Plain from './templates/plain';
-import Header from './header';
 
 // Import types from resume.ts
-import { Resume, WorkExperience, Project, Education, Language, Skill } from '../types/resume'; 
+import { Resume, WorkExperience, Project, Education, Language, Skill } from 'types/resume'; 
+import { Header } from '@components/layout';
+import Forms from '@components/Forms';
+import Plain from '@components/templates/Plain';
 
 const Create: React.FC = () => {
   const [resumes, setResumes] = useState<Resume[]>([]);
