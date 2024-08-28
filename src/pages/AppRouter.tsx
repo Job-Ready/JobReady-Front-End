@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import PageNotFound from "./components/PageNotFound";
+import PageNotFound from "../components/PageNotFound";
 import Home from "@pages/home";
 import Settings from "@pages/settings";
 import AboutUs from "@pages/about-us";
 import Create from "@pages/create";
 import LandingPage from "@pages/landing-page";
-import Design from "@components/design";
+import Design from "@components/Design";
 
 const AppRouter = () => {
 

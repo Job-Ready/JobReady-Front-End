@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/JobReady2-nobg-crp.png";
-import userImage from "../assets/user-image.png";
+import logo from "../../assets/JobReady2-nobg-crp.png";
+import userImage from "../../assets/user-image.png";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();

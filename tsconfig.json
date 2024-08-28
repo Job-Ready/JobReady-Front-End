@@ -1,39 +1,38 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./src",
-    "outDir": "./dist", // Path to output directory
-    "sourceMap": true, // Allow sourcemap support
-    "strictNullChecks": true, // Enable strict null checks as a best practice
-    "module": "es6", // Specify module code generation, change to "commonjs" if you target ES5
-    "jsx": "react-jsx", // Use new JSX transform if using React 17+
-    "target": "es6", // Specify ECMAScript target version (change to "es5" if needed)
-    "allowJs": true, // Allow a partial TypeScript and JavaScript codebase
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true, // Enable ES module interoperability
-    "skipLibCheck": true, // Skip type checking of declaration files to avoid issues with third-party types
-    "moduleResolution": "node", // Resolve modules using Node.js resolution algorithm
-    "forceConsistentCasingInFileNames": true, // Ensure consistent casing in import paths
-    "paths": {
-      "@components/*": [
-        "./components/*"
-      ],
-      "@utils/*": [
-        "./utils/*"
-      ],
-      "@pages/*": [
-        "./pages/*"
-      ],
-      "types/*": [
-        "./types/*"
-      ],
-    },
+  "compilerOptions":{
+     "outDir":"./dist",
+     "sourceMap":true,
+     "strictNullChecks":true,
+     "module":"es6",
+     "jsx":"react-jsx",
+     "target":"es6",
+     "allowJs":true,
+     "allowSyntheticDefaultImports":true,
+     "esModuleInterop":true,
+     "skipLibCheck":true,
+     "moduleResolution":"node",
+     "forceConsistentCasingInFileNames":true,
+     "paths":{
+        "@components/*":[
+           "./src/components/*"
+        ],
+        "@utils/*":[
+           "./src/utils/*"
+        ],
+        "@pages/*":[
+           "./src/pages/*"
+        ],
+        "types/*":[
+           "./src/types/*"
+        ]
+     }
   },
-  "include": [
-    "./src",
-    "./src/types"
+  "include":[
+     "./src",
+     "./src/types"
   ],
-  "exclude": [
-    "node_modules", // Exclude node_modules to prevent type checking on all dependencies
-    "*/.spec.ts" // Optionally exclude test files
+  "exclude":[
+     "node_modules",
+     "*/.spec.ts"
   ]
 }

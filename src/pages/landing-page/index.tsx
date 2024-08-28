@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import CV from "../assets/cv.webp";
+import CV from "../../assets/cv.webp";
 import { checkIsAuthenticated } from "@utils/auth";
 import Login from "./Login";
 import Register from "./Register";

@@ -54,8 +54,8 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^7.1.0",
     "craco-alias": "^3.0.1",
-    "react-app-rewired": "^2.2.1",
     "source-map-loader": "^5.0.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.5.4"
