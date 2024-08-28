@@ -42,7 +42,7 @@ const Register: React.FC = () => {
     }
 
     try {
-      const response = await axios.post("/api/auth/signup", formData);
+      const response = await axios.post("/signup", formData);
       const { token, Id } = response.data;
       setToken(token);
       setUserId(Id);
