@@ -16,12 +16,12 @@ const Plain: React.FC<PlainProps> = ({
   phone,
   linkedin,
   portfolio,
-  repos,
-  workExperiences,
-  projects,
-  education,
-  languages,
-  skills,
+  repos = [], // Default to empty array
+  workExperiences = [], // Default to empty array
+  projects = [], // Default to empty array
+  education = [], // Default to empty array
+  languages = [], // Default to empty array
+  skills = [], // Default to empty array
   fontFamily,
   fontSize,
   backgroundColor,
