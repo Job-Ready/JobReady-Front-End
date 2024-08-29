@@ -75,7 +75,7 @@ const Plain: React.FC<PlainProps> = ({
             <li>{phone || "(123) 456-7890"}</li>
             <li>{linkedin || "linkedin.com/in/yourname"}</li>
             <li>
-              {repos.length > 0 ? repos.join(", ") : "github.com/yourusername"}
+              {/*repos.length > 0 ? repos.join(", ") : "github.com/yourusername"*/}
             </li>
           </ul>
           <hr className="border-gray-400 flex-grow mt-2" />

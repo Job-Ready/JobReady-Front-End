@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import icon from '../assets/icons-resume.png';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import icon from "../assets/icons-resume.png";
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
@@ -14,9 +14,12 @@ interface SavedResumesProps {
   onResumeClick: (index: number) => void;
 }
 
-const SavedResumes: React.FC<SavedResumesProps> = ({ resumes, onResumeClick }) => {
+const SavedResumes: React.FC<SavedResumesProps> = ({
+  resumes,
+  onResumeClick,
+}) => {
   const [formData, setFormData] = useState({
-    userId: localStorage.getItem('User'),
+    userId: localStorage.getItem("User"),
     details: {},
     workExperiences: [],
     projects: [],
@@ -26,14 +29,14 @@ const SavedResumes: React.FC<SavedResumesProps> = ({ resumes, onResumeClick }) =
   });
 
   const createResume = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("accessToken");
     try {
-      const response = await axios.post('/create-resume', formData, {
+      const response = await axios.post("api/resumes", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      localStorage.setItem('Resume_Id', response.data.resume.id);
+      localStorage.setItem("Resume_Id", response.data.resume.id);
     } catch (error) {
-      console.error('Error creating resume:', error.message);
+      console.error("Error creating resume:", error.message);
     }
   };
 
