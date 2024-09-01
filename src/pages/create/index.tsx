@@ -17,8 +17,8 @@ import Plain from "@components/templates/Plain";
 
 const Create: React.FC = () => {
   const [resumes, setResumes] = useState<Resume[]>([]);
-  const [userId, setUserId] = useState<string | null>(
-    localStorage.getItem("User")
+  const [resumeId, setResumeId] = useState<string | null>(
+    localStorage.getItem("Resume_Id")
   );
   const [fullname, setFullname] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -39,20 +39,20 @@ const Create: React.FC = () => {
 
   useEffect(() => {
     const getResumes = async () => {
-      if (userId) {
+      if (resumeId) {
         try {
-          const response = await axios.get(`api/resumes/${userId}`, {
+          const response = await axios.get(`api/resumes/${resumeId}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
-          const flattenedResumes = response.data.resume.flat();
-          setResumes((prevResumes) => [...prevResumes, ...flattenedResumes]);
+          const fetchedResumes: Resume[] = response.data.resumes;
+          setResumes(fetchedResumes);
         } catch (error) {
           console.error("Get Resumes:", error.message);
         }
       }
     };
     getResumes();
-  }, [userId]);
+  }, [resumeId]);
 
   useEffect(() => {
     const handleStorageChange = () => {
