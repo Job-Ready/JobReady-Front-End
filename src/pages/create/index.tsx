@@ -70,27 +70,6 @@ const Create: React.FC = () => {
     return <Navigate replace to="/" />;
   }
 
-  // let selectedResume: Resume = resumes || {
-  //   id: "",
-  //   email: "",
-  //   phone: "",
-  //   linkedin: "",
-  //   portfolio: "",
-  //   country: "",
-  //   repos: [],
-  //   fullname: "",
-  //   title: "",
-  //   workExperiences: [],
-  //   projects: [],
-  //   education: [],
-  //   languages: [],
-  //   skills: [],
-  //   last_change: "",
-  // };
-
-  console.log(resumes);
-  // console.log(selectedResume);
-
   return (
     <div>
       <Header />

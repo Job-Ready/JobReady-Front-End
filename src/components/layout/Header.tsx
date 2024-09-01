@@ -5,7 +5,9 @@ import userImage from "../../assets/user-image.png";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(localStorage.getItem("token") ? true : false);
+  const [isLogin, setIsLogin] = useState(
+    localStorage.getItem("accessToken") ? true : false
+  );
   const [isOpen, setIsOpen] = useState(false);
 
   const logout = () => {
@@ -41,12 +43,32 @@ const Header: React.FC = () => {
         <div className="flex items-center space-x-10">
           {isLogin ? (
             <>
-              <Link to="/home" className="hover:scale-110 transition-transform duration-200">Home</Link>
-              <Link to="/create" className="hover:scale-110 transition-transform duration-200">Create</Link>
-              <Link to="/design" className="hover:scale-110 transition-transform duration-200">Design</Link>
+              <Link
+                to="/home"
+                className="hover:scale-110 transition-transform duration-200"
+              >
+                Home
+              </Link>
+              <Link
+                to="/create"
+                className="hover:scale-110 transition-transform duration-200"
+              >
+                Create
+              </Link>
+              <Link
+                to="/design"
+                className="hover:scale-110 transition-transform duration-200"
+              >
+                Design
+              </Link>
             </>
           ) : (
-            <Link to="/aboutus" className="hover:scale-110 transition-transform duration-200">About us</Link>
+            <Link
+              to="/aboutus"
+              className="hover:scale-110 transition-transform duration-200"
+            >
+              About us
+            </Link>
           )}
           {isLogin && (
             <div className="relative" ref={menuRef}>
@@ -100,6 +122,6 @@ const Header: React.FC = () => {
       </nav>
     </header>
   );
-}
+};
 
 export default Header;
