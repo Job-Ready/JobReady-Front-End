@@ -16,7 +16,7 @@ import Forms from "@components/Forms";
 import Plain from "@components/templates/Plain";
 
 const Create: React.FC = () => {
-  const [resumes, setResumes] = useState<Resume[]>([]);
+  const [resumes, setResumes] = useState<Resume>();
   const [resumeId, setResumeId] = useState<string | null>(
     localStorage.getItem("Resume_Id")
   );
@@ -44,7 +44,7 @@ const Create: React.FC = () => {
           const response = await axios.get(`api/resumes/${resumeId}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
-          const fetchedResumes: Resume[] = response.data.resumes;
+          const fetchedResumes: Resume = response.data.resume;
           setResumes(fetchedResumes);
         } catch (error) {
           console.error("Get Resumes:", error.message);
@@ -70,33 +70,26 @@ const Create: React.FC = () => {
     return <Navigate replace to="/" />;
   }
 
-  const getResumeIndex = resumes.reduce((acc, curr, index) => {
-    const storedResumeId = localStorage.getItem("Resume_Id");
-    if (storedResumeId) {
-      const resumeIndex = resumes.findIndex(
-        (resume) => resume.id === storedResumeId
-      );
-      return resumeIndex !== -1 ? resumeIndex : acc;
-    }
-    return curr.last_change > resumes[acc].last_change ? index : acc;
-  }, 0);
+  // let selectedResume: Resume = resumes || {
+  //   id: "",
+  //   email: "",
+  //   phone: "",
+  //   linkedin: "",
+  //   portfolio: "",
+  //   country: "",
+  //   repos: [],
+  //   fullname: "",
+  //   title: "",
+  //   workExperiences: [],
+  //   projects: [],
+  //   education: [],
+  //   languages: [],
+  //   skills: [],
+  //   last_change: "",
+  // };
 
-  const selectedResume = resumes[getResumeIndex] || {
-    email: "",
-    phone: "",
-    linkedin: "",
-    portfolio: "",
-    country: "",
-    repos: [],
-    fullname: "",
-    title: "",
-    workExperiences: [],
-    projects: [],
-    education: [],
-    languages: [],
-    skills: [],
-    last_change: "",
-  };
+  console.log(resumes);
+  // console.log(selectedResume);
 
   return (
     <div>
@@ -133,31 +126,25 @@ const Create: React.FC = () => {
           />
         </div>
         <div className="w-[50%] float-left overflow-y-auto mt-16">
-          {resumes.length > 0 ? (
+          {resumes ? (
             <Plain
-              email={email || selectedResume.email}
-              phone={phone || selectedResume.phone}
-              linkedin={linkedin || selectedResume.linkedin}
-              portfolio={portfolio || selectedResume.portfolio}
-              country={country || selectedResume.country}
-              repos={repos.length > 0 ? repos : selectedResume.repos}
-              fullname={fullname || selectedResume.fullname}
-              title={title || selectedResume.title}
+              email={email || resumes.email}
+              phone={phone || resumes.phone}
+              linkedin={linkedin || resumes.linkedin}
+              portfolio={portfolio || resumes.portfolio}
+              country={country || resumes.country}
+              repos={repos.length > 0 ? repos : resumes.repos}
+              fullname={fullname || resumes.fullname}
+              title={title || resumes.title}
               workExperiences={
                 workExperiences.length > 0
                   ? workExperiences
-                  : selectedResume.workExperiences
+                  : resumes.workExperiences
               }
-              projects={
-                projects.length > 0 ? projects : selectedResume.projects
-              }
-              education={
-                education.length > 0 ? education : selectedResume.education
-              }
-              languages={
-                languages.length > 0 ? languages : selectedResume.languages
-              }
-              skills={skills.length > 0 ? skills : selectedResume.skills}
+              projects={projects.length > 0 ? projects : resumes.projects}
+              education={education.length > 0 ? education : resumes.education}
+              languages={languages.length > 0 ? languages : resumes.languages}
+              skills={skills.length > 0 ? skills : resumes.skills}
             />
           ) : (
             <div className="flex justify-center pt-20">
