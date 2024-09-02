@@ -9,8 +9,8 @@ import {
   Language,
   Skill,
 } from "types/resume";
-import { Header } from "@components/layout";
-import Plain from "@components/templates/Plain";
+import Header from "../../components/layout/Header";
+import Plain from "../../components/templates/Plain";
 
 function Design() {
   const [resumes, setResumes] = useState<Resume[]>([]);

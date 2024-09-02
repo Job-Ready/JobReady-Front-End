@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import CV from "../../assets/cv.webp";
-import { checkIsAuthenticated } from "@utils/auth";
+import { checkIsAuthenticated } from "../../utils/auth";
 import Login from "./Login";
 import Register from "./Register";
-import { Header } from "@components/layout";
+import Header from "../../components/layout/Header";
 
 const LandingPage: React.FC = () => {
   const [isSigningUp, setIsSigningUp] = useState<boolean>(false);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(checkIsAuthenticated());
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    checkIsAuthenticated()
+  );
 
   useEffect(() => {
     const handleStorageChange = () => {
       setIsAuthenticated(checkIsAuthenticated());
     };
 
-    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
 
@@ -29,7 +31,9 @@ const LandingPage: React.FC = () => {
   const renderForm = () => (
     <div className="w-[25rem]">
       <h1 className="text-3xl font-semibold mb-4">
-        {isSigningUp ? "Create your resume in minutes. Sign up now!" : "Welcome back! Sign in to your account."}
+        {isSigningUp
+          ? "Create your resume in minutes. Sign up now!"
+          : "Welcome back! Sign in to your account."}
       </h1>
 
       {isSigningUp ? <Register /> : <Login />}

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
-import { getAccessToken, setAccessToken } from "@utils/auth";
+import { getAccessToken, setAccessToken } from "../../utils/auth";
 import { ClipLoader } from "react-spinners";
-import AuthForm from "@components/GoogleAuth";
+import AuthForm from "../../components/GoogleAuth";
 
 // Set up axios defaults correctly
 axios.defaults.baseURL = process.env.REACT_APP_URL;

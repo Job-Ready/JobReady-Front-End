@@ -11,9 +11,9 @@ import {
   Language,
   Skill,
 } from "types/resume";
-import { Header } from "@components/layout";
-import Forms from "@components/Forms";
-import Plain from "@components/templates/Plain";
+import { Header } from "../../components/layout/index";
+import Forms from "../../components/Forms";
+import Plain from "../../components/templates/Plain";
 
 const Create: React.FC = () => {
   const [resumes, setResumes] = useState<Resume>();

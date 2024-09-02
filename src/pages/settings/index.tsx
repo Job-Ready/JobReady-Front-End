@@ -1,20 +1,22 @@
-import { Header } from '@components/layout';
-import { getAccessToken } from '@utils/auth';
-import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import Header from "../../components/layout/Header";
+import { getAccessToken } from "../../utils/auth";
+import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 
 const Settings: React.FC = () => {
-  const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
+  const [token, setToken] = useState<string | null>(
+    localStorage.getItem("accessToken")
+  );
 
   const handleStorageChange = () => {
     setToken(getAccessToken());
   };
 
   useEffect(() => {
-    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
 
@@ -22,9 +24,7 @@ const Settings: React.FC = () => {
     return <Navigate replace to="/" />;
   }
 
-  return (
-    <Header />
-  );
+  return <Header />;
 };
 
 export default Settings;

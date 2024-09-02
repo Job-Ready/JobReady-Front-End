@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { Resume } from "types/resume";
-import { getAccessToken } from "@utils/auth";
-import { Header } from "@components/layout";
-import SavedResumes from "@components/SavedResumes";
-import Plain from "@components/templates/Plain";
+import { getAccessToken } from "../../utils/auth";
+import Header from "../../components/layout/Header";
+import SavedResumes from "../../components/SavedResumes";
+import Plain from "../../components/templates/Plain";
 
 const Home = () => {
   const [token, setToken] = useState<string | null>(getAccessToken());

@@ -1,15 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import PageNotFound from "../components/PageNotFound";
-import Home from "@pages/home";
-import Settings from "@pages/settings";
-import AboutUs from "@pages/about-us";
-import Create from "@pages/create";
-import LandingPage from "@pages/landing-page";
-import Design from "@components/Design";
+import Home from "../pages/home/index";
+import Settings from "../pages/settings/index";
+import AboutUs from "../pages/about-us/index";
+import Create from "../pages/create/index";
+import LandingPage from "../pages/landing-page/index";
+import Design from "../pages/design/index";
 
 const AppRouter = () => {
-
   return (
     <BrowserRouter>
       <Routes>
@@ -23,7 +22,7 @@ const AppRouter = () => {
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
-  )
-}
+  );
+};
 
 export default AppRouter;
