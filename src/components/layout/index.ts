@@ -1,1 +1,2 @@
-export { default as Header } from "./Header";
+import Header from "../../components/layout/Header";
+export { default as Header } from "../../components/layout/Header";
