@@ -1,7 +1,7 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import './components.css';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import "./components.css";
 
 interface Skill {
   skillName: string;
@@ -13,7 +13,6 @@ interface SkillsProps {
 }
 
 const Skills: React.FC<SkillsProps> = ({ skills, setSkills }) => {
-
   const addSkill = () => {
     setSkills([...skills, { skillName: "" }]);
   };
@@ -23,7 +22,7 @@ const Skills: React.FC<SkillsProps> = ({ skills, setSkills }) => {
   };
 
   const handleInputChange = (index: number, value: string) => {
-    const updatedSkills = skills.map((skill, i) => 
+    const updatedSkills = skills.map((skill, i) =>
       i === index ? { ...skill, skillName: value } : skill
     );
     setSkills(updatedSkills);
@@ -31,19 +30,23 @@ const Skills: React.FC<SkillsProps> = ({ skills, setSkills }) => {
 
   return (
     <div>
-      <h1 className="text-lg font-semibold">Skills</h1>
-
+      <h1 className="text-lg">Skills</h1>
       <button
         type="button"
-        className="text-white px-4 py-2 rounded-lg hover:bg-slate-200"
+        className="flex items-center text-black px-4 py-2 my-4 rounded-lg hover:bg-slate-200"
         onClick={addSkill}
       >
-        <FontAwesomeIcon icon={faPlus} style={{ color: "#000000" }} />
+        <FontAwesomeIcon
+          icon={faPlus}
+          style={{ color: "#000000" }}
+          className="mr-4"
+        />
+        <p className="text-slate-400 italic">Add Skills</p>
       </button>
 
       {skills.map((skill, index) => (
         <div key={index} className="mb-4 flex items-center">
-          <div className='mr-4 flex-1'>
+          <div className="mr-4 flex-1">
             <label className="text-sm font-medium text-gray-600">Skill</label>
             <input
               type="text"
@@ -64,6 +67,6 @@ const Skills: React.FC<SkillsProps> = ({ skills, setSkills }) => {
       ))}
     </div>
   );
-}
+};
 
 export default Skills;

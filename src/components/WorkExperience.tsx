@@ -1,11 +1,13 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import './components.css';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import "./components.css";
 
 interface WorkExperienceProps {
   workExperiences: WorkExperienceInterface[];
-  setWorkExperiences: React.Dispatch<React.SetStateAction<WorkExperienceInterface[]>>;
+  setWorkExperiences: React.Dispatch<
+    React.SetStateAction<WorkExperienceInterface[]>
+  >;
 }
 
 interface WorkExperienceInterface {
@@ -16,12 +18,20 @@ interface WorkExperienceInterface {
   description: string;
 }
 
-const WorkExperience: React.FC<WorkExperienceProps> = ({ workExperiences, setWorkExperiences }) => {
-
+const WorkExperience: React.FC<WorkExperienceProps> = ({
+  workExperiences,
+  setWorkExperiences,
+}) => {
   const addWorkExperience = () => {
     setWorkExperiences([
       ...workExperiences,
-      { companyName: '', position: '', startDate: '', endDate: '', description: '' }
+      {
+        companyName: "",
+        position: "",
+        startDate: "",
+        endDate: "",
+        description: "",
+      },
     ]);
   };
 
@@ -29,8 +39,12 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ workExperiences, setWor
     setWorkExperiences(workExperiences.filter((_, i) => i !== index));
   };
 
-  const handleInputChange = (index: number, key: keyof WorkExperienceInterface, value: string) => {
-    const updatedWorkExperiences = workExperiences.map((workExperience, i) => 
+  const handleInputChange = (
+    index: number,
+    key: keyof WorkExperienceInterface,
+    value: string
+  ) => {
+    const updatedWorkExperiences = workExperiences.map((workExperience, i) =>
       i === index ? { ...workExperience, [key]: value } : workExperience
     );
     setWorkExperiences(updatedWorkExperiences);
@@ -38,74 +52,116 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ workExperiences, setWor
 
   return (
     <div>
-      <h1 className="text-lg font-semibold mb-4">Work Experience</h1>
+      <h1 className="text-lg">Work Experience</h1>
 
       <button
         type="button"
-        className="flex items-center text-white px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600"
+        className="flex items-center text-black px-4 py-2 my-4 rounded-lg hover:bg-slate-200"
         onClick={addWorkExperience}
       >
-        <FontAwesomeIcon icon={faPlus} className="mr-2" />
-        Add Work Experience
+        <FontAwesomeIcon
+          icon={faPlus}
+          style={{ color: "#000000" }}
+          className="mr-4"
+        />
+        <p className="text-slate-400 italic">Add Work Experience</p>
       </button>
 
       {workExperiences.map((workExperience, index) => (
-        <div key={index} className="mb-4 p-4 border border-gray-200 rounded-md shadow-sm">
+        <div
+          key={index}
+          className="mb-4 p-4 border border-gray-200 rounded-md shadow-sm"
+        >
           <div className="mb-4">
-            <label htmlFor={`companyName-${index}`} className="text-sm font-medium text-gray-600">Company Name</label>
+            <label
+              htmlFor={`companyName-${index}`}
+              className="text-sm font-medium text-gray-600"
+            >
+              Company Name
+            </label>
             <input
               id={`companyName-${index}`}
               type="text"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               value={workExperience.companyName}
-              onChange={(e) => handleInputChange(index, 'companyName', e.target.value)}
+              onChange={(e) =>
+                handleInputChange(index, "companyName", e.target.value)
+              }
             />
           </div>
 
           <div className="flex gap-4 mb-4">
             <div className="w-1/2">
-              <label htmlFor={`position-${index}`} className="text-sm font-medium text-gray-600">Position</label>
+              <label
+                htmlFor={`position-${index}`}
+                className="text-sm font-medium text-gray-600"
+              >
+                Position
+              </label>
               <input
                 id={`position-${index}`}
                 type="text"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={workExperience.position}
-                onChange={(e) => handleInputChange(index, 'position', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange(index, "position", e.target.value)
+                }
               />
             </div>
 
             <div className="w-1/2">
-              <label htmlFor={`startDate-${index}`} className="text-sm font-medium text-gray-600">Start Date</label>
+              <label
+                htmlFor={`startDate-${index}`}
+                className="text-sm font-medium text-gray-600"
+              >
+                Start Date
+              </label>
               <input
                 id={`startDate-${index}`}
                 type="text"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={workExperience.startDate}
-                onChange={(e) => handleInputChange(index, 'startDate', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange(index, "startDate", e.target.value)
+                }
               />
             </div>
           </div>
 
           <div className="flex gap-4 mb-4">
             <div className="w-1/2">
-              <label htmlFor={`endDate-${index}`} className="text-sm font-medium text-gray-600">End Date</label>
+              <label
+                htmlFor={`endDate-${index}`}
+                className="text-sm font-medium text-gray-600"
+              >
+                End Date
+              </label>
               <input
                 id={`endDate-${index}`}
                 type="text"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={workExperience.endDate}
-                onChange={(e) => handleInputChange(index, 'endDate', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange(index, "endDate", e.target.value)
+                }
               />
             </div>
           </div>
 
           <div className="mb-4">
-            <label htmlFor={`description-${index}`} className="text-sm font-medium text-gray-600">Description</label>
+            <label
+              htmlFor={`description-${index}`}
+              className="text-sm font-medium text-gray-600"
+            >
+              Description
+            </label>
             <textarea
               id={`description-${index}`}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               value={workExperience.description}
-              onChange={(e) => handleInputChange(index, 'description', e.target.value)}
+              onChange={(e) =>
+                handleInputChange(index, "description", e.target.value)
+              }
             />
           </div>
 

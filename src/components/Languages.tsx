@@ -13,16 +13,19 @@ interface LanguagesProps {
 }
 
 const Languages: React.FC<LanguagesProps> = ({ languages, setLanguages }) => {
-
   const addLanguage = () => {
-    setLanguages([...languages, { languageName: '', level: '' }]);
+    setLanguages([...languages, { languageName: "", level: "" }]);
   };
 
   const removeLanguage = (index: number) => {
     setLanguages(languages.filter((_, i) => i !== index));
   };
 
-  const handleInputChange = (index: number, key: keyof Language, value: string) => {
+  const handleInputChange = (
+    index: number,
+    key: keyof Language,
+    value: string
+  ) => {
     const updatedLanguages = languages.map((lang, i) =>
       i === index ? { ...lang, [key]: value } : lang
     );
@@ -35,32 +38,45 @@ const Languages: React.FC<LanguagesProps> = ({ languages, setLanguages }) => {
 
       <button
         type="button"
-        className="text-white px-4 py-2 rounded-lg hover:bg-slate-200"
+        className="flex items-center text-black px-4 py-2 my-4 rounded-lg hover:bg-slate-200"
         onClick={addLanguage}
       >
-        <FontAwesomeIcon icon={faPlus} style={{ color: "#000000" }} />
+        <FontAwesomeIcon
+          icon={faPlus}
+          style={{ color: "#000000" }}
+          className="mr-4"
+        />
+        <p className="text-slate-400 italic">Add Languages</p>
       </button>
 
       {languages.map((language, index) => (
         <div key={index} className="mb-4">
           <div>
             <div>
-              <label className="text-sm font-medium text-gray-600">Language</label>
+              <label className="text-sm font-medium text-gray-600">
+                Language
+              </label>
               <input
                 type="text"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={language.languageName}
-                onChange={(e) => handleInputChange(index, 'languageName', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange(index, "languageName", e.target.value)
+                }
               />
             </div>
 
             <div>
-              <label className="mt-4 text-sm font-medium text-gray-600">Level</label>
+              <label className="mt-4 text-sm font-medium text-gray-600">
+                Level
+              </label>
               <div className="relative">
                 <select
                   className="shadow appearance-none border rounded w-full py-2 px-3 pr-8 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   value={language.level}
-                  onChange={(e) => handleInputChange(index, 'level', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange(index, "level", e.target.value)
+                  }
                 >
                   <option value="">Select Level</option>
                   <option value="Beginner">Beginner</option>
@@ -95,6 +111,6 @@ const Languages: React.FC<LanguagesProps> = ({ languages, setLanguages }) => {
       ))}
     </div>
   );
-}
+};
 
 export default Languages;

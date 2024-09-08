@@ -12,6 +12,7 @@ import {
   Skill,
 } from "types/resume";
 import { Header } from "../../components/layout/index";
+import Footer from "../../components/layout/Footer";
 import Forms from "../../components/Forms";
 import Plain from "../../components/templates/Plain";
 
@@ -160,6 +161,7 @@ const Create: React.FC = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

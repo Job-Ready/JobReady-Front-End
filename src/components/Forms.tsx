@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import WorkExperience from "./WorkExperience";
 import Projects from "./Projects";
 import Education from "./Education";
@@ -15,7 +15,7 @@ import LinkedIn from "./details/Linkedin";
 import Portfolio from "./details/Portfolio";
 import Repos from "./details/Repos";
 import Country from "./details/Country";
-
+import Accordion from "./accordion";
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
@@ -49,7 +49,7 @@ function Forms({
 }) {
   const userId = localStorage.getItem("User");
   const resumeId = localStorage.getItem("Resume_Id");
-
+  const [isOpen, setIsOpen] = useState(false); // Accordion open/close state
   const formData = {
     userId,
     fullname,
@@ -111,6 +111,10 @@ function Forms({
     }
   };
 
+  const toggleAccordion = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className="container p-8">
       <form onSubmit={handleSubmit}>
@@ -124,15 +128,31 @@ function Forms({
             Save
           </button>
         </div>
-
-        <Fullname fullname={fullname} setFullname={setFullname} />
-        <Title title={title} setTitle={setTitle} />
-        <Email email={email} setEmail={setEmail} />
-        <Phone phone={phone} setPhone={setPhone} />
-        <LinkedIn linkedin={linkedin} setLinkedin={setLinkedin} />
-        <Portfolio portfolio={portfolio} setPortfolio={setPortfolio} />
-        <Country country={country} setCountry={setCountry} />
-        <Repos repos={repos} setRepos={setRepos} />
+        <div className="border border-gray-300 rounded mb-4">
+          <div
+            className="bg-gray-100 cursor-pointer px-4 py-2 flex justify-between items-center"
+            onClick={toggleAccordion}
+          >
+            <h1 className="text-lg font-semibold">Personal Details</h1>
+            <span className="text-gray-500">
+              {isOpen ? "-" : "+"} {/* Toggle icon */}
+            </span>
+          </div>
+          {isOpen && (
+            <div className="px-4 py-3">
+              <div className="mb-4">
+                <Fullname fullname={fullname} setFullname={setFullname} />
+                <Title title={title} setTitle={setTitle} />
+                <Email email={email} setEmail={setEmail} />
+                <Phone phone={phone} setPhone={setPhone} />
+                <LinkedIn linkedin={linkedin} setLinkedin={setLinkedin} />
+                <Portfolio portfolio={portfolio} setPortfolio={setPortfolio} />
+                <Country country={country} setCountry={setCountry} />
+                <Repos repos={repos} setRepos={setRepos} />
+              </div>
+            </div>
+          )}
+        </div>
         <WorkExperience
           workExperiences={workExperiences}
           setWorkExperiences={setWorkExperiences}
@@ -141,7 +161,6 @@ function Forms({
         <Languages languages={languages} setLanguages={setLanguages} />
         <Projects projects={projects} setProjects={setProjects} />
         <Skills skills={skills} setSkills={setSkills} />
-
         <div className="mt-4 flex space-x-4">
           <button
             type="submit"

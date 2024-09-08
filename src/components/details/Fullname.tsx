@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface FullnameProps {
   fullname: string;
@@ -12,7 +12,6 @@ const Fullname: React.FC<FullnameProps> = ({ fullname, setFullname }) => {
 
   return (
     <div>
-      <h1 className='text-lg'>Personal Details</h1>
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Full-Name
@@ -27,6 +26,6 @@ const Fullname: React.FC<FullnameProps> = ({ fullname, setFullname }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Fullname;
