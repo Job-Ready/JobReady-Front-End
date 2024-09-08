@@ -4,6 +4,7 @@ import axios from "axios";
 import { Resume } from "types/resume";
 import { getAccessToken } from "../../utils/auth";
 import Header from "../../components/layout/Header";
+import Footer from "../../components/layout/Footer";
 import SavedResumes from "../../components/SavedResumes";
 import Plain from "../../components/templates/Plain";
 import { validateToken } from "../../utils/auth";
@@ -125,6 +126,7 @@ const Home = () => {
           </Link>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
