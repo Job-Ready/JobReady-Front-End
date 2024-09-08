@@ -5,7 +5,7 @@ import { checkIsAuthenticated } from "../../utils/auth";
 import Login from "./Login";
 import Register from "./Register";
 import Header from "../../components/layout/Header";
-import axios from "axios";
+import { validateToken } from "../../utils/auth";
 
 const LandingPage: React.FC = () => {
   const [token, setToken] = useState<string | null>(
@@ -16,25 +16,8 @@ const LandingPage: React.FC = () => {
     checkIsAuthenticated()
   );
 
-  const validateToken = async () => {
-    try {
-      const response = await axios.get("/auth-token", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      console.log(response);
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        console.log("Invalid or expired token");
-
-        localStorage.removeItem("jwtToken");
-      } else {
-        console.log(error.message);
-      }
-    }
-  };
-
   useEffect(() => {
-    validateToken();
+    validateToken(token);
     const handleStorageChange = () => {
       setIsAuthenticated(checkIsAuthenticated());
     };

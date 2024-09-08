@@ -6,6 +6,7 @@ import { getAccessToken } from "../../utils/auth";
 import Header from "../../components/layout/Header";
 import SavedResumes from "../../components/SavedResumes";
 import Plain from "../../components/templates/Plain";
+import { validateToken } from "../../utils/auth";
 
 const Home = () => {
   const [token, setToken] = useState<string | null>(getAccessToken());
@@ -17,6 +18,7 @@ const Home = () => {
   localStorage.removeItem("Resume_Id");
 
   useEffect(() => {
+    validateToken(token);
     const getResumes = async () => {
       try {
         const response = await axios.get(`/api/resumes`, {
