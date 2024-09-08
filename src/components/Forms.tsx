@@ -15,7 +15,7 @@ import LinkedIn from "./details/Linkedin";
 import Portfolio from "./details/Portfolio";
 import Repos from "./details/Repos";
 import Country from "./details/Country";
-import Accordion from "./accordion";
+import LoadingSpinner from "./LoadingSpinner";
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
@@ -47,11 +47,13 @@ function Forms({
   skills,
   setSkills,
 }) {
-  const userId = localStorage.getItem("User");
-  const resumeId = localStorage.getItem("Resume_Id");
+  const user_id = localStorage.getItem("User");
+  const id = localStorage.getItem("Resume_Id");
   const [isOpen, setIsOpen] = useState(false); // Accordion open/close state
+  const [loading, setLoading] = useState(false); // Loading state
   const formData = {
-    userId,
+    id,
+    user_id,
     fullname,
     title,
     email,
@@ -67,9 +69,10 @@ function Forms({
     skills,
   };
 
+  const token = localStorage.getItem("accessToken");
+
   // Function to update resume in the backend
   const updateResume = async () => {
-    const token = localStorage.getItem("token");
     const dataToSend = { ...formData };
 
     // Remove empty values
@@ -86,10 +89,13 @@ function Forms({
     });
 
     try {
-      await axios.put(`/update-resume/${resumeId}`, dataToSend, {
+      setLoading(true); // Start loading spinner
+      await axios.put(`/api/resumes/${id}`, dataToSend, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      setLoading(false); // Stop loading spinner once done
     } catch (error) {
+      setLoading(false); // Stop loading spinner on error
       console.log("Update failed:", error.message);
     }
   };
@@ -120,13 +126,6 @@ function Forms({
       <form onSubmit={handleSubmit}>
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-bold">Create Resume</h1>
-          <button
-            type="button"
-            onClick={updateResume}
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            Save
-          </button>
         </div>
         <div className="border border-gray-300 rounded mb-4">
           <div
@@ -165,16 +164,19 @@ function Forms({
           <button
             type="submit"
             className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            disabled={loading} // Disable button while loading
           >
-            Save
+            {loading ? "Saving..." : "Save"}
           </button>
           <button
             type="button"
             onClick={downloadAsPDF}
             className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+            disabled={loading} // Disable download while saving
           >
             Download Resume
           </button>
+          {loading && <LoadingSpinner />} {/* Show spinner while loading */}
         </div>
       </form>
     </div>
