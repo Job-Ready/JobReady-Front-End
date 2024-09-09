@@ -94,7 +94,7 @@ const Header: React.FC = () => {
                 <li className="hover:border-blue-600 border-transparent border-2 hover:border-solid rounded-lg">
                   <button
                     onClick={toggleModal}
-                    className="text-lg text-gray-400 hover:text-blue-600 flex items-center space-x-4 p-2"
+                    className="text-lg font-semibold hover:text-blue-600 flex items-center space-x-4 p-2"
                   >
                     <img className="w-10 h-10" src={user} alt="User avatar" />
                     <h1>{username}</h1>

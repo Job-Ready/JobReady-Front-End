@@ -38,6 +38,12 @@ const Create: React.FC = () => {
     localStorage.getItem("accessToken")
   );
 
+  // Accordion state object
+  const [accordionState, setAccordionState] = useState({
+    templates: false,
+    design: false,
+  });
+
   useEffect(() => {
     const getResumes = async () => {
       if (resumeId) {
@@ -70,6 +76,14 @@ const Create: React.FC = () => {
   if (!token) {
     return <Navigate replace to="/" />;
   }
+
+  // Toggle function for each accordion
+  const toggleAccordion = (section: keyof typeof accordionState) => {
+    setAccordionState((prevState) => ({
+      ...prevState,
+      [section]: !prevState[section],
+    }));
+  };
 
   return (
     <div>
@@ -140,23 +154,67 @@ const Create: React.FC = () => {
           )}
         </div>
         <div className="w-[20%] float-left overflow-y-auto mt-16">
-          <div className="bg-white rounded-lg shadow-md p-4">
-            <h1 className="text-xl font-bold">Templates</h1>
-            <div className="flex flex-col mt-10">
-              <div className="mx-auto">
-                <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
-                  <img src="/images/plain.png" alt="Plain Template" />
-                </div>
-                <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
-                  <img src="/images/modern.png" alt="Modern Template" />
-                </div>
-                <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
-                  <img src="/images/creative.png" alt="Creative Template" />
-                </div>
-                <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
-                  <img src="/images/unique.png" alt="Unique Template" />
-                </div>
+          <div className="bg-white p-4">
+            {/* Accordion for Templates */}
+            <div className="border border-gray-300 rounded mb-4">
+              <div
+                className="bg-gray-100 cursor-pointer px-4 py-2 flex justify-between items-center"
+                onClick={() => toggleAccordion("templates")}
+              >
+                <h1 className="text-lg font-semibold">Templates</h1>
+                <span className="text-gray-500">
+                  {accordionState.templates ? "-" : "+"}
+                </span>
               </div>
+              {accordionState.templates && (
+                <div className="px-4 py-3">
+                  <div className="mb-4">
+                    <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
+                      <img src="/images/plain.png" alt="Plain Template" />
+                    </div>
+                    <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
+                      <img src="/images/modern.png" alt="Modern Template" />
+                    </div>
+                    <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
+                      <img src="/images/creative.png" alt="Creative Template" />
+                    </div>
+                    <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
+                      <img src="/images/unique.png" alt="Unique Template" />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Accordion for Design */}
+            <div className="border border-gray-300 rounded mb-4">
+              <div
+                className="bg-gray-100 cursor-pointer px-4 py-2 flex justify-between items-center"
+                onClick={() => toggleAccordion("design")}
+              >
+                <h1 className="text-lg font-semibold">Design</h1>
+                <span className="text-gray-500">
+                  {accordionState.design ? "-" : "+"}
+                </span>
+              </div>
+              {accordionState.design && (
+                <div className="px-4 py-3">
+                  <div className="mb-4">
+                    <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
+                      <img src="/images/plain.png" alt="Plain Template" />
+                    </div>
+                    <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
+                      <img src="/images/modern.png" alt="Modern Template" />
+                    </div>
+                    <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
+                      <img src="/images/creative.png" alt="Creative Template" />
+                    </div>
+                    <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
+                      <img src="/images/unique.png" alt="Unique Template" />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
