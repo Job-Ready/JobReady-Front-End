@@ -1,4 +1,5 @@
-import Header from "../../components/layout/Header";
+import { Header } from "../../components/layout/index";
+import { Footer } from "../../components/layout/index";
 import { getAccessToken } from "../../utils/auth";
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
@@ -24,7 +25,12 @@ const Settings: React.FC = () => {
     return <Navigate replace to="/" />;
   }
 
-  return <Header />;
+  return (
+    <div>
+      <Header />
+      <Footer />
+    </div>
+  );
 };
 
 export default Settings;

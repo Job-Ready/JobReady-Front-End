@@ -6,7 +6,7 @@ import Settings from "../pages/settings/index";
 import AboutUs from "../pages/about-us/index";
 import Create from "../pages/create/index";
 import LandingPage from "../pages/landing-page/index";
-import Design from "../pages/design/index";
+import Account from "../pages/acount/index";
 
 const AppRouter = () => {
   return (
@@ -17,7 +17,7 @@ const AppRouter = () => {
         <Route path="/create" element={<Create />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/settings" element={<Settings />} />
-        {/* <Route path="/account" element={<Account />} /> */}
+        <Route path="/account" element={<Account />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
