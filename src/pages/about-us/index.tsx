@@ -1,4 +1,5 @@
 import { Header } from "../../components/layout/index";
+import { Footer } from "../../components/layout/index";
 import React from "react";
 
 const AboutUs: React.FC = () => {
@@ -33,6 +34,7 @@ const AboutUs: React.FC = () => {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

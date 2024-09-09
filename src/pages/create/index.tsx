@@ -12,11 +12,14 @@ import {
   Skill,
 } from "types/resume";
 import { Header } from "../../components/layout/index";
-import Footer from "../../components/layout/Footer";
+import { Footer } from "../../components/layout/index";
 import Forms from "../../components/Forms";
 import Plain from "../../components/templates/Plain";
 
 const Create: React.FC = () => {
+  const [backgroundColor, setBackgroundColor] = useState<string>("#ffffff");
+  const [fontSize, setFontSize] = useState<string>("12px");
+  const [fontFamily, setFontFamily] = useState<string>("Arial");
   const [resumes, setResumes] = useState<Resume>();
   const [resumeId, setResumeId] = useState<string | null>(
     localStorage.getItem("Resume_Id")
@@ -200,17 +203,68 @@ const Create: React.FC = () => {
               {accordionState.design && (
                 <div className="px-4 py-3">
                   <div className="mb-4">
-                    <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
-                      <img src="/images/plain.png" alt="Plain Template" />
+                    <div className="mb-4">
+                      <label htmlFor="fontFamily" className="block mb-2">
+                        Font Family:
+                      </label>
+                      <select
+                        id="fontFamily"
+                        value={fontFamily}
+                        onChange={(e) => setFontFamily(e.target.value)}
+                        className="w-full px-3 py-2 border rounded-lg"
+                      >
+                        <option value="Arial">Arial</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Helvetica">Helvetica</option>
+                        {/* Add more font options here */}
+                      </select>
                     </div>
-                    <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
-                      <img src="/images/modern.png" alt="Modern Template" />
+                    <div className="mb-4 items-center">
+                      <label htmlFor="fontSize" className="block mb-2 mr-2">
+                        Font Size:
+                      </label>
+                      <div className="flex border rounded-lg w-max">
+                        <button
+                          onClick={() =>
+                            setFontSize(
+                              (prevSize) =>
+                                `${Math.max(parseInt(prevSize) - 1, 1)}px`
+                            )
+                          }
+                          className="px-3 py-2 border-r"
+                        >
+                          -
+                        </button>
+                        <input
+                          type="text"
+                          id="fontSize"
+                          value={fontSize}
+                          onChange={(e) => setFontSize(e.target.value)}
+                          className="px-3 py-2 text-center outline-none w-20"
+                        />
+                        <button
+                          onClick={() =>
+                            setFontSize(
+                              (prevSize) => `${parseInt(prevSize) + 1}px`
+                            )
+                          }
+                          className="px-3 py-2 border-l"
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
-                    <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
-                      <img src="/images/creative.png" alt="Creative Template" />
-                    </div>
-                    <div className="bg-gray-100 rounded-lg shadow-md p-2 w-[12rem] h-[15rem] mt-4">
-                      <img src="/images/unique.png" alt="Unique Template" />
+                    <div className="mb-4">
+                      <label htmlFor="backgroundColor" className="block mb-2">
+                        Background Color:
+                      </label>
+                      <input
+                        type="color"
+                        id="backgroundColor"
+                        value={backgroundColor}
+                        onChange={(e) => setBackgroundColor(e.target.value)}
+                        className="w-16 h-16 px-3 py-2 border rounded-lg"
+                      />
                     </div>
                   </div>
                 </div>
