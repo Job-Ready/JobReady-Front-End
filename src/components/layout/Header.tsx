@@ -9,10 +9,12 @@ const Header: React.FC = () => {
     localStorage.getItem("accessToken") ? true : false
   );
   const [username, setUsername] = useState(localStorage.getItem("UserName"));
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // for mobile menu
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // for user dropdown
   const [isModalOpen, setIsModalOpen] = useState(false); // For modal visibility
 
   const menuRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null); // Reference for the dropdown
 
   const logout = () => {
     localStorage.clear();
@@ -24,13 +26,25 @@ const Header: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown visibility
+  };
+
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen); // Toggle modal visibility
   };
 
   const handleClickOutside = (event: MouseEvent) => {
+    // Close menu if clicking outside
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
       setIsOpen(false);
+    }
+    // Close dropdown if clicking outside
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsDropdownOpen(false);
     }
   };
 
@@ -90,15 +104,78 @@ const Header: React.FC = () => {
                     Contact
                   </Link>
                 </li>
-                {/* User Options Button */}
-                <li className="hover:border-blue-600 border-transparent border-2 hover:border-solid rounded-lg">
-                  <button
-                    onClick={toggleModal}
-                    className="text-lg font-semibold hover:text-blue-600 flex items-center space-x-4 p-2"
-                  >
-                    <img className="w-10 h-10" src={user} alt="User avatar" />
-                    <h1>{username}</h1>
-                  </button>
+                <li>
+                  <div className="flex justify-center">
+                    <div className="relative inline-block" ref={dropdownRef}>
+                      {/* Dropdown toggle button */}
+                      <button
+                        className="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:text-white dark:bg-gray-800 focus:outline-none"
+                        onClick={toggleDropdown}
+                      >
+                        <span className="mx-1">
+                          <h1>{username}</h1>
+                        </span>
+                        <svg
+                          className="w-5 h-5 mx-1"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </button>
+
+                      {/* Dropdown menu (conditionally rendered) */}
+                      {isDropdownOpen && (
+                        <div className="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800">
+                          <a
+                            href="#"
+                            className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                          >
+                            <img
+                              className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
+                              src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200"
+                              alt="jane avatar"
+                            />
+                            <div className="mx-1">
+                              <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                {username}
+                              </h1>
+                              <p className="text-sm text-gray-500 dark:text-gray-400">
+                                janedoe@exampl.com
+                              </p>
+                            </div>
+                          </a>
+
+                          <hr className="border-gray-200 dark:border-gray-700" />
+
+                          <a
+                            href="/account"
+                            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                          >
+                            View Profile
+                          </a>
+
+                          <a
+                            href="/settings"
+                            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                          >
+                            Settings
+                          </a>
+
+                          <a
+                            onClick={logout}
+                            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                          >
+                            Sign Out
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </li>
               </>
             ) : (
@@ -167,47 +244,6 @@ const Header: React.FC = () => {
           </ul>
         </nav>
       </div>
-
-      {/* Modal for User Options */}
-      {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-[300px]">
-            <h2 className="text-lg font-bold mb-4">User Options</h2>
-            <ul className="space-y-4">
-              <li>
-                <button
-                  onClick={() => navigate("/account")}
-                  className="block w-full text-left text-gray-700 hover:text-blue-600"
-                >
-                  Account
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => navigate("/settings")}
-                  className="block w-full text-left text-gray-700 hover:text-blue-600"
-                >
-                  Settings
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={logout}
-                  className="block w-full text-left text-red-600 hover:text-red-800"
-                >
-                  Logout
-                </button>
-              </li>
-            </ul>
-            <button
-              onClick={toggleModal}
-              className="mt-6 w-full bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
