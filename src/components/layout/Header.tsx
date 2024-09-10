@@ -50,7 +50,7 @@ const Header: React.FC = () => {
         <div className="flex-grow lg:flex lg:justify-end items-center">
           <div className="lg:hidden">
             <button
-              className="navbar-burger flex items-center text-blue-600 p-3"
+              className="navbar-burger flex items-center  p-3"
               onClick={toggleMenu}
             >
               <svg
@@ -143,7 +143,7 @@ const Header: React.FC = () => {
             <li>
               <a
                 className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                href="#"
+                href="/home"
               >
                 Home
               </a>
@@ -151,7 +151,7 @@ const Header: React.FC = () => {
             <li>
               <a
                 className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                href="#"
+                href="/aboutus"
               >
                 About Us
               </a>
@@ -159,7 +159,7 @@ const Header: React.FC = () => {
             <li>
               <a
                 className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                href="#"
+                href="/contact"
               >
                 Contact
               </a>
