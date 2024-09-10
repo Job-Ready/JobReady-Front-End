@@ -31,6 +31,7 @@ const Home = () => {
 
         if (error.response?.status === 403 || error.response?.status === 401) {
           localStorage.removeItem("accessToken");
+          window.location.reload();
           console.log("Token expired or invalid, please log in again.");
         }
       }
