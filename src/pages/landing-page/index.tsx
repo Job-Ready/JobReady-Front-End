@@ -5,7 +5,6 @@ import { checkIsAuthenticated } from "../../utils/auth";
 import Login from "./Login";
 import Register from "./Register";
 import Header from "../../components/layout/Header";
-import { validateToken } from "../../utils/auth";
 
 const LandingPage: React.FC = () => {
   const [token, setToken] = useState<string | null>(
@@ -17,7 +16,6 @@ const LandingPage: React.FC = () => {
   );
 
   useEffect(() => {
-    validateToken(token);
     const handleStorageChange = () => {
       setIsAuthenticated(checkIsAuthenticated());
     };

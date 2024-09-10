@@ -28,6 +28,11 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
     skills: [],
   });
 
+  // State to track selected resume index
+  const [selectedResumeIndex, setSelectedResumeIndex] = useState<number | null>(
+    null
+  );
+
   const createResume = async () => {
     const token = localStorage.getItem("accessToken");
     try {
@@ -40,6 +45,11 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
     }
   };
 
+  const handleResumeClick = (index: number) => {
+    setSelectedResumeIndex(index); // Update selected index
+    onResumeClick(index); // Call parent function if needed
+  };
+
   return (
     <div>
       <h1 className="mt-4 mb-10 text-3xl">My Resumes</h1>
@@ -47,8 +57,10 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
         {resumes.map((resume, index) => (
           <div
             key={resume.id}
-            onClick={() => onResumeClick(index)}
-            className="w-28 h-28 mb-4 mr-4 bg-slate-100 shadow-md rounded-md hover:scale-110 transition-transform duration-200 cursor-pointer"
+            onClick={() => handleResumeClick(index)}
+            className={`w-28 h-28 mb-4 mr-4 bg-slate-100 shadow-md rounded-md hover:scale-110 transition-transform duration-200 cursor-pointer ${
+              selectedResumeIndex === index ? "border-2 border-black" : ""
+            }`} // Conditionally apply border if selected
           >
             <div className="flex justify-center items-center h-full">
               <img src={icon} alt="Resume Icon" className="w-10 h-10 m-4" />

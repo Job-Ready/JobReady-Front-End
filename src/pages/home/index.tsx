@@ -7,7 +7,6 @@ import { Header } from "../../components/layout/index";
 import { Footer } from "../../components/layout/index";
 import SavedResumes from "../../components/SavedResumes";
 import Plain from "../../components/templates/Plain";
-import { validateToken } from "../../utils/auth";
 
 const Home = () => {
   const [token, setToken] = useState<string | null>(getAccessToken());
@@ -19,16 +18,21 @@ const Home = () => {
   localStorage.removeItem("Resume_Id");
 
   useEffect(() => {
-    validateToken(token);
     const getResumes = async () => {
       try {
         const response = await axios.get(`/api/resumes`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        const fetchedResumes: Resume[] = response.data.resumes;
+
+        const fetchedResumes = response.data.resumes;
         setResumes(fetchedResumes);
       } catch (error) {
-        console.error("Get Resumes:", error.message);
+        console.error("Get Resumes Error:", error.message);
+
+        if (error.response?.status === 403 || error.response?.status === 401) {
+          localStorage.removeItem("accessToken");
+          console.log("Token expired or invalid, please log in again.");
+        }
       }
     };
 
