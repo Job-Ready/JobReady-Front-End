@@ -81,7 +81,9 @@ const Home = () => {
   return (
     <div>
       {loading ? (
-        <LoadingSpinner />
+        <div className="flex items-center justify-center h-screen">
+          <LoadingSpinner />
+        </div>
       ) : (
         <>
           <Header />
