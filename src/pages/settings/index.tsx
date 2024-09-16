@@ -8,6 +8,7 @@ const Settings: React.FC = () => {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("accessToken")
   );
+
   const [username, setUsername] = useState<string | null>(
     localStorage.getItem("UserName")
   );
@@ -33,14 +34,25 @@ const Settings: React.FC = () => {
     }
   };
 
-  // Form submission handler with proper typing
-  const handleSaveChanges = (e: FormEvent<HTMLFormElement>): void => {
+  // Form submission handler for saving username
+  const handleSaveUsername = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    // Add logic to save changes, e.g., API call
+    // Logic to save username, e.g., API call
+    console.log({ username });
+  };
+
+  // Form submission handler for saving email
+  const handleSaveEmail = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    // Logic to save email, e.g., API call
+    console.log({ email });
+  };
+
+  // Form submission handler for saving password
+  const handleSavePassword = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    // Logic to save password, e.g., API call
     console.log({
-      username,
-      email,
-      photo,
       currentPassword,
       newPassword,
       confirmPassword,
@@ -80,8 +92,8 @@ const Settings: React.FC = () => {
           Profile Settings
         </h2>
 
-        <form onSubmit={handleSaveChanges} className="space-y-6">
-          {/* Username */}
+        {/* Form for changing Username */}
+        <form onSubmit={handleSaveUsername} className="space-y-6">
           <div className="flex flex-col">
             <label className="text-lg font-medium">Username:</label>
             <input
@@ -92,8 +104,16 @@ const Settings: React.FC = () => {
               required
             />
           </div>
+          <button
+            type="submit"
+            className="w-full bg-gray-800 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Save Username
+          </button>
+        </form>
 
-          {/* Email */}
+        {/* Form for changing Email */}
+        <form onSubmit={handleSaveEmail} className="space-y-6 mt-6">
           <div className="flex flex-col">
             <label className="text-lg font-medium">Email:</label>
             <input
@@ -104,74 +124,78 @@ const Settings: React.FC = () => {
               required
             />
           </div>
+          <button
+            type="submit"
+            className="w-full bg-gray-800 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Save Email
+          </button>
+        </form>
 
-          {/* Profile Photo */}
+        {/* Form for changing Password */}
+        <form onSubmit={handleSavePassword} className="space-y-6 mt-6">
+          <h1 className="text-lg font-medium">Security</h1>
+          <p>In this section, you can change your password</p>
           <div className="flex flex-col">
-            <label className="text-lg font-medium">Profile Photo:</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handlePhotoChange}
-              className="mt-1"
-            />
-
-            {/* Preview of selected image */}
-            {photoPreview && (
-              <div className="mt-4">
-                <img
-                  src={photoPreview}
-                  alt="Profile Preview"
-                  className="h-32 w-32 rounded-full object-cover border"
-                />
-              </div>
-            )}
-          </div>
-
-          {/* Current Password */}
-          <div className="flex flex-col">
-            <label className="text-lg font-medium">Current Password:</label>
+            <label>Current Password:</label>
             <input
               type="password"
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
               placeholder="Enter current password"
-              className="mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
-
-          {/* New Password */}
           <div className="flex flex-col">
-            <label className="text-lg font-medium">New Password:</label>
+            <label>New Password:</label>
             <input
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               placeholder="Enter new password"
-              className="mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
           </div>
-
-          {/* Confirm New Password */}
           <div className="flex flex-col">
-            <label className="text-lg font-medium">Confirm New Password:</label>
+            <label>Confirm New Password:</label>
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm new password"
-              className="mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
           </div>
-
-          {/* Save Button */}
           <button
             type="submit"
-            className="w-full bg-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full bg-gray-800 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            Save Changes
+            Save Password
           </button>
         </form>
+
+        {/* Profile Photo Upload */}
+        <div className="mt-6">
+          <label className="text-lg font-medium">Profile Photo:</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handlePhotoChange}
+            className="mt-1"
+          />
+          {photoPreview && (
+            <div className="mt-4">
+              <img
+                src={photoPreview}
+                alt="Profile Preview"
+                className="h-32 w-32 rounded-full object-cover border"
+              />
+            </div>
+          )}
+        </div>
 
         {/* Delete Account */}
         <div className="mt-10 text-center">
