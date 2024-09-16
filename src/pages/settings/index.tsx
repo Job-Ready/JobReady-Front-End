@@ -8,8 +8,12 @@ const Settings: React.FC = () => {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("accessToken")
   );
-  const [username, setUsername] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string | null>(
+    localStorage.getItem("UserName")
+  );
+  const [email, setEmail] = useState<string | null>(
+    localStorage.getItem("Email")
+  );
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null); // For preview
   const [currentPassword, setCurrentPassword] = useState<string>("");
@@ -82,7 +86,7 @@ const Settings: React.FC = () => {
             <label className="text-lg font-medium">Username:</label>
             <input
               type="text"
-              value={username}
+              value={username ?? ""}
               onChange={(e) => setUsername(e.target.value)}
               className="mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
@@ -94,7 +98,7 @@ const Settings: React.FC = () => {
             <label className="text-lg font-medium">Email:</label>
             <input
               type="email"
-              value={email}
+              value={email ?? ""}
               onChange={(e) => setEmail(e.target.value)}
               className="mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required

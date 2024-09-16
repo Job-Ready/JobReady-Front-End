@@ -8,6 +8,7 @@ const Header: React.FC = () => {
   const [isLogin, setIsLogin] = useState(
     localStorage.getItem("accessToken") ? true : false
   );
+  const [email, setEmail] = useState(localStorage.getItem("Email"));
   const [username, setUsername] = useState(localStorage.getItem("UserName"));
   const [isOpen, setIsOpen] = useState(false); // for mobile menu
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // for user dropdown
@@ -145,7 +146,7 @@ const Header: React.FC = () => {
                                 {username}
                               </h1>
                               <p className="text-sm text-gray-500 dark:text-gray-400">
-                                janedoe@exampl.com
+                                {email}
                               </p>
                             </div>
                           </a>

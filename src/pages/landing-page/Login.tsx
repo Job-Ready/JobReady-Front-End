@@ -45,6 +45,7 @@ const Login: React.FC = () => {
         setUserId(id);
         localStorage.setItem("User", id);
         localStorage.setItem("UserName", response.data.user.fullname);
+        localStorage.setItem("Email", response.data.user.email);
         setAccessToken(token);
         setErrorMessages("");
       }
