@@ -1,25 +1,27 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { Navigate } from "react-router-dom";
-import { Header } from "../../components/layout/index";
-import { Footer } from "../../components/layout/index";
+import axios from "axios";
+import { Header, Footer } from "../../components/layout";
 import { getAccessToken } from "../../utils/auth";
 
 const Settings: React.FC = () => {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("accessToken")
   );
-
   const [username, setUsername] = useState<string | null>(
     localStorage.getItem("UserName")
   );
   const [email, setEmail] = useState<string | null>(
     localStorage.getItem("Email")
   );
+  const [id, setId] = useState<string | null>(localStorage.getItem("User"));
   const [photo, setPhoto] = useState<File | null>(null);
-  const [photoPreview, setPhotoPreview] = useState<string | null>(null); // For preview
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+  const [message, setMessage] = useState<string>(""); // For success or error messages
 
   // Handle photo change and set preview
   const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -28,35 +30,95 @@ const Settings: React.FC = () => {
 
     if (file) {
       const previewURL = URL.createObjectURL(file);
-      setPhotoPreview(previewURL); // Set preview URL
+      setPhotoPreview(previewURL);
     } else {
       setPhotoPreview(null);
     }
   };
 
-  // Form submission handler for saving username
-  const handleSaveUsername = (e: FormEvent<HTMLFormElement>): void => {
+  // Save Username
+  const handleSaveUsername = async (
+    e: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
-    // Logic to save username, e.g., API call
-    console.log({ username });
+    try {
+      const response = await axios.post(
+        "/user/update-username",
+        { id, username },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setMessage("Username updated successfully!");
+      localStorage.setItem("UserName", username ?? "");
+    } catch (error) {
+      setMessage("Error updating username");
+    }
   };
 
-  // Form submission handler for saving email
-  const handleSaveEmail = (e: FormEvent<HTMLFormElement>): void => {
+  // Save Email
+  const handleSaveEmail = async (
+    e: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
-    // Logic to save email, e.g., API call
-    console.log({ email });
+    try {
+      const response = await axios.post(
+        "/user/update-email",
+        { email },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setMessage("Email updated successfully!");
+      localStorage.setItem("Email", email ?? "");
+    } catch (error) {
+      setMessage("Error updating email");
+    }
   };
 
-  // Form submission handler for saving password
-  const handleSavePassword = (e: FormEvent<HTMLFormElement>): void => {
+  // Save Password
+  const handleSavePassword = async (
+    e: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
-    // Logic to save password, e.g., API call
-    console.log({
-      currentPassword,
-      newPassword,
-      confirmPassword,
-    });
+    if (newPassword !== confirmPassword) {
+      setMessage("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "/user/update-password",
+        { currentPassword, newPassword },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setMessage("Password updated successfully!");
+    } catch (error) {
+      setMessage("Error updating password");
+    }
+  };
+
+  // Handle Photo Upload to server
+  const handlePhotoUpload = async (): Promise<void> => {
+    if (!photo) {
+      setMessage("Please select a photo to upload");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("photo", photo);
+
+    try {
+      const response = await axios.post("/user/upload-photo", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      setMessage("Photo uploaded successfully!");
+    } catch (error) {
+      setMessage("Error uploading photo");
+    }
   };
 
   const handleStorageChange = () => {
@@ -65,7 +127,6 @@ const Settings: React.FC = () => {
 
   useEffect(() => {
     window.addEventListener("storage", handleStorageChange);
-
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
@@ -75,12 +136,27 @@ const Settings: React.FC = () => {
     return <Navigate replace to="/" />;
   }
 
-  const handleDeleteAccount = (): void => {
+  const handleDeleteAccount = async (): Promise<void> => {
     const confirmed = window.confirm(
       "Are you sure you want to delete your account? This action cannot be undone."
     );
     if (confirmed) {
-      console.log("Account deleted");
+      try {
+        await axios.post(
+          "/user/delete-account",
+          {},
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        localStorage.removeItem("accessToken");
+        setMessage("Account deleted successfully!");
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1000);
+      } catch (error) {
+        setMessage("Error deleting account");
+      }
     }
   };
 
@@ -91,6 +167,7 @@ const Settings: React.FC = () => {
         <h2 className="text-2xl font-bold text-center mb-6">
           Profile Settings
         </h2>
+        {message && <p className="text-center text-red-500">{message}</p>}
 
         {/* Form for changing Username */}
         <form onSubmit={handleSaveUsername} className="space-y-6">
@@ -195,6 +272,12 @@ const Settings: React.FC = () => {
               />
             </div>
           )}
+          <button
+            onClick={handlePhotoUpload}
+            className="w-full bg-gray-800 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-4"
+          >
+            Upload Photo
+          </button>
         </div>
 
         {/* Delete Account */}
