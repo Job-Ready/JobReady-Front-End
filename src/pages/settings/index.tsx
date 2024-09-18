@@ -64,7 +64,7 @@ const Settings: React.FC = () => {
     try {
       const response = await axios.post(
         "/user/update-email",
-        { email },
+        { id, email },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
