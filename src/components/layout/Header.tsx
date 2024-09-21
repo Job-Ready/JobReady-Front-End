@@ -1,14 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/JobReady2-nobg-crp.png";
-import user from "../../assets/user-image.png";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(
     localStorage.getItem("accessToken") ? true : false
   );
-  const [email, setEmail] = useState(localStorage.getItem("Email"));
+  const [email, setEmail] = useState<string | null>(
+    localStorage.getItem("Email")
+  );
   const [username, setUsername] = useState(localStorage.getItem("UserName"));
   const [isOpen, setIsOpen] = useState(false); // for mobile menu
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // for user dropdown
@@ -31,8 +32,16 @@ const Header: React.FC = () => {
     setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown visibility
   };
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen); // Toggle modal visibility
+  const hideEmail = (email: string | null) => {
+    if (!email) {
+      return email;
+    }
+    let [username, domain] = email.split("@");
+    const maxLength = 8;
+    const truncatedEmail =
+      username.length > 8 ? username.substring(0, maxLength) + "..." : username;
+
+    return `${truncatedEmail}@${domain}`;
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -146,7 +155,7 @@ const Header: React.FC = () => {
                                 {username}
                               </h1>
                               <p className="text-sm text-gray-500 dark:text-gray-400">
-                                {email}
+                                {hideEmail(email)}
                               </p>
                             </div>
                           </a>
