@@ -105,18 +105,6 @@ function Forms({
     updateResume();
   };
 
-  const downloadAsPDF = () => {
-    const input = document.getElementById("resume");
-    if (input) {
-      html2canvas(input).then((canvas) => {
-        const img = canvas.toDataURL("image/png");
-        const pdf = new jsPdf();
-        pdf.addImage(img, "PNG", 0, 0, 210, 297);
-        pdf.save(fullname ? `${fullname}.pdf` : "resume.pdf");
-      });
-    }
-  };
-
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
@@ -167,14 +155,6 @@ function Forms({
             disabled={loading} // Disable button while loading
           >
             {loading ? "Saving..." : "Save"}
-          </button>
-          <button
-            type="button"
-            onClick={downloadAsPDF}
-            className="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
-            disabled={loading} // Disable download while saving
-          >
-            Download Resume
           </button>
           {loading && <LoadingSpinner />} {/* Show spinner while loading */}
         </div>

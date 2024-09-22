@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import ReactToPrint from "react-to-print";
 
 // Import types from resume.ts
 import {
@@ -46,6 +47,9 @@ const Create: React.FC = () => {
     templates: false,
     design: false,
   });
+
+  // Reference for the Plain component (for printing)
+  const componentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const getResumes = async () => {
@@ -122,27 +126,33 @@ const Create: React.FC = () => {
             setSkills={setSkills}
           />
         </div>
+
         <div className="w-[50%] float-left overflow-y-auto mt-16">
           {resumes ? (
-            <Plain
-              email={email || resumes.email}
-              phone={phone || resumes.phone}
-              linkedin={linkedin || resumes.linkedin}
-              portfolio={portfolio || resumes.portfolio}
-              country={country || resumes.country}
-              repos={repos.length > 0 ? repos : resumes.repos}
-              fullname={fullname || resumes.fullname}
-              title={title || resumes.title}
-              workExperiences={
-                workExperiences.length > 0
-                  ? workExperiences
-                  : resumes.workExperiences
-              }
-              projects={projects.length > 0 ? projects : resumes.projects}
-              education={education.length > 0 ? education : resumes.education}
-              languages={languages.length > 0 ? languages : resumes.languages}
-              skills={skills.length > 0 ? skills : resumes.skills}
-            />
+            <div ref={componentRef}>
+              <Plain
+                email={email || resumes.email}
+                phone={phone || resumes.phone}
+                linkedin={linkedin || resumes.linkedin}
+                portfolio={portfolio || resumes.portfolio}
+                country={country || resumes.country}
+                repos={repos.length > 0 ? repos : resumes.repos}
+                fullname={fullname || resumes.fullname}
+                title={title || resumes.title}
+                workExperiences={
+                  workExperiences.length > 0
+                    ? workExperiences
+                    : resumes.workExperiences
+                }
+                projects={projects.length > 0 ? projects : resumes.projects}
+                education={education.length > 0 ? education : resumes.education}
+                languages={languages.length > 0 ? languages : resumes.languages}
+                skills={skills.length > 0 ? skills : resumes.skills}
+                fontFamily={fontFamily}
+                fontSize={fontSize}
+                backgroundColor={backgroundColor}
+              />
+            </div>
           ) : (
             <div className="flex justify-center pt-20">
               <div>
@@ -156,6 +166,7 @@ const Create: React.FC = () => {
             </div>
           )}
         </div>
+
         <div className="w-[20%] float-left overflow-y-auto mt-16">
           <div className="bg-white p-4">
             {/* Accordion for Templates */}
@@ -216,7 +227,6 @@ const Create: React.FC = () => {
                         <option value="Arial">Arial</option>
                         <option value="Times New Roman">Times New Roman</option>
                         <option value="Helvetica">Helvetica</option>
-                        {/* Add more font options here */}
                       </select>
                     </div>
                     <div className="mb-4 items-center">
@@ -226,50 +236,55 @@ const Create: React.FC = () => {
                       <div className="flex border rounded-lg w-max">
                         <button
                           onClick={() =>
-                            setFontSize(
-                              (prevSize) =>
-                                `${Math.max(parseInt(prevSize) - 1, 1)}px`
-                            )
+                            setFontSize(`${parseInt(fontSize) - 1}px`)
                           }
-                          className="px-3 py-2 border-r"
+                          className="px-3 py-1 bg-gray-300 rounded-l-lg"
                         >
                           -
                         </button>
                         <input
-                          type="text"
                           id="fontSize"
+                          type="text"
                           value={fontSize}
                           onChange={(e) => setFontSize(e.target.value)}
-                          className="px-3 py-2 text-center outline-none w-20"
+                          className="px-3 py-1 border-none w-12 text-center"
                         />
                         <button
                           onClick={() =>
-                            setFontSize(
-                              (prevSize) => `${parseInt(prevSize) + 1}px`
-                            )
+                            setFontSize(`${parseInt(fontSize) + 1}px`)
                           }
-                          className="px-3 py-2 border-l"
+                          className="px-3 py-1 bg-gray-300 rounded-r-lg"
                         >
                           +
                         </button>
                       </div>
                     </div>
-                    <div className="mb-4">
+                    <div>
                       <label htmlFor="backgroundColor" className="block mb-2">
                         Background Color:
                       </label>
                       <input
-                        type="color"
                         id="backgroundColor"
+                        type="color"
                         value={backgroundColor}
                         onChange={(e) => setBackgroundColor(e.target.value)}
-                        className="w-16 h-16 px-3 py-2 border rounded-lg"
+                        className="w-full h-10 border rounded-lg"
                       />
                     </div>
                   </div>
                 </div>
               )}
             </div>
+
+            {/* Print Button */}
+            <ReactToPrint
+              trigger={() => (
+                <button className="bg-blue-500 text-white px-4 py-2 rounded">
+                  Print Resume
+                </button>
+              )}
+              content={() => componentRef.current} // Reference to the component to print
+            />
           </div>
         </div>
       </div>
