@@ -14,7 +14,7 @@ export interface Resume {
   languages: Language[];
   skills: Skill[];
   last_change: string;
-};
+}
 
 export interface WorkExperience {
   companyName: string;
@@ -31,8 +31,8 @@ export interface Project {
 }
 
 export interface Education {
-  institution: string;
-  degree: string;
+  uniName: string;
+  description: string;
   startDate: string;
   endDate: string;
 }

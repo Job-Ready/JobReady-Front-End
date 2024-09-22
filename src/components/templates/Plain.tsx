@@ -47,10 +47,7 @@ const Plain: React.FC<PlainProps> = ({
 
   return (
     <div className="p-8">
-      <div
-        id="resume"
-        className="w-[210mm] h-[297mm] bg-white p-6 rounded-md shadow-xl"
-      >
+      <div id="resume" className=" bg-white p-6 rounded-md shadow-xl">
         <div className="flex justify-between items-center">
           <div>
             <header className="text-left mb-6">
@@ -124,8 +121,8 @@ const Plain: React.FC<PlainProps> = ({
               {education.length > 0 ? (
                 education.map((edu, index) => (
                   <div key={index}>
-                    <p className="text-lg font-semibold">{edu.institution}</p>
-                    <p className="text-gray-600">{edu.degree}</p>
+                    <p className="text-lg font-semibold">{edu.uniName}</p>
+                    <p className="text-gray-600">{edu.description}</p>
                   </div>
                 ))
               ) : (
