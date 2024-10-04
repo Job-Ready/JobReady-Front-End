@@ -6,6 +6,9 @@
 app = 'jobready-front-end'
 primary_region = 'cdg'
 
+[env]
+  REACT_APP_URL = "https://jobready-back-end.fly.dev"
+
 [build]
 env = { REACT_APP_URL = "https://jobready-back-end.fly.dev" }
 
@@ -23,5 +26,3 @@ env = { REACT_APP_URL = "https://jobready-back-end.fly.dev" }
   cpu_kind = 'shared'
   cpus = 1
 
-[env]
-  REACT_APP_URL = "https://jobready-back-end.fly.dev"
