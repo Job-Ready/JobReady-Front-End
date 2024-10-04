@@ -8,6 +8,8 @@ import AuthForm from "../../components/GoogleAuth";
 // Set up axios defaults correctly
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
+console.log("REACT_APP_URL:", process.env.REACT_APP_URL);
+
 const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
