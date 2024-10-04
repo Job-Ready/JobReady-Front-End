@@ -22,4 +22,4 @@ primary_region = 'cdg'
   cpus = 1
 
 [env]
-  REACT_APP_URL = https://jobready-back-end.fly.dev
+  REACT_APP_URL = 'https://jobready-back-end.fly.dev'
