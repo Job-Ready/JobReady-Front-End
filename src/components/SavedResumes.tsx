@@ -63,6 +63,7 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
             }`} // Conditionally apply border if selected
           >
             <div className="flex justify-center items-center h-full">
+              {resume.id}
               <img src={icon} alt="Resume Icon" className="w-10 h-10 m-4" />
             </div>
           </div>
