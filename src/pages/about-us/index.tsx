@@ -10,7 +10,7 @@ const AboutUs: React.FC = () => {
         <div className="bg-gray-100 p-8 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">About Me</h2>
           <p className="text-gray-700">
-            As a dedicated front-end developer, my focus is on crafting
+            As a dedicated full-stack developer, my focus is on crafting
             intuitive and visually appealing user interfaces using technologies
             like React.js, JavaScript, HTML, and CSS.
           </p>
