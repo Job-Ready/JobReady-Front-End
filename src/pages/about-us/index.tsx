@@ -10,27 +10,24 @@ const AboutUs: React.FC = () => {
         <div className="bg-gray-100 p-8 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">About Me</h2>
           <p className="text-gray-700">
-            As a dedicated full-stack developer, my focus is on crafting
-            intuitive and visually appealing user interfaces using technologies
-            like React.js, JavaScript, HTML, and CSS.
-          </p>
-          <p className="text-gray-700 mt-4">
-            With a passion for clean code and a keen eye for design, I strive to
-            create seamless and user-friendly experiences that leave a lasting
-            impression.
-          </p>
-          <p className="text-gray-700 mt-4">
-            In addition to my technical skills, I embrace continuous learning to
-            stay updated with the latest trends, ensuring that my work reflects
-            current industry standards.
-          </p>
-          <p className="text-gray-700 mt-4">
-            This React resume builder serves as a platform to showcase my skills
-            and professional experiences. Feel free to explore and contact me if
-            you have any inquiries or collaboration opportunities.
-          </p>
-          <p className="text-gray-700 mt-4">
-            Thank you for visiting, and I look forward to connecting with you!
+            Hi there! My name is Konstantinos and I am a dedicated full-stack
+            developer. Feel free to use my resume builder and connect with me
+            at:
+            <br />
+            <a
+              href=" https://www.linkedin.com/in/konstantinos-kazazis-32a470228/"
+              className="hover:text-blue-500"
+            >
+              LinkedIn
+            </a>
+            ,{" "}
+            <a
+              href="https://github.com/konkazazis"
+              className="hover:text-blue-500"
+            >
+              Github
+            </a>{" "}
+            , or kazaziskonstantinos@gmail.com
           </p>
         </div>
       </div>
