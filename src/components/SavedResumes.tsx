@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import icon from "../assets/icons-resume.png";
 
@@ -28,6 +28,8 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
     skills: [],
   });
 
+  const navigate = useNavigate();
+
   // State to track selected resume index
   const [selectedResumeIndex, setSelectedResumeIndex] = useState<number | null>(
     null
@@ -40,6 +42,7 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
         headers: { Authorization: `Bearer ${token}` },
       });
       localStorage.setItem("Resume_Id", response.data.resume.id);
+      navigate("/create");
     } catch (error) {
       console.error("Error creating resume:", error.message);
     }
@@ -68,14 +71,12 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
             </div>
           </div>
         ))}
-        <div className="w-28 h-28 mb-4 mr-4 bg-white shadow-md rounded-md hover:scale-110 transition-transform duration-200 cursor-pointer">
-          <div
-            onClick={createResume}
-            className="flex justify-center items-center h-full w-full"
-          >
-            <Link to="/create">
-              <h1 className="text-4xl">+</h1>
-            </Link>
+        <div
+          onClick={createResume}
+          className="w-28 h-28 mb-4 mr-4 bg-white shadow-md rounded-md hover:scale-110 transition-transform duration-200 cursor-pointer"
+        >
+          <div className="flex justify-center items-center h-full w-full">
+            <h1 className="text-4xl">+</h1>
           </div>
         </div>
       </div>
