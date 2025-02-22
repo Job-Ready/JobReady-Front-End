@@ -93,7 +93,7 @@ const Header: React.FC = () => {
                 <li>
                   <Link
                     to="/home"
-                    className="text-lg text-gray-400 hover:text-gray-600 "
+                    className="text-lg font-thin hover:text-gray-600 "
                   >
                     Home
                   </Link>
@@ -101,7 +101,7 @@ const Header: React.FC = () => {
                 <li>
                   <Link
                     to="/aboutus"
-                    className="text-lg text-gray-400 hover:text-gray-600 "
+                    className="text-lg font-thin hover:text-gray-600 "
                   >
                     About Us
                   </Link>
@@ -109,7 +109,7 @@ const Header: React.FC = () => {
                 <li>
                   <Link
                     to="/contact"
-                    className=" text-lg text-gray-400 hover:text-gray-600 "
+                    className=" text-lg font-thin hover:text-gray-600 "
                   >
                     Contact
                   </Link>

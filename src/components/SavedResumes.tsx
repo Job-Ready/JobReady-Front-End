@@ -55,7 +55,7 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
 
   return (
     <div>
-      <h1 className="mt-4 mb-10 text-3xl">My Resumes</h1>
+      <h1 className="mt-4 mb-10 text-3xl font-thin">My Resumes</h1>
       <div className="flex flex-wrap p-4 overflow-auto">
         {resumes.map((resume, index) => (
           <div
