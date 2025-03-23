@@ -7,6 +7,7 @@ axios.defaults.baseURL = process.env.REACT_APP_URL;
 
 interface Resume {
   id: string;
+  title: string;
 }
 
 interface SavedResumesProps {
@@ -69,6 +70,7 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
               {resume.id}
               <img src={icon} alt="Resume Icon" className="w-10 h-10 m-4" />
             </div>
+            {resume.title}
           </div>
         ))}
         <div

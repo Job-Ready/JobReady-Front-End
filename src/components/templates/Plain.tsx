@@ -52,7 +52,7 @@ const Plain: React.FC<PlainProps> = ({
           <div>
             <header className="text-left mb-6">
               <h1 className="text-3xl font-bold">{fullname || "Your Name"}</h1>
-              <p className="text-base">{title || "Web Developer"}</p>
+              <p className="text-base">{title || "Your title"}</p>
               <p className="text-sm">{country || "Country, City"}</p>
             </header>
           </div>
