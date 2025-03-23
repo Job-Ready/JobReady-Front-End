@@ -1,24 +1,56 @@
+import { useState, useEffect } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { Header, Footer } from "../../components/layout/index";
+import axios from "axios";
+import { getAccessToken } from "../../utils/auth";
 
 const Contact: React.FC = () => {
+  const [token, setToken] = useState<string | null>(getAccessToken());
+  const [formData, setFormData] = useState<{
+    name: String;
+    email: string;
+    message: string;
+  }>({
+    name: "",
+    email: "",
+    message: "dssdsdsd",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setToken(getAccessToken());
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  if (!token) {
+    return <Navigate replace to="/" />;
+  }
+
   async function formSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault(); // Prevents page refresh
-    console.log("Test submit");
-
-    const formData = new FormData(event.currentTarget); // Use event.currentTarget instead of this
-
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`); // Log form data to verify
-    }
-
+    event.preventDefault();
     try {
-      const response = await fetch("/send-email", {
-        method: "POST",
-        body: formData,
+      const response = await axios.post("/send-email", formData, {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : "", // Ensure token is valid
+          // DO NOT manually set Content-Type for FormData
+        },
       });
 
-      const result = await response.json();
-      alert(result.message);
+      console.log("Response:", response);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -35,7 +67,6 @@ const Contact: React.FC = () => {
           <p className="text-gray-600 text-center mb-8">
             Have questions or feedback? We'd love to hear from you!
           </p>
-          {/* Attach onSubmit directly to the form */}
           <form className="space-y-6" onSubmit={formSubmit}>
             <div>
               <label
@@ -46,6 +77,7 @@ const Contact: React.FC = () => {
               </label>
               <input
                 type="text"
+                onChange={handleInputChange}
                 id="name"
                 name="name"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -64,6 +96,7 @@ const Contact: React.FC = () => {
               <input
                 type="email"
                 id="email"
+                onChange={handleInputChange}
                 name="email"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 placeholder="Your Email"
