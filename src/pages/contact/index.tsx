@@ -1,6 +1,29 @@
 import { Header, Footer } from "../../components/layout/index";
 
 const Contact: React.FC = () => {
+  async function formSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault(); // Prevents page refresh
+    console.log("Test submit");
+
+    const formData = new FormData(event.currentTarget); // Use event.currentTarget instead of this
+
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`); // Log form data to verify
+    }
+
+    try {
+      const response = await fetch("/send-email", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      alert(result.message);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  }
+
   return (
     <div>
       <Header />
@@ -12,7 +35,8 @@ const Contact: React.FC = () => {
           <p className="text-gray-600 text-center mb-8">
             Have questions or feedback? We'd love to hear from you!
           </p>
-          <form className="space-y-6">
+          {/* Attach onSubmit directly to the form */}
+          <form className="space-y-6" onSubmit={formSubmit}>
             <div>
               <label
                 htmlFor="name"
