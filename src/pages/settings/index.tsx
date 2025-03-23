@@ -183,7 +183,7 @@ const Settings: React.FC = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-gray-800 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full bg-gray-700 hover:bg-gray-500 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Save Username
           </button>
@@ -203,7 +203,7 @@ const Settings: React.FC = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-gray-800 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full bg-gray-700 hover:bg-gray-500 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Save Email
           </button>
@@ -248,7 +248,7 @@ const Settings: React.FC = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-gray-800 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full bg-gray-700 hover:bg-gray-500 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Save Password
           </button>
@@ -274,7 +274,7 @@ const Settings: React.FC = () => {
           )}
           <button
             onClick={handlePhotoUpload}
-            className="w-full bg-gray-800 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-4"
+            className="w-full bg-gray-700 hover:bg-gray-500 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Upload Photo
           </button>
