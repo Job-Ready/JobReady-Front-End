@@ -70,7 +70,9 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
               {resume.id}
               <img src={icon} alt="Resume Icon" className="w-10 h-10 m-4" />
             </div>
-            {resume.title}
+            <div className="mt-2 mb-4 mr-4 pl-1 bg-slate-100 shadow-md rounded-md">
+              {resume.title}
+            </div>
           </div>
         ))}
         <div
