@@ -6,12 +6,6 @@
 app = 'jobready-front-end'
 primary_region = 'cdg'
 
-[build]
-env = { REACT_APP_URL = "https://jobready-back-end.fly.dev/" }
-
-[env]
-  REACT_APP_URL = 'https://jobready-back-end.fly.dev/'
-
 [http_service]
   internal_port = 80
   force_https = true
