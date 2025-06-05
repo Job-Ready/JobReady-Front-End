@@ -1,10 +1,13 @@
-# fly.toml app configuration file generated for jobready-front-end on 2024-10-04T14:33:41+02:00
+# fly.toml app configuration file generated for jobready-front-end on 2025-06-05T18:23:56+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'jobready-front-end'
 primary_region = 'cdg'
+
+[build]
+env = { REACT_APP_URL = "https://jobready-back-end.fly.dev/" }
 
 [env]
   REACT_APP_URL = 'https://jobready-back-end.fly.dev/'
@@ -21,4 +24,3 @@ primary_region = 'cdg'
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
-
