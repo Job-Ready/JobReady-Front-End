@@ -7,11 +7,7 @@ app = 'jobready-front-end'
 primary_region = 'cdg'
 
 [env]
-  REACT_APP_URL = "https://jobready-back-end.fly.dev/"
-
-[build]
-env = { REACT_APP_URL = "https://jobready-back-end.fly.dev/" }
-
+  REACT_APP_URL = 'https://jobready-back-end.fly.dev/'
 
 [http_service]
   internal_port = 80
