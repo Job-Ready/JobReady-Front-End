@@ -13,6 +13,10 @@ RUN npm install
 # Step 5: Copy the rest of the application code to the container
 COPY . .
 
+# Dockerfile
+ARG REACT_APP_URL
+ENV REACT_APP_URL=$REACT_APP_URL
+
 # Step 6: Build the React app for production
 RUN npm run build
 
