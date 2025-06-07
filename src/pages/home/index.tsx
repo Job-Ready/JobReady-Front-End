@@ -70,6 +70,8 @@ const Home = () => {
   const setResumeIdfun = () => {
     if (selectedResume) {
       localStorage.setItem("Resume_Id", selectedResume.id);
+    } else {
+      localStorage.setItem("Resume_Id", resumes[latestResumeIndex].id);
     }
     console.log("Resume Id:", selectedResume ? selectedResume.id : null);
   };
