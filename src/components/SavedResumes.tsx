@@ -13,11 +13,12 @@ interface Resume {
 interface SavedResumesProps {
   resumes: Resume[];
   onResumeClick: (index: number) => void;
+  latestResumeIndex: number;
 }
 
 const SavedResumes: React.FC<SavedResumesProps> = ({
   resumes,
-  onResumeClick,
+  onResumeClick, latestResumeIndex
 }) => {
   const [formData, setFormData] = useState({
     userId: localStorage.getItem("User"),
@@ -32,8 +33,8 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
   const navigate = useNavigate();
 
   // State to track selected resume index
-  const [selectedResumeIndex, setSelectedResumeIndex] = useState<number | null>(
-    null
+  const [selectedResumeIndex, setSelectedResumeIndex] = useState<number>(
+      latestResumeIndex
   );
 
   const createResume = async () => {
@@ -58,7 +59,8 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
     <div>
       <h1 className="mt-4 mb-10 text-3xl font-thin">My Resumes</h1>
       <div className="flex flex-wrap p-4 overflow-auto">
-        {resumes.map((resume, index) => (
+        {resumes
+            .map((resume, index) => (
           <div
             key={resume.id}
             onClick={() => handleResumeClick(index)}

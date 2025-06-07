@@ -90,6 +90,7 @@ const Home = () => {
           <div className="flex h-screen p-8">
             <div className="w-[40%] overflow-auto mt-12">
               <SavedResumes
+                  latestResumeIndex = {latestResumeIndex}
                 resumes={resumes}
                 onResumeClick={handleResumeClick}
               />
