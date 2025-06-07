@@ -16,14 +16,14 @@ const AboutUs: React.FC = () => {
             <br />
             <a
               href=" https://www.linkedin.com/in/konstantinos-kazazis-32a470228/"
-              className="hover:text-blue-500"
+              className="hover:text-blue-500 underline"
             >
               LinkedIn
             </a>
             ,{" "}
             <a
               href="https://github.com/konkazazis"
-              className="hover:text-blue-500"
+              className="hover:text-blue-500 underline"
             >
               Github
             </a>{" "}

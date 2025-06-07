@@ -74,9 +74,14 @@ const LandingPage: React.FC = () => {
         <div className="flex items-center justify-center w-[30%] h-full mx-6">
           {renderForm()}
         </div>
-        <div className="flex items-center justify-center w-[70%] h-full bg-opacity-25 mb-2">
-          <img src={CV} alt="Example of a resume built with our tool" />
-        </div>
+          <div className="flex items-center justify-center w-[70%] h-full bg-opacity-25 mb-2 overflow-hidden">
+              <img
+                  src={CV}
+                  alt="Example of a resume built with our tool"
+                  className="w-full h-full object-cover"
+              />
+          </div>
+
       </div>
     </div>
   );
