@@ -161,138 +161,120 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <div>
-      <Header />
-      <div className="max-w-2xl mx-auto p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Profile Settings
-        </h2>
-        {message && <p className="text-center text-red-500">{message}</p>}
+      <div>
+        <Header />
+        <div className="max-w-lg mx-auto px-4 py-8">
+          <h2 className="text-2xl font-bold text-center mb-6">Profile Settings</h2>
+          {message && <p className="text-center text-red-500 mb-4">{message}</p>}
 
-        {/* Form for changing Username */}
-        <form onSubmit={handleSaveUsername} className="space-y-6">
-          <div className="flex flex-col">
-            <label className="text-lg font-medium">Username:</label>
+          {/* Username */}
+          <form onSubmit={handleSaveUsername} className="mb-6">
+            <label className="block text-sm font-medium mb-1">Username</label>
             <input
-              type="text"
-              value={username ?? ""}
-              onChange={(e) => setUsername(e.target.value)}
-              className="mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+                type="text"
+                value={username ?? ""}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full p-2 border rounded mb-3"
+                required
             />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-gray-700 hover:bg-gray-500 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            Save Username
-          </button>
-        </form>
+            <button
+                type="submit"
+                className="w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700"
+            >
+              Save Username
+            </button>
+          </form>
 
-        {/* Form for changing Email */}
-        <form onSubmit={handleSaveEmail} className="space-y-6 mt-6">
-          <div className="flex flex-col">
-            <label className="text-lg font-medium">Email:</label>
+          {/* Email */}
+          <form onSubmit={handleSaveEmail} className="mb-6">
+            <label className="block text-sm font-medium mb-1">Email</label>
             <input
-              type="email"
-              value={email ?? ""}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+                type="email"
+                value={email ?? ""}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full p-2 border rounded mb-3"
+                required
             />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-gray-700 hover:bg-gray-500 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            Save Email
-          </button>
-        </form>
+            <button
+                type="submit"
+                className="w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700"
+            >
+              Save Email
+            </button>
+          </form>
 
-        {/* Form for changing Password */}
-        <form onSubmit={handleSavePassword} className="space-y-6 mt-6">
-          <h1 className="text-lg font-medium">Security</h1>
-          <p>In this section, you can change your password</p>
-          <div className="flex flex-col">
-            <label>Current Password:</label>
+          {/* Password */}
+          <form onSubmit={handleSavePassword} className="mb-6">
+            <h3 className="font-semibold mb-2">Change Password</h3>
             <input
-              type="password"
-              value={currentPassword}
-              onChange={(e) => setCurrentPassword(e.target.value)}
-              placeholder="Enter current password"
-              className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+                type="password"
+                placeholder="Current password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                className="w-full p-2 border rounded mb-3"
+                required
             />
-          </div>
-          <div className="flex flex-col">
-            <label>New Password:</label>
             <input
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="Enter new password"
-              className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+                type="password"
+                placeholder="New password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="w-full p-2 border rounded mb-3"
+                required
             />
-          </div>
-          <div className="flex flex-col">
-            <label>Confirm New Password:</label>
             <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm new password"
-              className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+                type="password"
+                placeholder="Confirm new password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full p-2 border rounded mb-3"
+                required
             />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-gray-700 hover:bg-gray-500 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            Save Password
-          </button>
-        </form>
+            <button
+                type="submit"
+                className="w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700"
+            >
+              Save Password
+            </button>
+          </form>
 
-        {/* Profile Photo Upload */}
-        <div className="mt-6">
-          <label className="text-lg font-medium">Profile Photo:</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handlePhotoChange}
-            className="mt-1"
-          />
-          {photoPreview && (
-            <div className="mt-4">
-              <img
-                src={photoPreview}
-                alt="Profile Preview"
-                className="h-32 w-32 rounded-full object-cover border"
-              />
-            </div>
-          )}
-          <button
-            onClick={handlePhotoUpload}
-            className="w-full bg-gray-700 hover:bg-gray-500 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            Upload Photo
-          </button>
+          {/* Profile Photo */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium mb-2">Profile Photo</label>
+            <input
+                type="file"
+                accept="image/*"
+                onChange={handlePhotoChange}
+                className="mb-3"
+            />
+            {photoPreview && (
+                <img
+                    src={photoPreview}
+                    alt="Preview"
+                    className="h-24 w-24 rounded-full object-cover mb-3"
+                />
+            )}
+            <button
+                onClick={handlePhotoUpload}
+                className="w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700"
+            >
+              Upload Photo
+            </button>
+          </div>
+
+          {/* Delete Account */}
+          <div className="mt-10">
+            <h3 className="text-red-600 font-semibold text-lg mb-2">Danger Zone</h3>
+            <button
+                onClick={handleDeleteAccount}
+                className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded"
+            >
+              Delete Account
+            </button>
+          </div>
         </div>
-
-        {/* Delete Account */}
-        <div className="mt-10 text-center">
-          <h3 className="text-xl font-bold text-red-600 mb-4">Danger Zone</h3>
-          <button
-            onClick={handleDeleteAccount}
-            className="w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-          >
-            Delete Account
-          </button>
-        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
   );
 };
 
