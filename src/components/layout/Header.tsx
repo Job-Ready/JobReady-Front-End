@@ -93,7 +93,7 @@ const Header: React.FC = () => {
                 <li>
                   <Link
                     to="/home"
-                    className="text-lg font-thin hover:text-gray-600 "
+                    className="text-lg relative text-xl w-fit block after:block after:content-[''] after:absolute after:h-[1px] after:bg-black after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
                   >
                     Home
                   </Link>
@@ -101,7 +101,7 @@ const Header: React.FC = () => {
                 <li>
                   <Link
                     to="/aboutus"
-                    className="text-lg font-thin hover:text-gray-600 "
+                    className="text-lg relative text-xl w-fit block after:block after:content-[''] after:absolute after:h-[1px] after:bg-black after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
                   >
                     About Us
                   </Link>
@@ -109,7 +109,7 @@ const Header: React.FC = () => {
                 <li>
                   <Link
                     to="/contact"
-                    className=" text-lg font-thin hover:text-gray-600 "
+                    className=" text-lg relative text-xl w-fit block after:block after:content-[''] after:absolute after:h-[1px] after:bg-black after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
                   >
                     Contact
                   </Link>

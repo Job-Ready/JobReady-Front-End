@@ -89,7 +89,7 @@ const Home = () => {
       ) : (
         <>
           <Header />
-          <div className="flex h-screen p-8">
+          <div className="flex h-screen p-8 bg-gray-100">
             <div className="w-[40%] overflow-auto mt-12">
               <SavedResumes
                   latestResumeIndex = {latestResumeIndex}

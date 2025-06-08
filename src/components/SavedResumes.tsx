@@ -64,7 +64,7 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
           <div
             key={resume.id}
             onClick={() => handleResumeClick(index)}
-            className={`w-28 h-28 mb-4 mr-4 bg-slate-100 shadow-md rounded-md hover:scale-110 transition-transform duration-200 cursor-pointer ${
+            className={`w-28 h-28 mb-4 mr-4 bg-white shadow-md rounded-md hover:scale-110 transition-transform duration-200 cursor-pointer ${
               selectedResumeIndex === index ? "border-2 border-black" : ""
             }`} // Conditionally apply border if selected
           >

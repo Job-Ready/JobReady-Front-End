@@ -13,7 +13,7 @@ const Contact: React.FC = () => {
   }>({
     name: "",
     email: "",
-    message: "dssdsdsd",
+    message: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +59,7 @@ const Contact: React.FC = () => {
   return (
     <div>
       <Header />
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
         <div className="max-w-3xl w-full bg-white shadow-lg rounded-2xl p-8">
           <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
             Contact Us
@@ -76,13 +76,13 @@ const Contact: React.FC = () => {
                 Name
               </label>
               <input
-                type="text"
-                onChange={handleInputChange}
-                id="name"
-                name="name"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                placeholder="Your Name"
-                required
+                  type="text"
+                  onChange={handleInputChange}
+                  id="name"
+                  name="name"
+                  className="mt-1 block w-full rounded-md shadow-sm focus:outline-none"
+                  placeholder="Your Name"
+                  required
               />
             </div>
 
@@ -98,7 +98,7 @@ const Contact: React.FC = () => {
                 id="email"
                 onChange={handleInputChange}
                 name="email"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full focus:outline-none rounded-md"
                 placeholder="Your Email"
                 required
               />
@@ -114,7 +114,7 @@ const Contact: React.FC = () => {
               <textarea
                 id="message"
                 name="message"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md shadow-sm focus:outline-none"
                 placeholder="Your Message"
                 required
               ></textarea>

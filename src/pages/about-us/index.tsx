@@ -6,8 +6,8 @@ const AboutUs: React.FC = () => {
   return (
     <div>
       <Header />
-      <div className="flex justify-center items-center h-screen p-8">
-        <div className="bg-gray-100 p-8 rounded-lg shadow-md">
+      <div className="flex justify-center items-center h-screen p-8 bg-gray-100 ">
+        <div className="bg-white p-8 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">About Me</h2>
           <p className="text-gray-700">
             Hi there! My name is Konstantinos and I am a dedicated full-stack
