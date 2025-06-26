@@ -5,6 +5,7 @@ const Account: React.FC = () => {
   return (
     <div>
       <Header />
+        <p>This is the account page.</p>
       <Footer />
     </div>
   );

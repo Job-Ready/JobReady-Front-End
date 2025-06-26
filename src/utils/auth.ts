@@ -1,4 +1,3 @@
-import axios from "axios";
 const TOKEN_KEY = "accessToken";
 
 export const getAccessToken = (): string | null => {

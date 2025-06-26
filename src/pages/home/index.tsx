@@ -3,8 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { Resume } from "types/resume";
 import { getAccessToken } from "../../utils/auth";
-import { Header } from "../../components/layout/index";
-import { Footer } from "../../components/layout/index";
+import { Header, Footer } from "../../components/layout/index";
 import SavedResumes from "../../components/SavedResumes";
 import Plain from "../../components/templates/Plain";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -17,7 +16,6 @@ const Home = () => {
   );
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [selectedResume, setSelectedResume] = useState<Resume | null>(null); // State to hold the selected resume
-  localStorage.removeItem("Resume_Id");
 
   useEffect(() => {
     const getResumes = async () => {
@@ -35,9 +33,9 @@ const Home = () => {
 
         if (error.response?.status === 403 || error.response?.status === 401) {
           localStorage.removeItem("accessToken");
-          window.location.reload();
-          setLoading(false);
+          setToken(null);
           console.log("Token expired or invalid, please log in again.");
+          return <Navigate replace to="/" />;
         }
       }
     };
@@ -46,6 +44,7 @@ const Home = () => {
   }, [userId]);
 
   useEffect(() => {
+    localStorage.removeItem("Resume_Id");
     const handleStorageChange = () => {
       setToken(getAccessToken());
     };
@@ -68,12 +67,11 @@ const Home = () => {
   }, 0);
 
   const setResumeIdfun = () => {
-    if (selectedResume) {
-      localStorage.setItem("Resume_Id", selectedResume.id);
-    } else {
-      localStorage.setItem("Resume_Id", resumes[latestResumeIndex].id);
+    const resumeId = selectedResume?.id || resumes[latestResumeIndex]?.id;
+    if (resumeId) {
+      localStorage.setItem("Resume_Id", resumeId);
+      console.log("Resume Id:", resumeId);
     }
-    console.log("Resume Id:", selectedResume ? selectedResume.id : null);
   };
 
   const handleResumeClick = (index: number) => {
