@@ -7,10 +7,7 @@ import Register from "./Register";
 import Header from "../../components/layout/Header";
 
 const LandingPage: React.FC = () => {
-  const [token, setToken] = useState<string | null>(
-    localStorage.getItem("accessToken")
-  );
-  const [isSigningUp, setIsSigningUp] = useState<boolean>(false);
+    const [isSigningUp, setIsSigningUp] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     checkIsAuthenticated()
   );
