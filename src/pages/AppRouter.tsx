@@ -6,7 +6,7 @@ import Settings from "../pages/settings/index";
 import AboutUs from "../pages/about-us/index";
 import Create from "../pages/create/index";
 import LandingPage from "../pages/landing-page/index";
-import Account from "../pages/acount/index";
+import Account from "../pages/account/index";
 import Contact from "../pages/contact/index";
 
 const AppRouter = () => {
