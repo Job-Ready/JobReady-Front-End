@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 py-4 mt-8 border-t border-gray-300">
+    <footer className="bg-gray-100 py-4 border-t border-gray-300">
       <div className="text-center text-sm text-gray-600">
         <p>
           &copy; {new Date().getFullYear()}{" "}

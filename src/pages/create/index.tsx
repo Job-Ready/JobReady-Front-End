@@ -169,7 +169,7 @@ const Create: React.FC = () => {
 
         <div className="w-[20%] float-left overflow-y-auto mt-16">
           <div className="bg-white p-4">
-            {/* Accordion for Templates */}
+            {/* Accordion for Templates
             <div className="border border-gray-300 rounded mb-4">
               <div
                 className="bg-gray-100 cursor-pointer px-4 py-2 flex justify-between items-center"
@@ -198,7 +198,7 @@ const Create: React.FC = () => {
                   </div>
                 </div>
               )}
-            </div>
+            </div> */}
 
             {/* Accordion for Design */}
             <div className="border border-gray-300 rounded mb-4">

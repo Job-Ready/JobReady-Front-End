@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./components.css";
@@ -22,6 +22,9 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({
   workExperiences,
   setWorkExperiences,
 }) => {
+
+  const [openAccordions, setOpenAccordions] = useState<boolean[]>([]);
+
   const addWorkExperience = () => {
     setWorkExperiences([
       ...workExperiences,
@@ -50,6 +53,15 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({
     setWorkExperiences(updatedWorkExperiences);
   };
 
+  const toggleAccordion = (index) => {
+  setOpenAccordions((prev) => {
+    const newState = [...prev];
+    newState[index] = !newState[index];
+    return newState;
+  });
+};
+
+
   return (
     <div>
       <h1 className="text-lg">Work Experience</h1>
@@ -66,11 +78,23 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({
         />
         <p className="text-slate-400 italic">Add Work Experience</p>
       </button>
-
       {workExperiences.map((workExperience, index) => (
-        <div
+       <div className="border border-gray-300 rounded mb-4">
+          <div
+            className="bg-gray-100 cursor-pointer px-4 py-2 flex justify-between items-center"
+            onClick={() => toggleAccordion(index)}
+          >
+            <h1 className="text-lg font-semibold">{workExperience.companyName != '' ? workExperience.companyName : 'Work Experience'}</h1>
+            <span className="text-gray-500">
+              {openAccordions[index] ? "-" : "+"} {/* Toggle icon */}
+            </span>
+          </div>
+          {openAccordions[index] && (
+            <div className="px-4 py-3">
+              <div className="mb-4">
+                <div
           key={index}
-          className="mb-4 p-4 border border-gray-200 rounded-md shadow-sm"
+          className=""
         >
           <div className="mb-4">
             <label
@@ -173,7 +197,11 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({
             Remove
           </button>
         </div>
-      ))}
+              </div>
+            </div>
+          )}
+        </div>
+       ))}
     </div>
   );
 };
