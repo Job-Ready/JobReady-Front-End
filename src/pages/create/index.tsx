@@ -69,6 +69,25 @@ const Create: React.FC = () => {
   }, [resumeId]);
 
   useEffect(() => {
+  if (resumes) {
+    setEmail(resumes.email || "");
+    setPhone(resumes.phone || "");
+    setLinkedin(resumes.linkedin || "");
+    setPortfolio(resumes.portfolio || "");
+    setCountry(resumes.country || "");
+    setRepos(resumes.repos || []);
+    setTitle(resumes.title || "");
+    setFullname(resumes.fullname || "");
+    setWorkExperiences(resumes.workExperiences || []);
+    setProjects(resumes.projects || []);
+    setEducation(resumes.education || []);
+    setLanguages(resumes.languages || []);
+    setSkills(resumes.skills || []);
+  }
+}, [resumes]);
+
+
+  useEffect(() => {
     const handleStorageChange = () => {
       setToken(localStorage.getItem("token"));
     };
