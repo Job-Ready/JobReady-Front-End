@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./components.css";
@@ -54,12 +54,12 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({
   };
 
   const toggleAccordion = (index) => {
-  setOpenAccordions((prev) => {
-    const newState = [...prev];
-    newState[index] = !newState[index];
-    return newState;
-  });
-};
+    setOpenAccordions((prev) => {
+      const newState = [...prev];
+      newState[index] = !newState[index];
+      return newState;
+    });
+  };
 
 
   return (
@@ -79,7 +79,7 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({
         <p className="text-slate-400 italic">Add Work Experience</p>
       </button>
       {workExperiences.map((workExperience, index) => (
-       <div className="border border-gray-300 rounded mb-4">
+        <div className="border border-gray-300 rounded mb-4">
           <div
             className="bg-gray-100 cursor-pointer px-4 py-2 flex justify-between items-center"
             onClick={() => toggleAccordion(index)}
@@ -93,115 +93,117 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({
             <div className="px-4 py-3">
               <div className="mb-4">
                 <div
-          key={index}
-          className=""
-        >
-          <div className="mb-4">
-            <label
-              htmlFor={`companyName-${index}`}
-              className="text-sm font-medium text-gray-600"
-            >
-              Company Name
-            </label>
-            <input
-              id={`companyName-${index}`}
-              type="text"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={workExperience.companyName}
-              onChange={(e) =>
-                handleInputChange(index, "companyName", e.target.value)
-              }
-            />
-          </div>
+                  key={index}>
+                  <div className="flex">
+                    <div className="mr-4 w-1/2">
+                      <label
+                        htmlFor={`companyName-${index}`}
+                        className="text-sm font-medium text-gray-600"
+                      >
+                        Company Name
+                      </label>
+                      <input
+                        id={`companyName-${index}`}
+                        type="text"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        value={workExperience.companyName}
+                        onChange={(e) =>
+                          handleInputChange(index, "companyName", e.target.value)
+                        }
+                      />
+                    </div>
 
-          <div className="flex gap-4 mb-4">
-            <div className="w-1/2">
-              <label
-                htmlFor={`position-${index}`}
-                className="text-sm font-medium text-gray-600"
-              >
-                Position
-              </label>
-              <input
-                id={`position-${index}`}
-                type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={workExperience.position}
-                onChange={(e) =>
-                  handleInputChange(index, "position", e.target.value)
-                }
-              />
-            </div>
+                    <div className="w-1/2">
+                        <label
+                          htmlFor={`position-${index}`}
+                          className="text-sm font-medium text-gray-600"
+                        >
+                          Position
+                        </label>
+                        <input
+                          id={`position-${index}`}
+                          type="text"
+                          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                          value={workExperience.position}
+                          onChange={(e) =>
+                            handleInputChange(index, "position", e.target.value)
+                          }
+                        />
+                      </div>
+                  </div>
 
-            <div className="w-1/2">
-              <label
-                htmlFor={`startDate-${index}`}
-                className="text-sm font-medium text-gray-600"
-              >
-                Start Date
-              </label>
-              <input
-                id={`startDate-${index}`}
-                type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={workExperience.startDate}
-                onChange={(e) =>
-                  handleInputChange(index, "startDate", e.target.value)
-                }
-              />
-            </div>
-          </div>
 
-          <div className="flex gap-4 mb-4">
-            <div className="w-1/2">
-              <label
-                htmlFor={`endDate-${index}`}
-                className="text-sm font-medium text-gray-600"
-              >
-                End Date
-              </label>
-              <input
-                id={`endDate-${index}`}
-                type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={workExperience.endDate}
-                onChange={(e) =>
-                  handleInputChange(index, "endDate", e.target.value)
-                }
-              />
-            </div>
-          </div>
+                  <div className="flex gap-4 mb-4">
 
-          <div className="mb-4">
-            <label
-              htmlFor={`description-${index}`}
-              className="text-sm font-medium text-gray-600"
-            >
-              Description
-            </label>
-            <textarea
-              id={`description-${index}`}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={workExperience.description}
-              onChange={(e) =>
-                handleInputChange(index, "description", e.target.value)
-              }
-            />
-          </div>
+                    <div className="w-1/2">
+                      <label
+                        htmlFor={`startDate-${index}`}
+                        className="text-sm font-medium text-gray-600"
+                      >
+                        Start Date
+                      </label>
+                      <input
+                        id={`startDate-${index}`}
+                        type="date"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        value={workExperience.startDate}
+                        onChange={(e) =>
+                          handleInputChange(index, "startDate", e.target.value)
+                        }
+                      />
 
-          <button
-            type="button"
-            className="mt-4 p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-            onClick={() => removeWorkExperience(index)}
-          >
-            Remove
-          </button>
-        </div>
+                    </div>
+
+                    <div className="w-1/2">
+                      <label
+                        htmlFor={`endDate-${index}`}
+                        className="text-sm font-medium text-gray-600"
+                      >
+                        End Date
+                      </label>
+                      <input
+                        id={`endDate-${index}`}
+                        type="date"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        value={workExperience.endDate}
+                        onChange={(e) =>
+                          handleInputChange(index, "endDate", e.target.value)
+                        }
+                      />
+
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <label
+                      htmlFor={`description-${index}`}
+                      className="text-sm font-medium text-gray-600"
+                    >
+                      Description
+                    </label>
+                    <textarea
+                      id={`description-${index}`}
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      value={workExperience.description}
+                      onChange={(e) =>
+                        handleInputChange(index, "description", e.target.value)
+                      }
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    className="mt-4 p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                    onClick={() => removeWorkExperience(index)}
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
             </div>
           )}
         </div>
-       ))}
+      ))}
     </div>
   );
 };

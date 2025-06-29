@@ -4,8 +4,6 @@ import Projects from "./Projects";
 import Education from "./Education";
 import Languages from "./Languages";
 import Skills from "./Skills";
-import html2canvas from "html2canvas";
-import jsPdf from "jspdf";
 import axios from "axios";
 import Fullname from "./details/Fullname";
 import Title from "./details/Title";
