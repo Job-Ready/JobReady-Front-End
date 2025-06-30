@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,6 +14,9 @@ interface ProjectsProps {
 }
 
 const Projects: React.FC<ProjectsProps> = ({ education, setEducation }) => {
+
+  const [openAccordions, setOpenAccordions] = useState<boolean[]>([]);
+
   // Add a new education entry
   const addEducation = () => {
     setEducation([...education, { uniName: "", description: "" }]);
@@ -37,6 +40,14 @@ const Projects: React.FC<ProjectsProps> = ({ education, setEducation }) => {
     setEducation(updatedEducation);
   };
 
+  const toggleAccordion = (index) => {
+    setOpenAccordions((prev) => {
+      const newState = [...prev];
+      newState[index] = !newState[index];
+      return newState;
+    });
+  };
+
   return (
     <div>
       <h1 className="text-lg">Education</h1>
@@ -55,42 +66,55 @@ const Projects: React.FC<ProjectsProps> = ({ education, setEducation }) => {
       </button>
 
       {education.map((edu, index) => (
-        <div key={index} className="mb-4 border p-4 rounded-md shadow-sm">
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              University
-            </label>
-            <input
-              type="text"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={edu.uniName}
-              onChange={(e) =>
-                handleInputChange(index, "uniName", e.target.value)
-              }
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Description
-            </label>
-            <input
-              type="text"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={edu.description}
-              onChange={(e) =>
-                handleInputChange(index, "description", e.target.value)
-              }
-            />
-          </div>
-
-          <button
-            type="button"
-            className="p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-            onClick={() => removeEducation(index)}
+        <div className="border border-gray-300 rounded mb-4">
+          <div
+            className="bg-gray-100 cursor-pointer px-4 py-2 flex justify-between items-center"
+            onClick={() => toggleAccordion(index)}
           >
-            Remove
-          </button>
+            <h1 className="text-lg font-semibold">{edu.uniName != '' ? edu.uniName : 'Education'}</h1>
+            <span className="text-gray-500">
+              {openAccordions[index] ? "-" : "+"} {/* Toggle icon */}
+            </span>
+          </div>
+          {openAccordions[index] && (
+            <div key={index} className="mb-4  p-4 shadow-sm">
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-600">
+                  University
+                </label>
+                <input
+                  type="text"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  value={edu.uniName}
+                  onChange={(e) =>
+                    handleInputChange(index, "uniName", e.target.value)
+                  }
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-600">
+                  Description
+                </label>
+                <input
+                  type="text"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  value={edu.description}
+                  onChange={(e) =>
+                    handleInputChange(index, "description", e.target.value)
+                  }
+                />
+              </div>
+
+              <button
+                type="button"
+                className="p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                onClick={() => removeEducation(index)}
+              >
+                Remove
+              </button>
+            </div>
+          )}
         </div>
       ))}
     </div>
