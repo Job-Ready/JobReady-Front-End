@@ -86,6 +86,8 @@ const Create: React.FC = () => {
   }
 }, [resumes]);
 
+console.log(resumes);
+
 
   useEffect(() => {
     const handleStorageChange = () => {
