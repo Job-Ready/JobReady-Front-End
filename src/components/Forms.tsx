@@ -34,8 +34,8 @@ function Forms({
   setRepos,
   title,
   setTitle,
-  workExperiences,
-  setWorkExperiences,
+  work_experiences,
+  setwork_experiences,
   projects,
   setProjects,
   education,
@@ -60,7 +60,7 @@ function Forms({
     portfolio,
     country,
     repos,
-    workExperiences,
+    work_experiences,
     projects,
     education,
     languages,
@@ -139,8 +139,8 @@ function Forms({
           )}
         </div>
         <WorkExperience
-          workExperiences={workExperiences}
-          setWorkExperiences={setWorkExperiences}
+          work_experiences={work_experiences}
+          setwork_experiences={setwork_experiences}
         />
         <Education education={education} setEducation={setEducation} />
         <Languages languages={languages} setLanguages={setLanguages} />

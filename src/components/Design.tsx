@@ -30,7 +30,7 @@ function Design() {
   const [portfolio, setPortfolio] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [repos, setRepos] = useState<string[]>([]);
-  const [workExperiences, setWorkExperiences] = useState<WorkExperience[]>([]);
+  const [work_experiences, setwork_experiences] = useState<WorkExperience[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [education, setEducation] = useState<Education[]>([]);
   const [languages, setLanguages] = useState<Language[]>([]);
@@ -191,10 +191,10 @@ function Design() {
               repos={repos || selectedResume.repos}
               fullname={fullname || selectedResume.fullname}
               title={title || selectedResume.title}
-              workExperiences={
-                workExperiences.length > 0
-                  ? workExperiences
-                  : selectedResume.workExperiences
+              work_experiences={
+                work_experiences.length > 0
+                  ? work_experiences
+                  : selectedResume.work_experiences
               }
               projects={
                 projects.length > 0 ? projects : selectedResume.projects

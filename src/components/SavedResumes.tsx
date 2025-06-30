@@ -23,7 +23,7 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
   const [formData, setFormData] = useState({
     userId: localStorage.getItem("User"),
     details: {},
-    workExperiences: [],
+    work_experiences: [],
     projects: [],
     education: [],
     languages: [],

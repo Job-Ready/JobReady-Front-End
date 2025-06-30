@@ -33,7 +33,7 @@ const Create: React.FC = () => {
   const [portfolio, setPortfolio] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [repos, setRepos] = useState<string[]>([]);
-  const [workExperiences, setWorkExperiences] = useState<WorkExperience[]>([]);
+  const [work_experiences, setwork_experiences] = useState<WorkExperience[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [education, setEducation] = useState<Array<Education>>([]);
   const [languages, setLanguages] = useState<Language[]>([]);
@@ -70,6 +70,15 @@ const Create: React.FC = () => {
 
   useEffect(() => {
   if (resumes) {
+    const parseField = (field: any) => {
+      if (Array.isArray(field)) return field;
+      try {
+        return JSON.parse(field);
+      } catch {
+        return [];
+      }
+    };
+
     setEmail(resumes.email || "");
     setPhone(resumes.phone || "");
     setLinkedin(resumes.linkedin || "");
@@ -78,13 +87,14 @@ const Create: React.FC = () => {
     setRepos(resumes.repos || []);
     setTitle(resumes.title || "");
     setFullname(resumes.fullname || "");
-    setWorkExperiences(resumes.workExperiences || []);
-    setProjects(resumes.projects || []);
-    setEducation(resumes.education || []);
-    setLanguages(resumes.languages || []);
-    setSkills(resumes.skills || []);
+    setwork_experiences(parseField(resumes.work_experiences));
+    setProjects(parseField(resumes.projects));
+    setEducation(parseField(resumes.education));
+    setLanguages(parseField(resumes.languages));
+    setSkills(parseField(resumes.skills));
   }
 }, [resumes]);
+
 
 console.log(resumes);
 
@@ -135,8 +145,8 @@ console.log(resumes);
             setTitle={setTitle}
             fullname={fullname}
             setFullname={setFullname}
-            workExperiences={workExperiences}
-            setWorkExperiences={setWorkExperiences}
+            work_experiences={work_experiences}
+            setwork_experiences={setwork_experiences}
             projects={projects}
             setProjects={setProjects}
             education={education}
@@ -160,10 +170,10 @@ console.log(resumes);
                 repos={repos.length > 0 ? repos : resumes.repos}
                 fullname={fullname || resumes.fullname}
                 title={title || resumes.title}
-                workExperiences={
-                  workExperiences.length > 0
-                    ? workExperiences
-                    : resumes.workExperiences
+                work_experiences={
+                  work_experiences.length > 0
+                    ? work_experiences
+                    : resumes.work_experiences
                 }
                 projects={projects.length > 0 ? projects : resumes.projects}
                 education={education.length > 0 ? education : resumes.education}

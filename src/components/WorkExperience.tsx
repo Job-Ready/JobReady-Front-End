@@ -4,14 +4,14 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./components.css";
 
 interface WorkExperienceProps {
-  workExperiences: WorkExperienceInterface[];
-  setWorkExperiences: React.Dispatch<
+  work_experiences: WorkExperienceInterface[];
+  setwork_experiences: React.Dispatch<
     React.SetStateAction<WorkExperienceInterface[]>
   >;
 }
 
 interface WorkExperienceInterface {
-  companyName: string;
+  company_name: string;
   position: string;
   startDate: string;
   endDate: string;
@@ -19,17 +19,17 @@ interface WorkExperienceInterface {
 }
 
 const WorkExperience: React.FC<WorkExperienceProps> = ({
-  workExperiences,
-  setWorkExperiences,
+  work_experiences,
+  setwork_experiences,
 }) => {
 
   const [openAccordions, setOpenAccordions] = useState<boolean[]>([]);
 
   const addWorkExperience = () => {
-    setWorkExperiences([
-      ...workExperiences,
+    setwork_experiences([
+      ...work_experiences,
       {
-        companyName: "",
+        company_name: "",
         position: "",
         startDate: "",
         endDate: "",
@@ -39,7 +39,7 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({
   };
 
   const removeWorkExperience = (index: number) => {
-    setWorkExperiences(workExperiences.filter((_, i) => i !== index));
+    setwork_experiences(work_experiences.filter((_, i) => i !== index));
   };
 
   const handleInputChange = (
@@ -47,10 +47,10 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({
     key: keyof WorkExperienceInterface,
     value: string
   ) => {
-    const updatedWorkExperiences = workExperiences.map((workExperience, i) =>
+    const updatedwork_experiences = work_experiences.map((workExperience, i) =>
       i === index ? { ...workExperience, [key]: value } : workExperience
     );
-    setWorkExperiences(updatedWorkExperiences);
+    setwork_experiences(updatedwork_experiences);
   };
 
   const toggleAccordion = (index) => {
@@ -78,13 +78,13 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({
         />
         <p className="text-slate-400 italic">Add Work Experience</p>
       </button>
-      {workExperiences.map((workExperience, index) => (
+      {work_experiences.map((workExperience, index) => (
         <div className="border border-gray-300 rounded mb-4">
           <div
             className="bg-gray-100 cursor-pointer px-4 py-2 flex justify-between items-center"
             onClick={() => toggleAccordion(index)}
           >
-            <h1 className="text-lg font-semibold">{workExperience.companyName != '' ? workExperience.companyName : 'Work Experience'}</h1>
+            <h1 className="text-lg font-semibold">{workExperience.company_name != '' ? workExperience.company_name : 'Work Experience'}</h1>
             <span className="text-gray-500">
               {openAccordions[index] ? "-" : "+"} {/* Toggle icon */}
             </span>
@@ -97,18 +97,18 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({
                   <div className="flex">
                     <div className="mr-4 w-1/2">
                       <label
-                        htmlFor={`companyName-${index}`}
+                        htmlFor={`company_name-${index}`}
                         className="text-sm font-medium text-gray-600"
                       >
                         Company Name
                       </label>
                       <input
-                        id={`companyName-${index}`}
+                        id={`company_name-${index}`}
                         type="text"
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        value={workExperience.companyName}
+                        value={workExperience.company_name}
                         onChange={(e) =>
-                          handleInputChange(index, "companyName", e.target.value)
+                          handleInputChange(index, "company_name", e.target.value)
                         }
                       />
                     </div>
