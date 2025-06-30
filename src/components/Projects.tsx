@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./components.css";
@@ -14,6 +14,9 @@ interface ProjectsProps {
 }
 
 const Projects: React.FC<ProjectsProps> = ({ projects, setProjects }) => {
+
+    const [openAccordions, setOpenAccordions] = useState<boolean[]>([]);
+
   const addProject = () => {
     setProjects([...projects, { projectName: "", description: "" }]);
   };
@@ -31,6 +34,14 @@ const Projects: React.FC<ProjectsProps> = ({ projects, setProjects }) => {
       i === index ? { ...project, [key]: value } : project
     );
     setProjects(updatedProjects);
+  };
+
+  const toggleAccordion = (index) => {
+    setOpenAccordions((prev) => {
+      const newState = [...prev];
+      newState[index] = !newState[index];
+      return newState;
+    });
   };
 
   return (
@@ -51,45 +62,58 @@ const Projects: React.FC<ProjectsProps> = ({ projects, setProjects }) => {
       </button>
 
       {projects.map((project, index) => (
-        <div key={index} className="mb-4">
-          <div>
-            <div>
-              <label className="text-sm font-medium text-gray-600">
-                Project Name
-              </label>
-              <input
-                type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={project.projectName}
-                onChange={(e) =>
-                  handleInputChange(index, "projectName", e.target.value)
-                }
-              />
-            </div>
-
-            <div>
-              <label className="mt-4 text-sm font-medium text-gray-600">
-                Description
-              </label>
-              <input
-                type="text"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={project.description}
-                onChange={(e) =>
-                  handleInputChange(index, "description", e.target.value)
-                }
-              />
-            </div>
-          </div>
-
-          <button
-            type="button"
-            className="mt-4 p-2 bg-red-500 text-white rounded-md"
-            onClick={() => removeProject(index)}
+        <div className="border border-gray-300 rounded mb-4">
+          <div
+            className="bg-gray-100 cursor-pointer px-4 py-2 flex justify-between items-center"
+            onClick={() => toggleAccordion(index)}
           >
-            Remove
-          </button>
-        </div>
+            <h1 className="text-lg font-semibold">{project.projectName != '' ? project.projectName : 'Project'}</h1>
+            <span className="text-gray-500">
+              {openAccordions[index] ? "-" : "+"} {/* Toggle icon */}
+            </span>
+          </div>
+          {openAccordions[index] && (
+            <div key={index} className="mb-4 px-4 py-3">
+              <div>
+                <div>
+                  <label className="text-sm font-medium text-gray-600">
+                    Project Name
+                  </label>
+                  <input
+                    type="text"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    value={project.projectName}
+                    onChange={(e) =>
+                      handleInputChange(index, "projectName", e.target.value)
+                    }
+                  />
+                </div>
+
+                <div>
+                  <label className="mt-4 text-sm font-medium text-gray-600">
+                    Description
+                  </label>
+                  <input
+                    type="text"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    value={project.description}
+                    onChange={(e) =>
+                      handleInputChange(index, "description", e.target.value)
+                    }
+                  />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="mt-4 p-2 bg-red-500 text-white rounded-md"
+                onClick={() => removeProject(index)}
+              >
+                Remove
+              </button>
+            </div>
+          )}
+          </div>
       ))}
     </div>
   );
