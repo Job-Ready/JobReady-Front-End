@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 
 // Import types from resume.ts
@@ -22,8 +22,9 @@ const Create: React.FC = () => {
   const [fontSize, setFontSize] = useState<string>("12px");
   const [fontFamily, setFontFamily] = useState<string>("Arial");
   const [resumes, setResumes] = useState<Resume>();
-  const [resumeId, setResumeId] = useState<string | null>(
-    localStorage.getItem("Resume_Id")
+  const {id} = useParams();
+  const [resumeId, setResumeId] = useState<any>(
+    id
   );
   const [fullname, setFullname] = useState<string>("");
   const [title, setTitle] = useState<string>("");

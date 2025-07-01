@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import Plain from "./templates/Plain";
@@ -77,10 +77,10 @@ function Design() {
   }
 
   const getResumeIndex = resumes.reduce((acc, curr, index) => {
-    const storedResumeId = localStorage.getItem("Resume_Id");
-    if (storedResumeId) {
+    const {id} = useParams();
+    if (id) {
       const resumeIndex = resumes.findIndex(
-        (resume) => resume.id === storedResumeId
+        (resume) => resume.id === id
       );
       return resumeIndex !== -1 ? resumeIndex : index === 0 ? 0 : acc;
     }

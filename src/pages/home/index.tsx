@@ -44,7 +44,6 @@ const Home = () => {
   }, [userId]);
 
   useEffect(() => {
-    localStorage.removeItem("Resume_Id");
     const handleStorageChange = () => {
       setToken(getAccessToken());
     };
@@ -65,14 +64,6 @@ const Home = () => {
     if (index === 0) return index;
     return curr.last_change > resumes[acc].last_change ? index : acc;
   }, 0);
-
-  const setResumeIdfun = () => {
-    const resumeId = selectedResume?.id || resumes[latestResumeIndex]?.id;
-    if (resumeId) {
-      localStorage.setItem("Resume_Id", resumeId);
-      console.log("Resume Id:", resumeId);
-    }
-  };
 
   const handleResumeClick = (index: number) => {
     setSelectedResume(resumes[index]);
@@ -96,8 +87,8 @@ const Home = () => {
               />
             </div>
             <div className="flex-1 float-left overflow-y-auto bg-slate-100 hover:opacity-50 transition-transform duration-200 cursor-pointer mt-12">
-              <Link to="/create">
-                <div onClick={setResumeIdfun}>
+              <Link to={`/create/${selectedResume?.id || resumes[latestResumeIndex]?.id}`}>
+                <div>
                   {selectedResume ? (
                     <Plain
                       fullname={selectedResume.fullname}

@@ -43,8 +43,7 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
       const response = await axios.post("api/resumes", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      localStorage.setItem("Resume_Id", response.data.resume.id);
-      navigate("/create");
+      navigate(`/create/${response.data.resume.id}`);
     } catch (error) {
       console.error("Error creating resume:", error.message);
     }

@@ -14,6 +14,7 @@ import Portfolio from "./details/Portfolio";
 import Repos from "./details/Repos";
 import Country from "./details/Country";
 import LoadingSpinner from "./LoadingSpinner";
+import { useParams } from "react-router-dom";
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
@@ -46,7 +47,7 @@ function Forms({
   setSkills,
 }) {
   const user_id = localStorage.getItem("User");
-  const id = localStorage.getItem("Resume_Id");
+  const {id} = useParams();
   const [isOpen, setIsOpen] = useState(false); // Accordion open/close state
   const [loading, setLoading] = useState(false); // Loading state
   const formData = {
