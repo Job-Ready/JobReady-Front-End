@@ -14,7 +14,8 @@ import Portfolio from "./details/Portfolio";
 import Repos from "./details/Repos";
 import Country from "./details/Country";
 import LoadingSpinner from "./LoadingSpinner";
-import { useParams } from "react-router-dom";
+import { checkExpiredToken } from "../utils/auth";
+import { Navigate, useParams } from "react-router-dom"
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
@@ -88,13 +89,16 @@ function Forms({
     });
 
     try {
-      setLoading(true); // Start loading spinner
+      setLoading(true);
       await axios.put(`/api/resumes/${id}`, dataToSend, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setLoading(false); // Stop loading spinner once done
+      setLoading(false);
     } catch (error) {
-      setLoading(false); // Stop loading spinner on error
+      setLoading(false); 
+      if (checkExpiredToken(error)) {
+            return <Navigate replace to="/" />;
+      }
       console.log("Update failed:", error.message);
     }
   };

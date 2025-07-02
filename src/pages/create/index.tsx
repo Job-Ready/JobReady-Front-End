@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { Navigate, useParams } from "react-router-dom";
 import ReactToPrint from "react-to-print";
+import { checkExpiredToken } from "../../utils/auth";
 
 // Import types from resume.ts
 import {
@@ -62,6 +63,9 @@ const Create: React.FC = () => {
           const fetchedResumes: Resume = response.data.resume;
           setResumes(fetchedResumes);
         } catch (error) {
+          if (checkExpiredToken(error)) {
+            return <Navigate replace to="/" />;
+          }
           console.error("Get Resumes:", error.message);
         }
       }
@@ -123,6 +127,8 @@ console.log(resumes);
       [section]: !prevState[section],
     }));
   };
+
+  console.log(resumes);
 
   return (
     <div>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { Resume } from "types/resume";
-import { getAccessToken } from "../../utils/auth";
+import { getAccessToken, checkExpiredToken } from "../../utils/auth";
 import { Header, Footer } from "../../components/layout/index";
 import SavedResumes from "../../components/SavedResumes";
 import Plain from "../../components/templates/Plain";
@@ -29,14 +29,10 @@ const Home = () => {
         setResumes(fetchedResumes);
         setLoading(false);
       } catch (error) {
-        console.error("Get Resumes Error:", error.message);
-
-        if (error.response?.status === 403 || error.response?.status === 401) {
-          localStorage.removeItem("accessToken");
-          setToken(null);
-          console.log("Token expired or invalid, please log in again.");
-          return <Navigate replace to="/" />;
+        if (checkExpiredToken(error)) {
+            return <Navigate replace to="/" />;
         }
+        console.error("Get Resumes Error:", error.message);
       }
     };
 

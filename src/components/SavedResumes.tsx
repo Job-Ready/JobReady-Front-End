@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import icon from "../assets/icons-resume.png";
+import { Navigate, useParams } from "react-router-dom";
+import { checkExpiredToken } from "../utils/auth";
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
@@ -45,6 +47,9 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
       });
       navigate(`/create/${response.data.resume.id}`);
     } catch (error) {
+      if (checkExpiredToken(error)) {
+            return <Navigate replace to="/" />;
+      }
       console.error("Error creating resume:", error.message);
     }
   };

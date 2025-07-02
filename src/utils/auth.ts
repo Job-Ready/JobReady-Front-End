@@ -1,7 +1,10 @@
+import { Navigate} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+
 const TOKEN_KEY = "accessToken";
 
 export const getAccessToken = (): string | null => {
-  return localStorage.getItem(TOKEN_KEY); // Use secure storage in production
+  return localStorage.getItem(TOKEN_KEY);
 };
 
 export const setAccessToken = (token: string): void => {
@@ -15,3 +18,16 @@ export const removeAccessToken = (): void => {
 export const checkIsAuthenticated = (): boolean => {
   return !!getAccessToken();
 };
+
+export const checkExpiredToken = (error: any): boolean => {
+  if (
+    error.response &&
+    error.response.status === 403 &&
+    error.response.data?.message === 'Invalid or expired token'
+  ) {
+    removeAccessToken();
+    return true;
+  }
+  return false;
+};
+
