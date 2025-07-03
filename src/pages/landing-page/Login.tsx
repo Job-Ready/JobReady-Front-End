@@ -58,6 +58,10 @@ const Login: React.FC = () => {
         fullname: user.fullname
       });
 
+      localStorage.setItem("UserData", JSON.stringify(user));
+      setAccessToken(token);
+      setUser(user);
+
       // Navigate to home page
       navigate("/home", {
         replace: true,

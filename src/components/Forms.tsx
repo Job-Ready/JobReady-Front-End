@@ -47,7 +47,10 @@ function Forms({
   skills,
   setSkills,
 }) {
-  const user_id = localStorage.getItem("User");
+  const userDataString = localStorage.getItem("UserData");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+  const user_id = userData?.id ?? null;
+
   const {id} = useParams();
   const [isOpen, setIsOpen] = useState(false); // Accordion open/close state
   const [loading, setLoading] = useState(false); // Loading state
