@@ -4,6 +4,7 @@ import axios from "axios";
 import icon from "../assets/icons-resume.png";
 import { Navigate, useParams } from "react-router-dom";
 import { checkExpiredToken } from "../utils/auth";
+import { useUser } from "../user_context";
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
@@ -22,8 +23,10 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
   resumes,
   onResumeClick, latestResumeIndex
 }) => {
+    const { user } = useUser();
+  
   const [formData, setFormData] = useState({
-    userId: localStorage.getItem("User"),
+    userId: user?.userid,
     details: {},
     work_experiences: [],
     projects: [],

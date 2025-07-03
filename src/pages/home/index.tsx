@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { Resume } from "types/resume";
 import { getAccessToken, checkExpiredToken } from "../../utils/auth";
@@ -9,10 +9,12 @@ import Plain from "../../components/templates/Plain";
 import LoadingSpinner from "../../components/LoadingSpinner";
 
 const Home = () => {
+  const location = useLocation();
+  const { id, email } = location.state || {};
   const [loading, setLoading] = useState<boolean>(false);
   const [token, setToken] = useState<string | null>(getAccessToken());
   const [userId, setUserId] = useState<string | null>(
-    localStorage.getItem("User")
+    id
   );
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [selectedResume, setSelectedResume] = useState<Resume | null>(null); // State to hold the selected resume
@@ -73,7 +75,7 @@ const Home = () => {
         </div>
       ) : (
         <>
-          <Header />
+          <Header/>
           <div className="flex h-screen p-8 bg-gray-100">
             <div className="w-[40%] overflow-auto mt-12">
               <SavedResumes

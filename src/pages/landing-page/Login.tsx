@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { getAccessToken, setAccessToken } from "../../utils/auth";
 import { ClipLoader } from "react-spinners";
 import AuthForm from "../../components/GoogleAuth";
+import { useUser } from '../../user_context';
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
 const Login: React.FC = () => {
+  const { setUser } = useUser();
+
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(getAccessToken());
@@ -31,36 +35,51 @@ const Login: React.FC = () => {
     }));
   };
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    try {
-      const response = await axios.post("/login", formData);
-      if (response.status === 200) {
-        const { token } = response.data;
-        const id = response.data.user.id;
-        setToken(token);
-        setUserId(id);
-        localStorage.setItem("User", id);
-        localStorage.setItem("UserName", response.data.user.fullname);
-        localStorage.setItem("Email", response.data.user.email);
-        setAccessToken(token);
-        setErrorMessages("");
-      }
-    } catch (error: any) {
-      if (error.response && error.response.status === 401) {
-        setErrorMessages("Invalid email or password");
-      } else {
-        setErrorMessages("An unexpected error occurred");
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
+ const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setIsLoading(true);
 
-  if (token) {
-    return <Navigate to="/home" replace />;
+  try {
+    const response = await axios.post("/login", formData);
+
+    if (response.status === 200) {
+      const { token, user } = response.data;
+
+      // Save token and user ID locally
+      setToken(token);
+      setUserId(user.id);
+      setAccessToken(token);
+      setErrorMessages("");
+
+      // ✅ Set user in context
+      setUser({
+        userid: user.id,
+        email: user.email,
+        fullname: user.fullname
+      });
+
+      // Navigate to home page
+      navigate("/home", {
+        replace: true,
+        state: {
+          id: user.id,
+          email: user.email,
+          name: user.fullname,
+        },
+      });
+    }
+  } catch (error: any) {
+    if (error.response && error.response.status === 401) {
+      setErrorMessages("Invalid email or password");
+    } else {
+      setErrorMessages("An unexpected error occurred");
+    }
+  } finally {
+    setIsLoading(false);
   }
+};
+
+
 
   return (
     <div>

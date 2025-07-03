@@ -1,16 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/JobReady2-nobg-crp.png";
+import { useUser } from "../../user_context";
 
 const Header: React.FC = () => {
+  const { user } = useUser();
+
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(
     localStorage.getItem("accessToken") ? true : false
   );
-  const [email, setEmail] = useState<string | null>(
-    localStorage.getItem("Email")
-  );
-  const [username, setUsername] = useState(localStorage.getItem("UserName"));
+  const username = user?.fullname || 'User';
   const [isOpen, setIsOpen] = useState(false); // for mobile menu
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // for user dropdown
   const [isModalOpen, setIsModalOpen] = useState(false); // For modal visibility
@@ -146,12 +146,9 @@ const Header: React.FC = () => {
                             className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                           >
                             <div className="mx-1">
-                              <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
-                                {username}
-                              </h1>
-                              <p className="text-sm text-gray-500 dark:text-gray-400">
-                                {hideEmail(email)}
-                              </p>
+                              <h1>{user?.fullname || "User"}</h1>
+                              <p className="text-sm">{hideEmail(user?.email || "")}</p>
+
                             </div>
                           </a>
 
