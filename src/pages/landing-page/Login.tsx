@@ -35,53 +35,53 @@ const Login: React.FC = () => {
     }));
   };
 
- const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setIsLoading(true);
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-  try {
-    const response = await axios.post("/login", formData);
+    try {
+      const response = await axios.post("/login", formData);
 
-    if (response.status === 200) {
-      const { token, user } = response.data;
+      if (response.status === 200) {
+        const { token, user } = response.data;
 
-      // Save token and user ID locally
-      setToken(token);
-      setUserId(user.id);
-      setAccessToken(token);
-      setErrorMessages("");
+        // Save token and user ID locally
+        setToken(token);
+        setUserId(user.id);
+        setAccessToken(token);
+        setErrorMessages("");
 
-      // ✅ Set user in context
-      setUser({
-        userid: user.id,
-        email: user.email,
-        fullname: user.fullname
-      });
-
-      localStorage.setItem("UserData", JSON.stringify(user));
-      setAccessToken(token);
-      setUser(user);
-
-      // Navigate to home page
-      navigate("/home", {
-        replace: true,
-        state: {
-          id: user.id,
+        // ✅ Set user in context
+        setUser({
+          userid: user.id,
           email: user.email,
-          name: user.fullname,
-        },
-      });
+          fullname: user.fullname
+        });
+
+        localStorage.setItem("UserData", JSON.stringify(user));
+        setAccessToken(token);
+        setUser(user);
+
+        // Navigate to home page
+        navigate("/home", {
+          replace: true,
+          state: {
+            id: user.id,
+            email: user.email,
+            name: user.fullname,
+          },
+        });
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        setErrorMessages("Invalid email or password");
+      } else {
+        setErrorMessages("An unexpected error occurred");
+      }
+    } finally {
+      setIsLoading(false);
     }
-  } catch (error: any) {
-    if (error.response && error.response.status === 401) {
-      setErrorMessages("Invalid email or password");
-    } else {
-      setErrorMessages("An unexpected error occurred");
-    }
-  } finally {
-    setIsLoading(false);
-  }
-};
+  };
 
 
 
@@ -131,10 +131,11 @@ const Login: React.FC = () => {
         <div>
           <button
             type="submit"
-            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-400 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="group relative w-full flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-400 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            {isLoading ? <ClipLoader /> : "Sign in"}
+            {isLoading ? <ClipLoader size={15} color="#fff" /> : "Sign in"}
           </button>
+
           <div className="flex items-center justify-center my-4">
             <hr className="border-gray-300 w-16" />
             <span className="text-gray-500 font-medium mx-4">Or</span>
