@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/JobReady2-nobg-crp.png";
+import logo from "../../assets/logoWH-crp.png";
 import { useUser } from "../../user_context";
 
 const Header: React.FC = () => {
@@ -67,7 +67,7 @@ const Header: React.FC = () => {
 
   return (
     <div>
-      <nav className="relative px-20 flex justify-between items-center bg-white">
+      <nav className="relative px-20 flex justify-between items-center bg-gray-900 shadow-lg">
         <Link to="/" className="flex items-center">
           <img src={logo} alt="Logo" className="w-[170px]" />
         </Link>
@@ -93,7 +93,7 @@ const Header: React.FC = () => {
                 <li>
                   <Link
                     to="/home"
-                    className="text-lg relative text-xl w-fit block after:block after:content-[''] after:absolute after:h-[1px] after:bg-black after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
+                    className="text-lg text-white relative text-xl w-fit block after:block after:content-[''] after:absolute after:h-[1px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
                   >
                     Home
                   </Link>
@@ -101,7 +101,7 @@ const Header: React.FC = () => {
                 <li>
                   <Link
                     to="/aboutus"
-                    className="text-lg relative text-xl w-fit block after:block after:content-[''] after:absolute after:h-[1px] after:bg-black after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
+                    className="text-lg text-white relative text-xl w-fit block after:block after:content-[''] after:absolute after:h-[1px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
                   >
                     About Us
                   </Link>
@@ -109,7 +109,7 @@ const Header: React.FC = () => {
                 <li>
                   <Link
                     to="/contact"
-                    className=" text-lg relative text-xl w-fit block after:block after:content-[''] after:absolute after:h-[1px] after:bg-black after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
+                    className=" text-lg text-white relative text-xl w-fit block after:block after:content-[''] after:absolute after:h-[1px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center"
                   >
                     Contact
                   </Link>
@@ -119,10 +119,10 @@ const Header: React.FC = () => {
                     <div className="relative inline-block" ref={dropdownRef}>
                       {/* Dropdown toggle button */}
                       <button
-                        className="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:text-white dark:bg-gray-800 focus:outline-none"
+                        className="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-black border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:text-white dark:bg-gray-800 focus:outline-none"
                         onClick={toggleDropdown}
                       >
-                        <span className="mx-1">
+                        <span className="mx-1 text-white">
                           <h1>{username}</h1>
                         </span>
                         <svg
@@ -133,7 +133,7 @@ const Header: React.FC = () => {
                         >
                           <path
                             d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
-                            fill="currentColor"
+                            fill="white"
                           ></path>
                         </svg>
                       </button>
