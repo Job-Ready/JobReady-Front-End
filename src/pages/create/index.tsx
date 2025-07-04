@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import { Navigate, useParams } from "react-router-dom";
+import {useParams, useNavigate } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import { checkExpiredToken } from "../../utils/auth";
 
@@ -19,6 +19,7 @@ import Forms from "../../components/Forms";
 import Plain from "../../components/templates/Plain";
 
 const Create: React.FC = () => {
+  const navigate = useNavigate();
   const [backgroundColor, setBackgroundColor] = useState<string>("#ffffff");
   const [fontSize, setFontSize] = useState<string>("12px");
   const [fontFamily, setFontFamily] = useState<string>("Arial");
@@ -64,7 +65,8 @@ const Create: React.FC = () => {
           setResumes(fetchedResumes);
         } catch (error) {
           if (checkExpiredToken(error)) {
-            return <Navigate replace to="/" />;
+              localStorage.clear();
+              navigate("/");
           }
           console.error("Get Resumes:", error.message);
         }
@@ -117,7 +119,7 @@ console.log(resumes);
   }, []);
 
   if (!token) {
-    return <Navigate replace to="/" />;
+    navigate("/");
   }
 
   // Toggle function for each accordion

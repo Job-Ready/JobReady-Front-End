@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Resume } from "types/resume";
 import { getAccessToken, checkExpiredToken } from "../../utils/auth";
@@ -9,6 +9,7 @@ import Plain from "../../components/templates/Plain";
 import LoadingSpinner from "../../components/LoadingSpinner";
 
 const Home = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { id, email } = location.state || {};
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,7 +33,8 @@ const Home = () => {
         setLoading(false);
       } catch (error) {
         if (checkExpiredToken(error)) {
-            return <Navigate replace to="/" />;
+            localStorage.clear();    
+            navigate("/");
         }
         console.error("Get Resumes Error:", error.message);
       }
@@ -54,7 +56,8 @@ const Home = () => {
   }, []);
 
   if (!token) {
-    return <Navigate replace to="/" />;
+    localStorage.clear();
+    navigate("/");
   }
 
   // Find the index of the resume with the latest last_change timestamp
