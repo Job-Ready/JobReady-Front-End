@@ -66,7 +66,7 @@ const LandingPage: React.FC = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <div className="min-h-screen h-[600px] w-screen mx-0 flex items-center justify-center bg-gray-50">
         <div className="flex items-center justify-center w-[30%] h-full mx-6">
           {renderForm()}
