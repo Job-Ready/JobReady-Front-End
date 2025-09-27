@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { getAccessToken, setAccessToken } from "../../utils/auth";
 import { ClipLoader } from "react-spinners";
 import AuthForm from "../../components/GoogleAuth";
-import { useUser } from '../../user_context';
+import { useUser } from "../../user_context";
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
@@ -40,35 +40,18 @@ const Login: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("/login", formData);
+      const response = await axios.post("/auth/login", formData);
 
       if (response.status === 200) {
-        const { token, user } = response.data;
-
-        // Save token and user ID locally
-        setToken(token);
-        setUserId(user.id);
-        setAccessToken(token);
-        setErrorMessages("");
-
-        // ✅ Set user in context
-        setUser({
-          userid: user.id,
-          email: user.email,
-          fullname: user.fullname
-        });
-
-        localStorage.setItem("UserData", JSON.stringify(user));
-        setAccessToken(token);
-        setUser(user);
-
+        console.log(response.data);
+        setAccessToken(response.data.token);
         // Navigate to home page
         navigate("/home", {
           replace: true,
           state: {
-            id: user.id,
-            email: user.email,
-            name: user.fullname,
+            id: response.data.id,
+            email: response.data.email,
+            name: response.data.fullname,
           },
         });
       }
@@ -82,8 +65,6 @@ const Login: React.FC = () => {
       setIsLoading(false);
     }
   };
-
-
 
   return (
     <div>

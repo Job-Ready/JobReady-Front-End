@@ -14,9 +14,7 @@ const Home = () => {
   const { id, email } = location.state || {};
   const [loading, setLoading] = useState<boolean>(false);
   const [token, setToken] = useState<string | null>(getAccessToken());
-  const [userId, setUserId] = useState<string | null>(
-    id
-  );
+  const [userId, setUserId] = useState<string | null>(id);
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [selectedResume, setSelectedResume] = useState<Resume | null>(null); // State to hold the selected resume
 
@@ -30,11 +28,11 @@ const Home = () => {
 
         const fetchedResumes = response.data.resumes;
         setResumes(fetchedResumes);
-        setLoading(false);
       } catch (error) {
+        setLoading(false);
         if (checkExpiredToken(error)) {
-            localStorage.clear();    
-            navigate("/");
+          localStorage.clear();
+          navigate("/");
         }
         console.error("Get Resumes Error:", error.message);
       }
@@ -42,23 +40,6 @@ const Home = () => {
 
     getResumes();
   }, [userId]);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setToken(getAccessToken());
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
-
-  if (!token) {
-    localStorage.clear();
-    navigate("/");
-  }
 
   // Find the index of the resume with the latest last_change timestamp
   const latestResumeIndex = resumes.reduce((acc, curr, index) => {
@@ -78,17 +59,21 @@ const Home = () => {
         </div>
       ) : (
         <>
-          <Header/>
+          <Header />
           <div className="flex h-screen p-8 bg-gray-100">
             <div className="w-[40%] overflow-auto mt-12">
               <SavedResumes
-                  latestResumeIndex = {latestResumeIndex}
+                latestResumeIndex={latestResumeIndex}
                 resumes={resumes}
                 onResumeClick={handleResumeClick}
               />
             </div>
             <div className="flex-1 float-left overflow-y-auto bg-slate-100 hover:opacity-50 transition-transform duration-200 cursor-pointer mt-12">
-              <Link to={`/create/${selectedResume?.id || resumes[latestResumeIndex]?.id}`}>
+              <Link
+                to={`/create/${
+                  selectedResume?.id || resumes[latestResumeIndex]?.id
+                }`}
+              >
                 <div>
                   {selectedResume ? (
                     <Plain

@@ -1,32 +1,14 @@
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
 import CV from "../../assets/cv.webp";
 import { checkIsAuthenticated } from "../../utils/auth";
 import Login from "./Login";
 import Register from "./Register";
-import Header from "../../components/layout/Header";
 
 const LandingPage: React.FC = () => {
-    const [isSigningUp, setIsSigningUp] = useState<boolean>(false);
+  const [isSigningUp, setIsSigningUp] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     checkIsAuthenticated()
   );
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setIsAuthenticated(checkIsAuthenticated());
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
-
-  if (isAuthenticated) {
-    return <Navigate to="/home" replace />;
-  }
 
   const renderForm = () => (
     <div className="w-[25rem]">
@@ -71,14 +53,13 @@ const LandingPage: React.FC = () => {
         <div className="flex items-center justify-center w-[30%] h-full mx-6">
           {renderForm()}
         </div>
-          <div className="flex items-center justify-center w-[70%] h-full bg-opacity-25 mb-2 overflow-hidden">
-              <img
-                  src={CV}
-                  alt="Example of a resume built with our tool"
-                  className="w-full h-full object-cover"
-              />
-          </div>
-
+        <div className="flex items-center justify-center w-[70%] h-full bg-opacity-25 mb-2 overflow-hidden">
+          <img
+            src={CV}
+            alt="Example of a resume built with our tool"
+            className="w-full h-full object-cover"
+          />
+        </div>
       </div>
     </div>
   );

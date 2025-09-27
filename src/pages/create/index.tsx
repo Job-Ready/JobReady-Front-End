@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import {useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import { checkExpiredToken } from "../../utils/auth";
 
@@ -24,10 +24,8 @@ const Create: React.FC = () => {
   const [fontSize, setFontSize] = useState<string>("12px");
   const [fontFamily, setFontFamily] = useState<string>("Arial");
   const [resumes, setResumes] = useState<Resume>();
-  const {id} = useParams();
-  const [resumeId, setResumeId] = useState<any>(
-    id
-  );
+  const { id } = useParams();
+  const [resumeId, setResumeId] = useState<any>(id);
   const [fullname, setFullname] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -36,7 +34,9 @@ const Create: React.FC = () => {
   const [portfolio, setPortfolio] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [repos, setRepos] = useState<string[]>([]);
-  const [work_experiences, setwork_experiences] = useState<WorkExperience[]>([]);
+  const [work_experiences, setwork_experiences] = useState<WorkExperience[]>(
+    []
+  );
   const [projects, setProjects] = useState<Project[]>([]);
   const [education, setEducation] = useState<Array<Education>>([]);
   const [languages, setLanguages] = useState<Language[]>([]);
@@ -65,8 +65,8 @@ const Create: React.FC = () => {
           setResumes(fetchedResumes);
         } catch (error) {
           if (checkExpiredToken(error)) {
-              localStorage.clear();
-              navigate("/");
+            localStorage.clear();
+            navigate("/");
           }
           console.error("Get Resumes:", error.message);
         }
@@ -76,35 +76,33 @@ const Create: React.FC = () => {
   }, [resumeId]);
 
   useEffect(() => {
-  if (resumes) {
-    const parseField = (field: any) => {
-      if (Array.isArray(field)) return field;
-      try {
-        return JSON.parse(field);
-      } catch {
-        return [];
-      }
-    };
+    if (resumes) {
+      const parseField = (field: any) => {
+        if (Array.isArray(field)) return field;
+        try {
+          return JSON.parse(field);
+        } catch {
+          return [];
+        }
+      };
 
-    setEmail(resumes.email || "");
-    setPhone(resumes.phone || "");
-    setLinkedin(resumes.linkedin || "");
-    setPortfolio(resumes.portfolio || "");
-    setCountry(resumes.country || "");
-    setRepos(resumes.repos || []);
-    setTitle(resumes.title || "");
-    setFullname(resumes.fullname || "");
-    setwork_experiences(parseField(resumes.work_experiences));
-    setProjects(parseField(resumes.projects));
-    setEducation(parseField(resumes.education));
-    setLanguages(parseField(resumes.languages));
-    setSkills(parseField(resumes.skills));
-  }
-}, [resumes]);
+      setEmail(resumes.email || "");
+      setPhone(resumes.phone || "");
+      setLinkedin(resumes.linkedin || "");
+      setPortfolio(resumes.portfolio || "");
+      setCountry(resumes.country || "");
+      setRepos(resumes.repos || []);
+      setTitle(resumes.title || "");
+      setFullname(resumes.fullname || "");
+      setwork_experiences(parseField(resumes.work_experiences));
+      setProjects(parseField(resumes.projects));
+      setEducation(parseField(resumes.education));
+      setLanguages(parseField(resumes.languages));
+      setSkills(parseField(resumes.skills));
+    }
+  }, [resumes]);
 
-
-console.log(resumes);
-
+  console.log(resumes);
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -117,10 +115,6 @@ console.log(resumes);
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
-
-  if (!token) {
-    navigate("/");
-  }
 
   // Toggle function for each accordion
   const toggleAccordion = (section: keyof typeof accordionState) => {
