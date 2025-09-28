@@ -1,16 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/logoWH-crp.png";
 import { useUser } from "../../user_context";
 
 const Header: React.FC = () => {
-  const { user } = useUser();
+  //const { user } = useUser();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const { id, name, email } = location.state || {};
+
   const [isLogin, setIsLogin] = useState(
-    localStorage.getItem("accessToken") ? true : false
+    localStorage.getItem("token") ? true : false
   );
-  const username = user?.fullname || 'User';
+  const username = name || "User";
   const [isOpen, setIsOpen] = useState(false); // for mobile menu
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // for user dropdown
   const [isModalOpen, setIsModalOpen] = useState(false); // For modal visibility
@@ -146,9 +149,10 @@ const Header: React.FC = () => {
                             className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                           >
                             <div className="mx-1">
-                              <h1>{user?.fullname || "User"}</h1>
-                              <p className="text-sm">{hideEmail(user?.email || "")}</p>
-
+                              <h1>{name || "User"}</h1>
+                              <p className="text-sm">
+                                {hideEmail(email || "")}
+                              </p>
                             </div>
                           </a>
 

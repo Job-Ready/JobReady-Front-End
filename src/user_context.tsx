@@ -1,5 +1,6 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import type { User } from './types/user'; // ✅ import the type
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import type { User } from "./types/user"; // ✅ import the type
 
 type UserContextType = {
   user: User | null;
@@ -8,6 +9,9 @@ type UserContextType = {
 
 // ✅ Create context with the correct type
 const UserContext = createContext<UserContextType | undefined>(undefined);
+
+//const location = useLocation();
+//const { id, name, email } = location.state || {};
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(() => {
@@ -34,7 +38,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 export function useUser() {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error('useUser must be used within a UserProvider');
+    throw new Error("useUser must be used within a UserProvider");
   }
   return context;
 }

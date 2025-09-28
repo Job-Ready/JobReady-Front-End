@@ -1,4 +1,3 @@
-
 <div align="center">
 
   <img src="src/assets/logoWH.png" alt="Logo" width="350" height="350">
@@ -6,20 +5,20 @@
 </div>
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 This is the React Front End of JobReady! A simple and open-source resume builder.
 Remember to get the back end too : https://github.com/Job-Ready/JobReady-Back-End
 
-
 ### Built With
 
-* [![TypeScript][TypeScript.js]][TypeScript-url]
-* [![React][React.js]][React-url]
-* [![Node.js][Node.js]][Node-url]
-
+- [![TypeScript][TypeScript.js]][TypeScript-url]
+- [![React][React.js]][React-url]
+- [![Spring][Spring]][Spring-url]
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
@@ -27,7 +26,8 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
+
+- npm
   ```sh
   npm install npm@latest -g
   ```

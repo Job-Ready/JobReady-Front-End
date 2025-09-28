@@ -22,12 +22,13 @@ const Home = () => {
     const getResumes = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/api/resumes`, {
+        const response = await axios.get(`/resumes/user/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-
-        const fetchedResumes = response.data.resumes;
-        setResumes(fetchedResumes);
+        if (response) {
+          setLoading(false);
+        }
+        console.log(location);
       } catch (error) {
         setLoading(false);
         if (checkExpiredToken(error)) {
@@ -42,7 +43,7 @@ const Home = () => {
   }, [userId]);
 
   // Find the index of the resume with the latest last_change timestamp
-  const latestResumeIndex = resumes.reduce((acc, curr, index) => {
+  const latestResumeIndex = resumes?.reduce((acc, curr, index) => {
     if (index === 0) return index;
     return curr.last_change > resumes[acc].last_change ? index : acc;
   }, 0);
