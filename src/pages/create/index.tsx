@@ -42,7 +42,7 @@ const Create: React.FC = () => {
   const [languages, setLanguages] = useState<Language[]>([]);
   const [skills, setSkills] = useState<Skill[]>([]);
   const [token, setToken] = useState<string | null>(
-    localStorage.getItem("accessToken")
+    localStorage.getItem("token")
   );
 
   // Accordion state object
@@ -61,7 +61,7 @@ const Create: React.FC = () => {
           const response = await axios.get(`resumes/${resumeId}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
-          const fetchedResumes: Resume = response.data.resume;
+          const fetchedResumes: Resume = response.data;
           setResumes(fetchedResumes);
         } catch (error) {
           if (checkExpiredToken(error)) {
