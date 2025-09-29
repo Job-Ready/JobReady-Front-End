@@ -58,7 +58,7 @@ const Create: React.FC = () => {
     const getResumes = async () => {
       if (resumeId) {
         try {
-          const response = await axios.get(`api/resumes/${resumeId}`, {
+          const response = await axios.get(`resumes/${resumeId}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           const fetchedResumes: Resume = response.data.resume;

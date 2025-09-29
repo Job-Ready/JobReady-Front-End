@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import icon from "../assets/icons-resume.png";
 import { Navigate, useParams } from "react-router-dom";
@@ -21,12 +21,15 @@ interface SavedResumesProps {
 
 const SavedResumes: React.FC<SavedResumesProps> = ({
   resumes,
-  onResumeClick, latestResumeIndex
+  onResumeClick,
+  latestResumeIndex,
 }) => {
-    const { user } = useUser();
-  
+  const { user } = useUser();
+  const location = useLocation();
+  const { id, email } = location.state || {};
+
   const [formData, setFormData] = useState({
-    userId: user?.userid,
+    user: { id },
     details: {},
     work_experiences: [],
     projects: [],
@@ -38,36 +41,34 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
   const navigate = useNavigate();
 
   // State to track selected resume index
-  const [selectedResumeIndex, setSelectedResumeIndex] = useState<number>(
-      latestResumeIndex
-  );
+  const [selectedResumeIndex, setSelectedResumeIndex] =
+    useState<number>(latestResumeIndex);
 
   const createResume = async () => {
-    const token = localStorage.getItem("accessToken");
+    const token = localStorage.getItem("token");
     try {
-      const response = await axios.post("api/resumes", formData, {
+      const response = await axios.post("resumes", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      navigate(`/create/${response.data.resume.id}`);
+      navigate(`/create/${response["id"]}`);
     } catch (error) {
       if (checkExpiredToken(error)) {
-            return <Navigate replace to="/" />;
+        return <Navigate replace to="/" />;
       }
       console.error("Error creating resume:", error.message);
     }
   };
 
   const handleResumeClick = (index: number) => {
-    setSelectedResumeIndex(index); // Update selected index
-    onResumeClick(index); // Call parent function if needed
+    setSelectedResumeIndex(index);
+    onResumeClick(index);
   };
 
   return (
     <div>
       <h1 className="mt-4 mb-10 text-3xl font-thin">My Resumes</h1>
       <div className="flex flex-wrap p-4 overflow-auto">
-        {resumes
-            .map((resume, index) => (
+        {resumes.map((resume, index) => (
           <div
             key={resume.id}
             onClick={() => handleResumeClick(index)}

@@ -28,7 +28,7 @@ const Home = () => {
         if (response) {
           setLoading(false);
         }
-        console.log(location);
+        setResumes(response.data);
       } catch (error) {
         setLoading(false);
         if (checkExpiredToken(error)) {
