@@ -4,9 +4,9 @@ import axios from "axios";
 import { Resume } from "types/resume";
 import { getAccessToken, checkExpiredToken } from "../../utils/auth";
 import { Header, Footer } from "../../components/layout/index";
-import SavedResumes from "../../components/SavedResumes";
+import SavedResumes from "../../components/resume-components/SavedResumes";
 import Plain from "../../components/templates/Plain";
-import LoadingSpinner from "../../components/LoadingSpinner";
+import LoadingSpinner from "../../components/components/LoadingSpinner";
 
 const Home = () => {
   const navigate = useNavigate();

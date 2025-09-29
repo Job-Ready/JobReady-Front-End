@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import icon from "../assets/icons-resume.png";
+import icon from "../../assets/icons-resume.png";
 import { Navigate, useParams } from "react-router-dom";
-import { checkExpiredToken } from "../utils/auth";
-import { useUser } from "../user_context";
+import { checkExpiredToken } from "../../utils/auth";
+import { useUser } from "../../user_context";
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 

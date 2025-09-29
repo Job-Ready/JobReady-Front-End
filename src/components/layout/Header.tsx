@@ -71,7 +71,7 @@ const Header: React.FC = () => {
   return (
     <div>
       <nav className="relative mt-2 mx-2 px-20 flex justify-between items-center bg-zinc-800 shadow-2xl rounded-3xl">
-        <Link to="/" className="flex items-center">
+        <Link to="/home" className="flex items-center">
           <img src={logo} alt="Logo" className="w-[170px]" />
         </Link>
         <div className="flex-grow lg:flex lg:justify-end items-center">

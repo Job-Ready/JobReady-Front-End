@@ -15,7 +15,7 @@ import {
 } from "types/resume";
 import { Header } from "../../components/layout/index";
 import { Footer } from "../../components/layout/index";
-import Forms from "../../components/Forms";
+import Forms from "../../components/resume-components/Forms";
 import Plain from "../../components/templates/Plain";
 
 const Create: React.FC = () => {
