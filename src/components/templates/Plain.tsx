@@ -86,7 +86,7 @@ const Plain: React.FC<PlainProps> = ({
               <h2 className="text-xl font-semibold mb-2">Work Experience</h2>
               <hr className="border-gray-400 flex-grow mt-2" />
               <div>
-                {work_experiences.length > 0 ? (
+                {work_experiences?.length > 0 ? (
                   work_experiences.map((experience, index) => (
                     <div key={index}>
                       <p className="text-lg font-semibold">
@@ -118,7 +118,7 @@ const Plain: React.FC<PlainProps> = ({
             <section className="mb-6">
               <h2 className="text-xl font-semibold mb-2">Education</h2>
               <hr className="border-gray-400 flex-grow mt-2" />
-              {education.length > 0 ? (
+              {education?.length > 0 ? (
                 education.map((edu, index) => (
                   <div key={index}>
                     <p className="text-lg font-semibold">{edu.uniName}</p>
@@ -137,7 +137,7 @@ const Plain: React.FC<PlainProps> = ({
             <section className="mb-6">
               <h2 className="text-xl font-semibold mb-2">Languages</h2>
               <hr className="border-gray-400 flex-grow mt-2" />
-              {languages.length > 0 ? (
+              {languages?.length > 0 ? (
                 languages.map((lang, index) => (
                   <div key={index}>
                     <p className="text-lg font-semibold">{lang.languageName}</p>
@@ -157,7 +157,7 @@ const Plain: React.FC<PlainProps> = ({
             <section>
               <h2 className="text-xl font-semibold mb-2">Projects</h2>
               <hr className="border-gray-400 flex-grow mt-2" />
-              {projects.length > 0 ? (
+              {projects?.length > 0 ? (
                 projects.map((project, index) => (
                   <div key={index}>
                     <p className="text-lg font-semibold">
@@ -179,7 +179,7 @@ const Plain: React.FC<PlainProps> = ({
               <h2 className="text-xl font-semibold mb-2">Skills</h2>
               <hr className="border-gray-400 flex-grow mt-2" />
               <div className="flex flex-wrap">
-                {skills.length > 0 ? (
+                {skills?.length > 0 ? (
                   skills.map((skill, index) => (
                     <ul key={index} className="flex flex-wrap">
                       <li className="bg-blue-500 text-white px-3 py-1 m-1 rounded">

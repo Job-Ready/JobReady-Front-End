@@ -178,10 +178,14 @@ const Create: React.FC = () => {
                     ? work_experiences
                     : resumes.work_experiences
                 }
-                projects={projects.length > 0 ? projects : resumes.projects}
-                education={education.length > 0 ? education : resumes.education}
-                languages={languages.length > 0 ? languages : resumes.languages}
-                skills={skills.length > 0 ? skills : resumes.skills}
+                projects={projects?.length > 0 ? projects : resumes.projects}
+                education={
+                  education?.length > 0 ? education : resumes.education
+                }
+                languages={
+                  languages?.length > 0 ? languages : resumes.languages
+                }
+                skills={skills?.length > 0 ? skills : resumes.skills}
                 fontFamily={fontFamily}
                 fontSize={fontSize}
                 backgroundColor={backgroundColor}

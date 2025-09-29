@@ -15,7 +15,7 @@ import Repos from "./details/Repos";
 import Country from "./details/Country";
 import LoadingSpinner from "./LoadingSpinner";
 import { checkExpiredToken } from "../utils/auth";
-import { Navigate, useParams } from "react-router-dom"
+import { Navigate, useParams } from "react-router-dom";
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
@@ -51,7 +51,7 @@ function Forms({
   const userData = userDataString ? JSON.parse(userDataString) : null;
   const user_id = userData?.id ?? null;
 
-  const {id} = useParams();
+  const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false); // Accordion open/close state
   const [loading, setLoading] = useState(false); // Loading state
   const formData = {
@@ -72,7 +72,7 @@ function Forms({
     skills,
   };
 
-  const token = localStorage.getItem("accessToken");
+  const token = localStorage.getItem("token");
 
   // Function to update resume in the backend
   const updateResume = async () => {
@@ -93,14 +93,14 @@ function Forms({
 
     try {
       setLoading(true);
-      await axios.put(`/api/resumes/${id}`, dataToSend, {
+      await axios.put(`/resumes/${id}`, dataToSend, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setLoading(false);
     } catch (error) {
-      setLoading(false); 
+      setLoading(false);
       if (checkExpiredToken(error)) {
-            return <Navigate replace to="/" />;
+        return <Navigate replace to="/" />;
       }
       console.log("Update failed:", error.message);
     }

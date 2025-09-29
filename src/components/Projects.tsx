@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./components.css";
@@ -14,8 +14,7 @@ interface ProjectsProps {
 }
 
 const Projects: React.FC<ProjectsProps> = ({ projects, setProjects }) => {
-
-    const [openAccordions, setOpenAccordions] = useState<boolean[]>([]);
+  const [openAccordions, setOpenAccordions] = useState<boolean[]>([]);
 
   const addProject = () => {
     setProjects([...projects, { projectName: "", description: "" }]);
@@ -61,13 +60,15 @@ const Projects: React.FC<ProjectsProps> = ({ projects, setProjects }) => {
         <p className="text-slate-400 italic">Add Projects</p>
       </button>
 
-      {projects.map((project, index) => (
+      {projects?.map((project, index) => (
         <div className="border border-gray-300 rounded mb-4">
           <div
             className="bg-gray-100 cursor-pointer px-4 py-2 flex justify-between items-center"
             onClick={() => toggleAccordion(index)}
           >
-            <h1 className="text-lg font-semibold">{project.projectName != '' ? project.projectName : 'Project'}</h1>
+            <h1 className="text-lg font-semibold">
+              {project.projectName != "" ? project.projectName : "Project"}
+            </h1>
             <span className="text-gray-500">
               {openAccordions[index] ? "-" : "+"} {/* Toggle icon */}
             </span>
@@ -113,7 +114,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects, setProjects }) => {
               </button>
             </div>
           )}
-          </div>
+        </div>
       ))}
     </div>
   );

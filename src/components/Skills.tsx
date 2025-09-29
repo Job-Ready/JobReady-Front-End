@@ -44,28 +44,29 @@ const Skills: React.FC<SkillsProps> = ({ skills, setSkills }) => {
         <p className="text-slate-400 italic">Add Skills</p>
       </button>
 
-      {skills.map((skill, index) => (
-       <div key={index} className="mb-4 flex items-end space-x-4">
-  <div className="flex-1">
-    <label className="block text-sm font-semibold text-gray-700 mb-1">Skill</label>
-    <input
-      type="text"
-      className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-800 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-      value={skill.skillName}
-      placeholder="Enter a skill"
-      onChange={(e) => handleInputChange(index, e.target.value)}
-    />
-  </div>
+      {skills?.map((skill, index) => (
+        <div key={index} className="mb-4 flex items-end space-x-4">
+          <div className="flex-1">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
+              Skill
+            </label>
+            <input
+              type="text"
+              className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-800 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              value={skill.skillName}
+              placeholder="Enter a skill"
+              onChange={(e) => handleInputChange(index, e.target.value)}
+            />
+          </div>
 
-  <button
-    type="button"
-    onClick={() => removeSkill(index)}
-    className="h-10 rounded-md bg-red-500 px-4 text-sm font-medium text-white transition hover:bg-red-600"
-  >
-    Remove
-  </button>
-</div>
-
+          <button
+            type="button"
+            onClick={() => removeSkill(index)}
+            className="h-10 rounded-md bg-red-500 px-4 text-sm font-medium text-white transition hover:bg-red-600"
+          >
+            Remove
+          </button>
+        </div>
       ))}
     </div>
   );

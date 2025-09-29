@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,7 +14,6 @@ interface ProjectsProps {
 }
 
 const Projects: React.FC<ProjectsProps> = ({ education, setEducation }) => {
-
   const [openAccordions, setOpenAccordions] = useState<boolean[]>([]);
 
   // Add a new education entry
@@ -65,13 +64,15 @@ const Projects: React.FC<ProjectsProps> = ({ education, setEducation }) => {
         <p className="text-slate-400 italic">Add Education</p>
       </button>
 
-      {education.map((edu, index) => (
+      {education?.map((edu, index) => (
         <div className="border border-gray-300 rounded mb-4">
           <div
             className="bg-gray-100 cursor-pointer px-4 py-2 flex justify-between items-center"
             onClick={() => toggleAccordion(index)}
           >
-            <h1 className="text-lg font-semibold">{edu.uniName != '' ? edu.uniName : 'Education'}</h1>
+            <h1 className="text-lg font-semibold">
+              {edu.uniName != "" ? edu.uniName : "Education"}
+            </h1>
             <span className="text-gray-500">
               {openAccordions[index] ? "-" : "+"} {/* Toggle icon */}
             </span>
