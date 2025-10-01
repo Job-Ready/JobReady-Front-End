@@ -8,7 +8,7 @@ export interface Resume {
   portfolio: string;
   country: string;
   repos: string[];
-  work_experiences: Array<WorkExperience>;
+  workExperiences: Array<WorkExperience>;
   projects: Array<Project>;
   education: Array<Education>;
   languages: Language[];

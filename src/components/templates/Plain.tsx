@@ -17,7 +17,7 @@ const Plain: React.FC<PlainProps> = ({
   linkedin,
   portfolio,
   repos = [], // Default to empty array
-  work_experiences = [], // Default to empty array
+  workExperiences = [], // Default to empty array
   projects = [], // Default to empty array
   education = [], // Default to empty array
   languages = [], // Default to empty array
@@ -86,8 +86,8 @@ const Plain: React.FC<PlainProps> = ({
               <h2 className="text-xl font-semibold mb-2">Work Experience</h2>
               <hr className="border-gray-400 flex-grow mt-2" />
               <div>
-                {work_experiences?.length > 0 ? (
-                  work_experiences.map((experience, index) => (
+                {workExperiences?.length > 0 ? (
+                  workExperiences.map((experience, index) => (
                     <div key={index}>
                       <p className="text-lg font-semibold">
                         {experience.company_name}

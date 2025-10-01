@@ -34,9 +34,7 @@ const Create: React.FC = () => {
   const [portfolio, setPortfolio] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [repos, setRepos] = useState<string[]>([]);
-  const [work_experiences, setwork_experiences] = useState<WorkExperience[]>(
-    []
-  );
+  const [workExperiences, setWorkExperiences] = useState<WorkExperience[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [education, setEducation] = useState<Array<Education>>([]);
   const [languages, setLanguages] = useState<Language[]>([]);
@@ -94,7 +92,7 @@ const Create: React.FC = () => {
       setRepos(resumes.repos || []);
       setTitle(resumes.title || "");
       setFullname(resumes.fullname || "");
-      setwork_experiences(parseField(resumes.work_experiences));
+      setWorkExperiences(parseField(resumes.workExperiences));
       setProjects(parseField(resumes.projects));
       setEducation(parseField(resumes.education));
       setLanguages(parseField(resumes.languages));
@@ -148,8 +146,8 @@ const Create: React.FC = () => {
             setTitle={setTitle}
             fullname={fullname}
             setFullname={setFullname}
-            workExperiences={work_experiences}
-            setWorkExperiences={setwork_experiences}
+            workExperiences={workExperiences}
+            setWorkExperiences={setWorkExperiences}
             projects={projects}
             setProjects={setProjects}
             education={education}
@@ -173,10 +171,10 @@ const Create: React.FC = () => {
                 repos={repos.length > 0 ? repos : resumes.repos}
                 fullname={fullname || resumes.fullname}
                 title={title || resumes.title}
-                work_experiences={
-                  work_experiences.length > 0
-                    ? work_experiences
-                    : resumes.work_experiences
+                workExperiences={
+                  workExperiences.length > 0
+                    ? workExperiences
+                    : resumes.workExperiences
                 }
                 projects={projects?.length > 0 ? projects : resumes.projects}
                 education={

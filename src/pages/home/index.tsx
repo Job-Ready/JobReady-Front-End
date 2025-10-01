@@ -86,7 +86,7 @@ const Home = () => {
                       portfolio={selectedResume.portfolio}
                       country={selectedResume.country}
                       repos={selectedResume.repos}
-                      work_experiences={selectedResume.work_experiences}
+                      workExperiences={selectedResume.workExperiences}
                       projects={selectedResume.projects}
                       education={selectedResume.education}
                       languages={selectedResume.languages}
@@ -102,8 +102,8 @@ const Home = () => {
                       portfolio={resumes[latestResumeIndex].portfolio}
                       country={resumes[latestResumeIndex].country}
                       repos={resumes[latestResumeIndex].repos}
-                      work_experiences={
-                        resumes[latestResumeIndex].work_experiences
+                      workExperiences={
+                        resumes[latestResumeIndex].workExperiences
                       }
                       projects={resumes[latestResumeIndex].projects}
                       education={resumes[latestResumeIndex].education}
