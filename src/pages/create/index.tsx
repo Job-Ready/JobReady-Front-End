@@ -76,6 +76,7 @@ const Create: React.FC = () => {
   useEffect(() => {
     if (resumes) {
       const parseField = (field: any) => {
+        if (!field) return [];
         if (Array.isArray(field)) return field;
         try {
           return JSON.parse(field);
@@ -172,18 +173,20 @@ const Create: React.FC = () => {
                 fullname={fullname || resumes.fullname}
                 title={title || resumes.title}
                 workExperiences={
-                  workExperiences.length > 0
+                  workExperiences?.length > 0
                     ? workExperiences
-                    : resumes.workExperiences
+                    : resumes.workExperiences ?? []
                 }
-                projects={projects?.length > 0 ? projects : resumes.projects}
+                projects={
+                  projects?.length > 0 ? projects : resumes.projects ?? []
+                }
                 education={
-                  education?.length > 0 ? education : resumes.education
+                  education?.length > 0 ? education : resumes.education ?? []
                 }
                 languages={
-                  languages?.length > 0 ? languages : resumes.languages
+                  languages?.length > 0 ? languages : resumes.languages ?? []
                 }
-                skills={skills?.length > 0 ? skills : resumes.skills}
+                skills={skills?.length > 0 ? skills : resumes.skills ?? []}
                 fontFamily={fontFamily}
                 fontSize={fontSize}
                 backgroundColor={backgroundColor}
