@@ -36,8 +36,8 @@ function Forms({
   setRepos,
   title,
   setTitle,
-  work_experiences,
-  setwork_experiences,
+  workExperiences,
+  setWorkExperiences,
   projects,
   setProjects,
   education,
@@ -65,7 +65,7 @@ function Forms({
     portfolio,
     country,
     repos,
-    work_experiences,
+    workExperiences,
     projects,
     education,
     languages,
@@ -96,6 +96,7 @@ function Forms({
       await axios.put(`/resumes/${id}`, dataToSend, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log(dataToSend);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -147,8 +148,8 @@ function Forms({
           )}
         </div>
         <WorkExperience
-          work_experiences={work_experiences}
-          setwork_experiences={setwork_experiences}
+          work_experiences={workExperiences}
+          setwork_experiences={setWorkExperiences}
         />
         <Education education={education} setEducation={setEducation} />
         <Languages languages={languages} setLanguages={setLanguages} />

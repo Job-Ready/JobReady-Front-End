@@ -148,8 +148,8 @@ const Create: React.FC = () => {
             setTitle={setTitle}
             fullname={fullname}
             setFullname={setFullname}
-            work_experiences={work_experiences}
-            setwork_experiences={setwork_experiences}
+            workExperiences={work_experiences}
+            setWorkExperiences={setwork_experiences}
             projects={projects}
             setProjects={setProjects}
             education={education}
