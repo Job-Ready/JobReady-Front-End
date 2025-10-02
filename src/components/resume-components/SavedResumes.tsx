@@ -24,12 +24,10 @@ const SavedResumes: React.FC<SavedResumesProps> = ({
   onResumeClick,
   latestResumeIndex,
 }) => {
-  const { user } = useUser();
-  const location = useLocation();
-  const { id, email } = location.state || {};
+  const { userId } = useUser();
 
   const [formData, setFormData] = useState({
-    user: { id },
+    user: { userId },
     details: {},
     work_experiences: [],
     projects: [],

@@ -49,14 +49,14 @@ const AppRouter = () => {
               </RequireAuth>
             }
           />
-          <Route
+          {/* <Route
             path="/contact"
             element={
               <RequireAuth>
                 <Contact />
               </RequireAuth>
             }
-          />
+          /> */}
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </UserProvider>

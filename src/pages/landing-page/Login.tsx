@@ -9,11 +9,10 @@ import { useUser } from "../../user_context";
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
 const Login: React.FC = () => {
-  const { setUser } = useUser();
+  const { setUserId } = useUser();
 
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [userId, setUserId] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(getAccessToken());
   const [errorMessages, setErrorMessages] = useState<string>("");
   const [formData, setFormData] = useState<{ email: string; password: string }>(
@@ -43,9 +42,8 @@ const Login: React.FC = () => {
       const response = await axios.post("/auth/login", formData);
 
       if (response.status === 200) {
-        console.log(response.data);
         setAccessToken(response.data.token);
-        // Navigate to home page
+        setUserId(response.data.id);
         navigate("/home", {
           replace: true,
           state: {

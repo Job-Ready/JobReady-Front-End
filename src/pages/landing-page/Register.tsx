@@ -3,12 +3,13 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { getAccessToken, setAccessToken } from "../../utils/auth";
 import { ClipLoader } from "react-spinners";
+import { useUser } from "../../user_context";
 
 // Set up axios defaults correctly
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
 const Register: React.FC = () => {
-  const [userId, setUserId] = useState<string | null>(null);
+  const { setUserId } = useUser();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [token, setToken] = useState<string | null>(getAccessToken());
   const [formData, setFormData] = useState<{
@@ -44,9 +45,7 @@ const Register: React.FC = () => {
     try {
       const response = await axios.post("/auth/register", formData);
       const { token, Id } = response.data;
-      setToken(token);
       setUserId(Id);
-      localStorage.setItem("User", Id);
       setAccessToken(token);
       setErrorMessages("");
     } catch (error: any) {

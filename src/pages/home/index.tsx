@@ -7,14 +7,13 @@ import { Header, Footer } from "../../components/layout/index";
 import SavedResumes from "../../components/resume-components/SavedResumes";
 import Plain from "../../components/templates/Plain";
 import LoadingSpinner from "../../components/components/LoadingSpinner";
+import { useUser } from "../../user_context";
 
 const Home = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { id, email } = location.state || {};
+  const { userId } = useUser();
   const [loading, setLoading] = useState<boolean>(false);
   const [token, setToken] = useState<string | null>(getAccessToken());
-  const [userId, setUserId] = useState<string | null>(id);
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [selectedResume, setSelectedResume] = useState<Resume | null>(null); // State to hold the selected resume
 

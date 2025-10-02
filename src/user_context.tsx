@@ -1,35 +1,28 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import type { User } from "./types/user"; // ✅ import the type
 
 type UserContextType = {
-  user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  userId: string | null;
+  setUserId: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-// ✅ Create context with the correct type
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-//const location = useLocation();
-//const { id, name, email } = location.state || {};
-
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(() => {
-    const storedUser = localStorage.getItem("UserData");
-    return storedUser ? JSON.parse(storedUser) : null;
+  const [userId, setUserId] = useState<string | null>(() => {
+    return localStorage.getItem("UserId");
   });
 
-  // Optional: sync any change to user with localStorage
+  // Sync changes with localStorage
   useEffect(() => {
-    if (user) {
-      localStorage.setItem("UserData", JSON.stringify(user));
+    if (userId) {
+      localStorage.setItem("UserId", userId);
     } else {
-      localStorage.removeItem("UserData");
+      localStorage.removeItem("UserId");
     }
-  }, [user]);
+  }, [userId]);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ userId, setUserId }}>
       {children}
     </UserContext.Provider>
   );
