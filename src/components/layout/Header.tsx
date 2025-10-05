@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/logoWH-crp.png";
-import { useUser } from "../../user_context";
+import { useUser } from "../../utils/user_context";
 
 const Header: React.FC = () => {
   //const { user } = useUser();

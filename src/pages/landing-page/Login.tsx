@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { getAccessToken, setAccessToken } from "../../utils/auth";
 import { ClipLoader } from "react-spinners";
 import AuthForm from "../../components/google/GoogleAuth";
-import { useUser } from "../../user_context";
+import { useUser } from "../../utils/user_context";
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 

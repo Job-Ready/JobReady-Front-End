@@ -4,7 +4,7 @@ import axios from "axios";
 import icon from "../../assets/icons-resume.png";
 import { Navigate, useParams } from "react-router-dom";
 import { checkExpiredToken } from "../../utils/auth";
-import { useUser } from "../../user_context";
+import { useUser } from "../../utils/user_context";
 
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 

@@ -7,7 +7,9 @@ import { Header, Footer } from "../../components/layout/index";
 import SavedResumes from "../../components/resume-components/SavedResumes";
 import Plain from "../../components/templates/Plain";
 import LoadingSpinner from "../../components/components/LoadingSpinner";
-import { useUser } from "../../user_context";
+import { useUser } from "../../utils/user_context";
+import "../../utils/sevices";
+import { getResumes } from "../../utils/sevices";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -15,18 +17,13 @@ const Home = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [token, setToken] = useState<string | null>(getAccessToken());
   const [resumes, setResumes] = useState<Resume[]>([]);
-  const [selectedResume, setSelectedResume] = useState<Resume | null>(null); // State to hold the selected resume
+  const [selectedResume, setSelectedResume] = useState<Resume | null>(null);
 
   useEffect(() => {
-    const getResumes = async () => {
+    const fetchResumes = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/resumes/user/${userId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (response) {
-          setLoading(false);
-        }
+        const response = await getResumes(token, userId);
         setResumes(response.data);
       } catch (error) {
         setLoading(false);
@@ -35,11 +32,13 @@ const Home = () => {
           navigate("/");
         }
         console.error("Get Resumes Error:", error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
-    getResumes();
-  }, [userId]);
+    fetchResumes();
+  }, []);
 
   // Find the index of the resume with the latest last_change timestamp
   const latestResumeIndex = resumes?.reduce((acc, curr, index) => {

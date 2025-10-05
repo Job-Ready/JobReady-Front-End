@@ -8,7 +8,7 @@ import Create from "../pages/create/index";
 import LandingPage from "../pages/landing-page/index";
 import Account from "../pages/account/index";
 import Contact from "../pages/contact/index";
-import { UserProvider } from "../user_context";
+import { UserProvider } from "../utils/user_context";
 
 const AppRouter = () => {
   return (

@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { getAccessToken, setAccessToken } from "../../utils/auth";
 import { ClipLoader } from "react-spinners";
-import { useUser } from "../../user_context";
+import { useUser } from "../../utils/user_context";
 
 // Set up axios defaults correctly
 axios.defaults.baseURL = process.env.REACT_APP_URL;
