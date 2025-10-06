@@ -6,3 +6,10 @@ export function getResumes(token: String | null, userId: String | null) {
   });
   return response;
 }
+
+export function getResumeById(token: String | null, resumeId: Number | null) {
+  const response = axios.get(`resumes/${resumeId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response;
+}

@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
-import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import { checkExpiredToken } from "../../utils/auth";
+import { getResumeById } from "../../utils/sevices";
 
 // Import types from resume.ts
 import {
@@ -19,7 +19,6 @@ import Forms from "../../components/resume-components/Forms";
 import Plain from "../../components/templates/Plain";
 
 const Create: React.FC = () => {
-  const navigate = useNavigate();
   const [backgroundColor, setBackgroundColor] = useState<string>("#ffffff");
   const [fontSize, setFontSize] = useState<string>("12px");
   const [fontFamily, setFontFamily] = useState<string>("Arial");
@@ -53,12 +52,10 @@ const Create: React.FC = () => {
   const componentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const getResumes = async () => {
+    const fetchResumeById = async () => {
       if (resumeId) {
         try {
-          const response = await axios.get(`resumes/${resumeId}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
+          const response = await getResumeById(token, resumeId);
           const fetchedResumes: Resume = response.data;
           setResumes(fetchedResumes);
         } catch (error) {
@@ -69,8 +66,8 @@ const Create: React.FC = () => {
         }
       }
     };
-    getResumes();
-  }, [resumeId]);
+    fetchResumeById();
+  }, []);
 
   useEffect(() => {
     if (resumes) {
