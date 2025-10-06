@@ -20,11 +20,7 @@ export const checkIsAuthenticated = (): boolean => {
 };
 
 export const checkExpiredToken = (error: any): boolean => {
-  if (
-    error.response &&
-    error.response.status === 403 &&
-    error.response.data?.message === "Invalid or expired token"
-  ) {
+  if (error.response && error.response.status === 403) {
     removeAccessToken();
     return true;
   }

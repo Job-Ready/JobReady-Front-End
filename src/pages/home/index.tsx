@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import { Resume } from "types/resume";
 import { getAccessToken, checkExpiredToken } from "../../utils/auth";
 import { Header, Footer } from "../../components/layout/index";
@@ -29,7 +28,6 @@ const Home = () => {
         setLoading(false);
         if (checkExpiredToken(error)) {
           localStorage.clear();
-          navigate("/");
         }
         console.error("Get Resumes Error:", error.message);
       } finally {

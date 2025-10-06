@@ -64,7 +64,6 @@ const Create: React.FC = () => {
         } catch (error) {
           if (checkExpiredToken(error)) {
             localStorage.clear();
-            navigate("/");
           }
           console.error("Get Resumes:", error.message);
         }
