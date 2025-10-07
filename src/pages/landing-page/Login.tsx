@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { getAccessToken, setAccessToken } from "../../utils/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { setAccessToken } from "../../utils/auth";
 import { ClipLoader } from "react-spinners";
 import AuthForm from "../../components/google/GoogleAuth";
 import { useUser } from "../../utils/user_context";
@@ -9,11 +9,10 @@ import { useUser } from "../../utils/user_context";
 axios.defaults.baseURL = process.env.REACT_APP_URL;
 
 const Login: React.FC = () => {
-  const { setUserId } = useUser();
+  const { setUserId, setEmail, setFullname } = useUser();
 
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [token, setToken] = useState<string | null>(getAccessToken());
   const [errorMessages, setErrorMessages] = useState<string>("");
   const [formData, setFormData] = useState<{ email: string; password: string }>(
     {
@@ -44,6 +43,8 @@ const Login: React.FC = () => {
       if (response.status === 200) {
         setAccessToken(response.data.token);
         setUserId(response.data.id);
+        setEmail(response.data.email);
+        setFullname(response.data.fullname);
         navigate("/home", {
           replace: true,
           state: {

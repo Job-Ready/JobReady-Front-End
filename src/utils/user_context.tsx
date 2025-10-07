@@ -3,6 +3,10 @@ import React, { createContext, useState, useContext, useEffect } from "react";
 type UserContextType = {
   userId: string | null;
   setUserId: React.Dispatch<React.SetStateAction<string | null>>;
+  email: string | null;
+  setEmail: React.Dispatch<React.SetStateAction<string | null>>;
+  fullname: string | null;
+  setFullname: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -10,6 +14,12 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [userId, setUserId] = useState<string | null>(() => {
     return localStorage.getItem("UserId");
+  });
+  const [email, setEmail] = useState<string | null>(() => {
+    return localStorage.getItem("email");
+  });
+  const [fullname, setFullname] = useState<string | null>(() => {
+    return localStorage.getItem("fullname");
   });
 
   // Sync changes with localStorage
@@ -22,7 +32,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }, [userId]);
 
   return (
-    <UserContext.Provider value={{ userId, setUserId }}>
+    <UserContext.Provider
+      value={{ userId, setUserId, email, setEmail, fullname, setFullname }}
+    >
       {children}
     </UserContext.Provider>
   );

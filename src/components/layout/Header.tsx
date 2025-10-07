@@ -4,16 +4,13 @@ import logo from "../../assets/logoWH-crp.png";
 import { useUser } from "../../utils/user_context";
 
 const Header: React.FC = () => {
-  //const { user } = useUser();
+  const { userId, email, fullname } = useUser();
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const { id, name, email } = location.state || {};
-
   const [isLogin, setIsLogin] = useState(
     localStorage.getItem("token") ? true : false
   );
-  const username = name || "User";
+  const username = fullname || "User";
   const [isOpen, setIsOpen] = useState(false); // for mobile menu
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // for user dropdown
   const [isModalOpen, setIsModalOpen] = useState(false); // For modal visibility
@@ -149,7 +146,7 @@ const Header: React.FC = () => {
                             className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                           >
                             <div className="mx-1">
-                              <h1>{name || "User"}</h1>
+                              <h1>{fullname || "User"}</h1>
                               <p className="text-sm">
                                 {hideEmail(email || "")}
                               </p>
