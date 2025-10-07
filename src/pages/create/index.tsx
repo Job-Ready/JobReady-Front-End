@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReactToPrint from "react-to-print";
-import { checkExpiredToken } from "../../utils/auth";
+import { checkExpiredToken, getAccessToken } from "../../utils/auth";
 import { getResumeById } from "../../utils/sevices";
 
 // Import types from resume.ts
@@ -38,9 +38,7 @@ const Create: React.FC = () => {
   const [education, setEducation] = useState<Array<Education>>([]);
   const [languages, setLanguages] = useState<Language[]>([]);
   const [skills, setSkills] = useState<Skill[]>([]);
-  const [token, setToken] = useState<string | null>(
-    localStorage.getItem("token")
-  );
+  const [token, setToken] = useState<string | null>(getAccessToken());
 
   // Accordion state object
   const [accordionState, setAccordionState] = useState({
@@ -97,20 +95,6 @@ const Create: React.FC = () => {
     }
   }, [resumes]);
 
-  console.log(resumes);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setToken(localStorage.getItem("token"));
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
-
   // Toggle function for each accordion
   const toggleAccordion = (section: keyof typeof accordionState) => {
     setAccordionState((prevState) => ({
@@ -118,8 +102,6 @@ const Create: React.FC = () => {
       [section]: !prevState[section],
     }));
   };
-
-  console.log(resumes);
 
   return (
     <div>
