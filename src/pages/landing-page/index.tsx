@@ -1,14 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CV from "../../assets/cv.webp";
-import { checkIsAuthenticated } from "../../utils/auth";
 import Login from "./Login";
 import Register from "./Register";
 
 const LandingPage: React.FC = () => {
   const [isSigningUp, setIsSigningUp] = useState<boolean>(false);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    checkIsAuthenticated()
-  );
 
   const renderForm = () => (
     <div className="w-[25rem]">
