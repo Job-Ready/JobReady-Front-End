@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useContext } from "react";
 
 type UserContextType = {
   userId: string | null;
@@ -12,24 +12,9 @@ type UserContextType = {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [userId, setUserId] = useState<string | null>(() => {
-    return localStorage.getItem("UserId");
-  });
-  const [email, setEmail] = useState<string | null>(() => {
-    return localStorage.getItem("email");
-  });
-  const [fullname, setFullname] = useState<string | null>(() => {
-    return localStorage.getItem("fullname");
-  });
-
-  // Sync changes with localStorage
-  useEffect(() => {
-    if (userId) {
-      localStorage.setItem("UserId", userId);
-    } else {
-      localStorage.removeItem("UserId");
-    }
-  }, [userId]);
+  const [userId, setUserId] = useState<string | null>("UserId");
+  const [email, setEmail] = useState<string | null>("email");
+  const [fullname, setFullname] = useState<string | null>("fullname");
 
   return (
     <UserContext.Provider
